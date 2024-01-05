@@ -7,7 +7,7 @@ var objc = JSON.parse($response.body);
     "non_subscriptions": {
     },
     "first_seen": "2023-10-05T12:39:19Z",
-    "original_application_version": "38.0.7",
+    "original_application_version": "38.11.0",
     "other_purchases": {
     },
     "management_url": "https:\/\/apps.apple.com\/account\/subscriptions",
