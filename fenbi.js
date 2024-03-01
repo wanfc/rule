@@ -5,7 +5,7 @@
 建议放本地使用 随时跑路
 [rewrite_local]
 
-^https?:\/\/[kt]iku?\.fenbi\.com\/iphone\/ url script-request-header https://raw.githubusercontent.com/Yu9191/Rewrite/main/fenbi.js
+^https?:\/\/[kt]iku?\.fenbi\.com\/iphone\/ url script-request-header https://raw.githubusercontent.com/wanfc/rule/re/fenbi.js
 [mitm] 
 
 hostname = 123.206.1.227, 39.105.140.127,
