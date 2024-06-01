@@ -1,4 +1,6 @@
 payload:
 
 # > MisakaF
-  - DOMAIN,misakaf.org
+  - DOMAIN-SUFFIX,misakaf.org
+# > ACA
+  - DOMAIN-SUFFIX,aca.best
