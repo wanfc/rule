@@ -1,4 +1,15 @@
-/*
+/*************************************
+* @author: KleinerSource
+* 
+* @fileoverview Example to compose response for rewrite of script-echo-response.
+*
+* $request.url, $notify(title, subtitle, message), console.log(message), $done(response)
+*
+* @supported Quantumult X (v1.0.3-build141)
+*
+* Emby 解锁播放权限
+#
+**************************************
 
 [rewrite_local]
 
@@ -8,7 +19,7 @@
 
 hostname= mb3admin.com
 
-*/
+*************************************/
 
 
 var url = $request.url;
