@@ -2,8 +2,7 @@
 无效请开试用 恢复购买
 [rewrite_local]
 
-http://api.528529.com/apple_product/ url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/main/riyuxuexi.js
-
+http://api.528529.com/apple_product/ url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/Riyuxuexishengqi/riyuxuexi.js
 [mitm] 
 
 hostname = api.528529.com
@@ -22,6 +21,5 @@ let obj = {
   ],
   "code": 1
 }
-
 
 $done({ body: JSON.stringify(obj), status: 200 });
