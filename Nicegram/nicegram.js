@@ -8,7 +8,7 @@
 使用说明： 要激活高级版，请单击底部的“助手”，然后单击“释放您的 Nicegram 福利”，最后单击底部的“开始”。完成此操作后，Premium 应该已解锁
 
 [rewrite_local]
-^https?:\/\/nicegram\.cloud\/api\/v\d\/(ai-assistant\/purchase-list|user\/info|telegram\/auth) url script-response-body https://raw.githubusercontent.com/czy13724/Quantumult-X/main/scripts/nicegram.js
+^https?:\/\/nicegram\.cloud\/api\/v\d\/(ai-assistant\/purchase-list|user\/info|telegram\/auth) url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/Nicegram/nicegram.js
 
 [mitm]
 hostname = nicegram.cloud
