@@ -4,7 +4,7 @@
 更新时间：2024年
 [rewrite_local]
 # >扫描宝（永久会员）
-^https?:\/\/app.yinxiang.com\/third\/scanner\/scanner\/app\/userInfo\/get url script-response-body https://raw.githubusercontent.com/WeiGiegie/666/main/smb.js
+^https?:\/\/app.yinxiang.com\/third\/scanner\/scanner\/app\/userInfo\/get url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/saomiaobao/smb2.js
 
 [mitm] 
 hostname = app.yinxiang.com
