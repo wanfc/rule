@@ -1,7 +1,7 @@
 /*
 [rewrite_local]
 
-^https:\/\/notability\.com\/ url script-response-body https://raw.githubusercontent.com/xudondon888/Rewrite/main/Notability.js
+^https:\/\/notability\.com\/ url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/Notability/notability2.js
 
 [mitm]
 
