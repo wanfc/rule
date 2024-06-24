@@ -1,7 +1,7 @@
 /*
 [rewrite_local]
 #会员
-http:\/\/app.ppmbook.com\/(system\/getVipInfo\.do|user\/getMyCenterVo\.do) url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/main/fhsy.js
+http:\/\/app.ppmbook.com\/(system\/getVipInfo\.do|user\/getMyCenterVo\.do) url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/Fenghuangshuxuan/fhsy.js
 #开屏广告
 ^http:\/\/app\.ppmbook\.com\/home\/getCurrentAdvertisement\.do$ url reject
 
