@@ -8,4 +8,4 @@
 
 [mitm]
 
-hostname = api.gotokeep.com, kad.gotokeep.com
+hostname = *keep*
