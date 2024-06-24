@@ -3,7 +3,7 @@
 更新时间：2024年2月28日 18:39
 
 [rewrite_local]
-^https?:\/\/www\.pozhu\.com\/(v1|v2)\/(package\/playinfo\?|notes\/index|notes\/notes|notes\/audio|notes\/video|package\/subart|package\/artlist2|video\/show|college\/chapter2|member\/userinfo|home\/startimg|deep\/course|notes\/secret_lives).*$ url script-response-body https://raw.githubusercontent.com/WeiGiegie/666/main/pozhu.js
+^https?:\/\/www\.pozhu\.com\/(v1|v2)\/(package\/playinfo\?|notes\/index|notes\/notes|notes\/audio|notes\/video|package\/subart|package\/artlist2|video\/show|college\/chapter2|member\/userinfo|home\/startimg|deep\/course|notes\/secret_lives).*$ url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/Pozhu/pozhu.js
 
 [mitm] 
 hostname = www.pozhu.com
