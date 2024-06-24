@@ -6,7 +6,7 @@
 
 [rewrite_local]
 
-^https?:\/\/duoting.tatatimes.com\/tataeraapi\/api.s\?h=QueryVipUser url script-response-body https://raw.githubusercontent.com/WeiGiegie/666/main/yyds.js
+^https?:\/\/duoting.tatatimes.com\/tataeraapi\/api.s\?h=QueryVipUser url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/yingyudushu/yyds.js
 
 [mitm] 
 hostname = duoting.tatatimes.com
