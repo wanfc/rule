@@ -5,8 +5,8 @@
 [rewrite_local]
 
 # > 解锁vip，(不能登录账号)
-^https?:\/\/(app|user|recpage-c|entry).qtfm.cn\/(m-bff\/v2\/channel|u2\/api\/v5\/user|v5\/vippage|api\/v1\/personal|m-bff\/v1\/channelpage|m-bff\/v1\/purchase).*$ url script-response-body https://raw.githubusercontent.com/WeiGiegie/666/main/qtfm.js
-^https?:\/\/app\.qtfm\.cn\/m-bff\/v1\/audiostreams\/channel\/ url script-request-header https://raw.githubusercontent.com/WeiGiegie/666/main/qtfmtk.js
+^https?:\/\/(app|user|recpage-c|entry).qtfm.cn\/(m-bff\/v2\/channel|u2\/api\/v5\/user|v5\/vippage|api\/v1\/personal|m-bff\/v1\/channelpage|m-bff\/v1\/purchase).*$ url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/QingtingFM/qtfm.js
+^https?:\/\/app\.qtfm\.cn\/m-bff\/v1\/audiostreams\/channel\/ url script-request-header https://raw.githubusercontent.com/wanfc/rule/re/QingtingFM/qtfm.js
 ^https://ad\.qtfm\.cn/api/ url reject
 ^https://ip\.qtfm\.cn/ip url reject
 ^https://adlaunch\.qtfm\.cn/launch url reject
