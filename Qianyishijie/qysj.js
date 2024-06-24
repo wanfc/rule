@@ -3,8 +3,7 @@
 更新时间：2024年2月10日 12:22
 
 [rewrite_local]
-^https?:\/\/app.thwlqy.com\/(login\/login\/sign|login\/login\/veifys).html.*$ url script-response-body https://raw.githubusercontent.com/WeiGiegie/666/main/qysj.js
-
+^https?:\/\/app.thwlqy.com\/(login\/login\/sign|login\/login\/veifys).html.*$ url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/Qianyishijie/qysj.js
 [mitm]
 hostname = app.thwlqy.com
 */
