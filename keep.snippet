@@ -24,7 +24,7 @@
 # 屏蔽更新
 ^https?:\/\/api\.gotokeep\.com\/anno\/v\d\/upgrade\/check url reject
 # 应用底部栏净化
-^https?:\/\/api\.gotokeep\.com\/config\/v\d\/basic url script-response-body https://raw.githubusercontent.com/fmz200/wool_scripts/main/Scripts/keep.js
+^https?:\/\/api\.gotokeep\.com\/config\/v\d\/basic url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/keep3.js
 #keep会员
 ^https://api.gotokeep.com.+ url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/Keep.js
 ;^http[s]?:\/\/.+keep.+(athena/v7/people/my|/ad/preload|details|preview|/start|liveStream/schedule|course/v3/plans|/home/prime/page).*$ url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/keep2.js
