@@ -5,7 +5,7 @@
 
 [rewrite_local]
 
-^https?:\/\/m.yicaoting.com\/api\/(center\/Center\/new_center_user|book\/book\/audio).*$ url script-response-body https://raw.githubusercontent.com/WeiGiegie/666/main/yctds.js
+^https?:\/\/m.yicaoting.com\/api\/(center\/Center\/new_center_user|book\/book\/audio).*$ url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/yicaotingdushu/yctds.js
 
 [mitm] 
 hostname = m.yicaoting.com
