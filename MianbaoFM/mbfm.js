@@ -4,7 +4,7 @@
 更新时间：2024年2月17日 22:39
 
 [rewrite_local]
-^https?:\/\/wx.voxpie.com\/api\/(fmapp_bookinfo|fmapp_user).*$ url script-response-body https://raw.githubusercontent.com/WeiGiegie/666/main/mbfm.js
+^https?:\/\/wx.voxpie.com\/api\/(fmapp_bookinfo|fmapp_user).*$ url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/MianbaoFM/mbfm.js
 
 [mitm] 
 hostname = wx.voxpie.com
