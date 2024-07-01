@@ -4,7 +4,7 @@
 更新日期：2024-1-23
 
 [rewrite_local]
-http:\/\/new\.xslm333\.xyz\/api\/getUserInfo url script-response-body https://raw.githubusercontent.com/chxm1023/Rewrite/main/ssfyg.js
+http:\/\/new\.xslm333\.xyz\/api\/getUserInfo url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/Shishifanyiguan/ssfyg.js
 
 [mitm]
 hostname = new.xslm333.xyz
