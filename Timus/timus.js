@@ -7,7 +7,7 @@
 项目名称：Timus
 
 [rewrite_local]
-^https?:\/\/api\.revenuecat\.com\/v1\/(subscribers\/[^\/]+$|receipts$) url script-response-body https://raw.githubusercontent.com/czy13724/Quantumult-X/main/scripts/Timus.js
+^https?:\/\/api\.revenuecat\.com\/v1\/(subscribers\/[^\/]+$|receipts$) url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/Timus/timus.js
 
 [mitm]
 hostname = api.revenuecat.com  
