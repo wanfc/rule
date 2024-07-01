@@ -4,7 +4,7 @@
 更新时间：2024年3月25日 
 [rewrite_local]
 
-^https?:\/\/duoting.tatatimes.com\/tataeraapi\/api.s\?h=QueryVipUser url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/yingyudushu/yyds.js
+^https?:\/\/duoting.tatatimes.com\/tataeraapi\/api.s\?h=QueryVipUser url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/Yingyudushu/yyds.js
 
 [mitm] 
 hostname = duoting.tatatimes.com
