@@ -3,8 +3,8 @@
 我@的@物@品
 
 [rewrite_local]
-^https?:\/\/api\.revenuecat\.com\/.+\/(receipts$|subscribers\/?(.*?)*$) url script-response-body https://raw.githubusercontent.com/Reviewa/Review/main/Wodewupin.js
-^https?:\/\/api\.revenuecat\.com\/.+\/(receipts$|subscribers\/?(.*?)*$) url script-request-header https://raw.githubusercontent.com/Reviewa/Review/main/Wodewupin.js
+^https?:\/\/api\.revenuecat\.com\/.+\/(receipts$|subscribers\/?(.*?)*$) url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/Wodewupin/wdwp.js
+^https?:\/\/api\.revenuecat\.com\/.+\/(receipts$|subscribers\/?(.*?)*$) url script-request-header https://raw.githubusercontent.com/wanfc/rule/re/Wodewupin/wdwp.js
 
 [mitm]
 hostname = api.revenuecat.com
