@@ -3,7 +3,7 @@ PDF@点@睛
 使用说明：软件提示登录就“跳过此步骤” 然后弹出订阅点取消 关掉软件重新打开解锁 是否能登录自测
 
 [rewrite_local]
-^https:\/\/license\.pdfexpert\.com\/api\/2\.0\/pdfexpert6\/subscription\/refresh url script-request-body https://raw.githubusercontent.com/Yu9191/Rewrite/main/PDFexpert.js
+^https:\/\/license\.pdfexpert\.com\/api\/2\.0\/pdfexpert6\/subscription\/refresh url script-request-body https://raw.githubusercontent.com/wanfc/rule/re/PDFexpert/pdfexpert.js
 
 [mitm]
 hostname = license.pdfexpert.com
