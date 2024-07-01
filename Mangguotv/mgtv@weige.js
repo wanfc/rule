@@ -5,7 +5,7 @@
 
 [rewrite_local]
 
-^https?:\/\/.*mgtv.com.*(GetUserInfo|module\/list\?_support|app\/bdboot|pullReleaseInfo|floor\/detail|video\/source|entry\?_support).*$ url script-response-body https://raw.githubusercontent.com/WeiGiegie/666/main/mgtv.js
+^https?:\/\/.*mgtv.com.*(GetUserInfo|module\/list\?_support|app\/bdboot|pullReleaseInfo|floor\/detail|video\/source|entry\?_support).*$ url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/Mangguotv/mgtv%40weige.js
 ^https?:\/\/mobile-stream\.api\.mgtv\.com\/v1\/video\/source\? url script-request-header https://raw.githubusercontent.com/WeiGiegie/666/main/mgtk.js
 ^https?://mobile.da.mgtv.com\/m\/page url reject
 
