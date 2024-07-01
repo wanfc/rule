@@ -3,7 +3,7 @@
 
 [rewrite_local]
 
-https://api.yaodiandaxue.vip/api/opencourse/course/details url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/main/yaodianxuetang.js
+https://api.yaodiandaxue.vip/api/opencourse/course/details url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/Yaodianxuetang/yaodianxuetang.js
 
 [mitm] 
 
