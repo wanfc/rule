@@ -4,7 +4,7 @@
 更新日期：2023-12-05
 
 [rewrite_local]
-^https?:\/\/baimiao\.uzero\.cn\/api\/.+\/(appLaunchWithUser|getAnnouncement|checkLoginClient) url script-response-body https://raw.githubusercontent.com/chxm1023/Rewrite/main/baimiao.js
+^https?:\/\/baimiao\.uzero\.cn\/api\/.+\/(appLaunchWithUser|getAnnouncement|checkLoginClient) url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/Baimiao/bm.js
 
 [mitm]
 hostname = baimiao.uzero.cn
