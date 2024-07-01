@@ -3,7 +3,7 @@
 
 [rewrite_local]
 
-https://teleprompter-api.quthing.com/vip/state url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/main/lgtcq.js
+https://teleprompter-api.quthing.com/vip/state url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/Lingganticiqi/lgtcq.js
 
 [mitm]
 hostname = teleprompter-api.quthing.com
