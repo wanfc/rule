@@ -2,7 +2,7 @@
 青@柠@设@计
 
 [rewrite_local]
-^https?:\/\/api\.qingning6\.com\/api\/user\/getUserInfo url script-response-body https://raw.githubusercontent.com/Guding88/Script/main/qingningsheji.js
+^https?:\/\/api\.qingning6\.com\/api\/user\/getUserInfo url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/Qingningsheji/qnsj.js
 
 [mitm]
 hostname = api.qingning6.com
