@@ -3,7 +3,7 @@
 强大的网络调试工具，类似Anubis
 日期:2023.08.17
 [rewrite_local]
-^https?:\/\/api\.revenuecat\.com/v\d/(subscribers/(\$RCAnonymousID\%)?(\w)+|receipts)$ url script-echo-response https://raw.githubusercontent.com/Crazy-Z7/Script/main/Httpbot.js
+^https?:\/\/api\.revenuecat\.com/v\d/(subscribers/(\$RCAnonymousID\%)?(\w)+|receipts)$ url script-echo-response https://raw.githubusercontent.com/wanfc/rule/re/Httpbot/httpbot.js
 hostname = api.revenuecat.com
 */
    
