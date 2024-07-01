@@ -6,7 +6,7 @@
 
 [rewrite_local]
 # > 新语听书解锁永久会员
-^https?:\/\/i\.xinyulib\.com\.cn\/api\/querytoken.+ url script-response-body https://raw.githubusercontent.com/yqc007/QuantumultX/master/XinYuLibraryProCrack.js
+^https?:\/\/i\.xinyulib\.com\.cn\/api\/querytoken.+ url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/XinYuLibrary/xyts.js
 
 [mitm] 
 hostname = i.xinyulib.com.cn
