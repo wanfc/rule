@@ -1,0 +1,11 @@
+#!name = 小@蓝@医@学（蓝@基@因）
+
+[Script]
+小蓝医学 = type=http-response,pattern=^https:\/\/edu\.lezaitizhong\.com\/(vod|tiku)\/(class_list|getclassifychapter)\?,requires-body=1,max-size=0,script-path=https://gist.githubusercontent.com/Yu9191/89c24ef2e5837ef588fadb025f2b031d/raw/440a165908ee696fd0db6c4ce79830e829f65c02/xiaolanyixue.js
+
+人机 = type=http-response,pattern=https://edu.lezaitizhong.com/tiku/machine/sheet_machine_category?,requires-body=1,max-size=0,script-path=https://gist.githubusercontent.com/Yu9191/0e25bfde48d0c11b8cabdb685cfd67a7/raw/5f67ed3ea638d23eaeb8e57b2fca564bb7a90056/xiaolanyixue2.js
+
+名词解释 = type=http-response,pattern=https://edu.lezaitizhong.com/classify/,requires-body=1,max-size=0,script-path=https://gist.githubusercontent.com/Yu9191/89c24ef2e5837ef588fadb025f2b031d/raw/440a165908ee696fd0db6c4ce79830e829f65c02/xiaolanyixue.js
+
+[mitm]
+hostname = %APPEND% edu.lezaitizhong.com
