@@ -4,7 +4,7 @@
 更新时间：2024年2月9日
 
 [rewrite_local]
-^https?:\/\/napi.yunpub.cn\/api\/(product/getBookContent|user/login\/getUserInfo|cms\/index\/getMyPage).*$ url script-response-body https://raw.githubusercontent.com/WeiGiegie/666/main/zxsy.js
+^https?:\/\/napi.yunpub.cn\/api\/(product/getBookContent|user/login\/getUserInfo|cms\/index\/getMyPage).*$ url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/Zhongxinshuyuan/zxsy.js
 
 [mitm] 
 hostname = napi.yunpub.cn
