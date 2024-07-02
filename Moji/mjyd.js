@@ -4,7 +4,7 @@
 脚本作者：@anyeyey
 
 [rewrite_local]
-^https:\/\/api\.mojidict\.com\/app\/mojiread\/parse\/functions\/(target-fetch|reading-article-detail) url script-response-body https://raw.githubusercontent.com/anyehttp/quantumult-x/main/Adguard/MOJiyd.js 
+^https:\/\/api\.mojidict\.com\/app\/mojiread\/parse\/functions\/(target-fetch|reading-article-detail) url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/Moji/mjyd.js
 
 [mitm]
 hostname = api.mojidict.com
