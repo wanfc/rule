@@ -2,7 +2,7 @@
 1.4.7
 
 [rewrite_local]
-https://nicegram.cloud/api/v6/user/info url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/main/Nicegram.js
+https://nicegram.cloud/api/v6/user/info url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/Nicegram/nicegram147.js
 
 [mitm] 
 hostname = nicegram.cloud
