@@ -4,7 +4,7 @@
 脚本作者：@anyeyey
 
 [rewrite_local]
-^https:\/\/api\.wlvpn\.com\/v3\/login url script-response-body https://raw.githubusercontent.com/anyehttp/quantumult-x/main/Adguard/Speedtest.js
+^https:\/\/api\.wlvpn\.com\/v3\/login url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/Speedtest/st.js
 
 [mitm]
 hostname = api.wlvpn.com
