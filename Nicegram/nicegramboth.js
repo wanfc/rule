@@ -1,4 +1,4 @@
-/*************************************
+/*
 
 项目名称：Nicegram(兼容新老旧版)
 更新日期：2023-11-30
@@ -6,12 +6,12 @@
 版本1.4.7非一次性解锁：打开APP → 助手 → 点击【释放您的Nicegram特权】之后关闭APP，重新打开即可
 
 [rewrite_local]
-^https?:\/\/(nicegram\.cloud\/api\/v\d\/user\/info|restore-access\.indream\.app\/restoreAccess) url script-response-body https://raw.githubusercontent.com/chxm1023/Rewrite/main/nicegram.js
+^https?:\/\/(nicegram\.cloud\/api\/v\d\/user\/info|restore-access\.indream\.app\/restoreAccess) url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/Nicegram/nicegramboth.js
 
 [mitm]
 hostname = nicegram.cloud, restore-access.indream.app
 
-*************************************/
+*/
 
 
 const url = $request.url;
