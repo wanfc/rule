@@ -4,7 +4,7 @@
 使用说明：进入App出现付费恢复购买
 
 [rewrite_local]
-^https?:\/\/ssl-api\.itranslateapp\.com\/accounts\/.+\/(subscriptions\/verify|marketing\/consent\/status) url script-response-body https://raw.githubusercontent.com/chxm1023/Rewrite/main/itranslate.js
+^https?:\/\/ssl-api\.itranslateapp\.com\/accounts\/.+\/(subscriptions\/verify|marketing\/consent\/status) url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/iTranslate/itranslate.js
 
 [mitm]
 hostname = ssl-api.itranslateapp.com
