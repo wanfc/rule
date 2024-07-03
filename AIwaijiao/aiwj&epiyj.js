@@ -1,7 +1,7 @@
 /*
-项目名称：Ai外教
-更新日期：2024-01-15
-脚本作者：@epiyj
+https://raw.githubusercontent.com/anyehttp/quantumult-x/main/Adguard/aiwj.js
+AI外教
+2024-01-15
 
 [rewrite_local]
 ^https?://chatai\.qupeiyin\.com/(user/memberData|member/index|basic/userModule|member/index) url script-response-body https://raw.githubusercontent.com/anyehttp/quantumult-x/main/Adguard/aiwj.js
