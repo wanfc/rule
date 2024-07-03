@@ -1,10 +1,10 @@
 /*
-
+https://raw.githubusercontent.com/chxm1023/Rewrite/main/baimiao.js
 白@描
-更新日期：2023-12-05
+2023-12-05
 
 [rewrite_local]
-^https?:\/\/baimiao\.uzero\.cn\/api\/.+\/(appLaunchWithUser|getAnnouncement|checkLoginClient) url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/Baimiao/bm.js
+^https?:\/\/baimiao\.uzero\.cn\/api\/.+\/(appLaunchWithUser|getAnnouncement|checkLoginClient) url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/Baimiao/baimiao.js
 
 [mitm]
 hostname = baimiao.uzero.cn
