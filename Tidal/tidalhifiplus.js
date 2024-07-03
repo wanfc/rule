@@ -11,7 +11,7 @@ TIDAL解锁HiFi Plus
 [mitm] 
 hostname = api.tidal.com
 
-*******************************/
+*/
 
 $done({
     body: JSON.stringify({
