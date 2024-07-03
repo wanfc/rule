@@ -5,7 +5,7 @@ https://raw.githubusercontent.com/WeiGiegie/666/main/smb.js
 2024年
 
 [rewrite_local]
-^https?:\/\/app.yinxiang.com\/third\/scanner\/scanner\/app\/userInfo\/get url script-response-body https://raw.githubusercontent.com/WeiGiegie/666/main/smb.js
+^https?:\/\/app.yinxiang.com\/third\/scanner\/scanner\/app\/userInfo\/get url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/Scannable/smb0wg.js
 
 [mitm] 
 hostname = app.yinxiang.com
