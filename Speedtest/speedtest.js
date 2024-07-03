@@ -1,10 +1,9 @@
 /*
-
-更新日期：2024-01-13
-脚本作者：@anyeyey
+https://raw.githubusercontent.com/anyehttp/quantumult-x/main/Adguard/Speedtest.js
+2024-01-13
 
 [rewrite_local]
-^https:\/\/api\.wlvpn\.com\/v3\/login url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/Speedtest/st.js
+^https:\/\/api\.wlvpn\.com\/v3\/login url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/Speedtest/speedtest.js
 
 [mitm]
 hostname = api.wlvpn.com
