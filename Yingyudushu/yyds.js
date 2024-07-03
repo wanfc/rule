@@ -1,7 +1,9 @@
 /*
+https://raw.githubusercontent.com/WeiGiegie/666/main/yyds.js
+英@语@读@书
+2.1.3
+2024年3月25日
 
-软件版本：2.1.3
-更新时间：2024年3月25日 
 [rewrite_local]
 
 ^https?:\/\/duoting.tatatimes.com\/tataeraapi\/api.s\?h=QueryVipUser url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/Yingyudushu/yyds.js
