@@ -1,11 +1,11 @@
 /*
+https://raw.githubusercontent.com/yqc007/QuantumultX/master/XinYuLibraryProCrack.js
 新@语@听@书
-脚本功能：解锁永久会员
-应用版本：4.2.24
-更新时间：2023-08-27
+解锁永久会员
+4.2.24
+2023-08-27
 
 [rewrite_local]
-# > 新语听书解锁永久会员
 ^https?:\/\/i\.xinyulib\.com\.cn\/api\/querytoken.+ url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/XinYuLibrary/xyts.js
 
 [mitm] 
