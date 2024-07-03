@@ -4,7 +4,7 @@ Fimo
 使用说明：打开App直接恢复购买，不用登录
 
 [rewrite_local]
-^https:\/\/server\.(yoyiapp|zbisq)\.com url script-response-body https://raw.githubusercontent.com/chxm1023/Rewrite/main/fimo.js
+^https:\/\/server\.(yoyiapp|zbisq)\.com url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/Fimo/fm0dd.js
 
 [mitm]
 hostname = server.*.com
