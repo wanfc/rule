@@ -1,5 +1,6 @@
 /*
-使用说明：登录国区账号恢复购买重启恢复
+https://raw.githubusercontent.com/chxm1023/Rewrite/main/Xmind.js
+登录国区账号恢复购买重启恢复
 
 [rewrite_local]
 ^https?:\/\/(?:www\.)?xmind\..*\/.+\/(devices|token\/.+) url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/Xmind/xmind.js
