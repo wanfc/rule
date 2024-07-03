@@ -1,6 +1,6 @@
 /*
 https://raw.githubusercontent.com/Yu9191/Rewrite/main/yaodianxuetang.js
-药*店*学*堂
+药@店@学@堂
 解锁全课程
 
 [rewrite_local]
