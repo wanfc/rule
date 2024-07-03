@@ -1,7 +1,8 @@
 /*
+https://raw.githubusercontent.com/WeiGiegie/666/main/zxsy.js
 中@信@书@院
-脚本功能：解@锁vip@电@子@书,付@费@电@子@书
-更新时间：2024年2月9日
+解锁vip电子书,付费电子书
+2024年2月9日
 
 [rewrite_local]
 ^https?:\/\/napi.yunpub.cn\/api\/(product/getBookContent|user/login\/getUserInfo|cms\/index\/getMyPage).*$ url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/Zhongxinshuyuan/zxsy.js
