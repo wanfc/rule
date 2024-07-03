@@ -1,8 +1,8 @@
 /*
-
-项目名称：云@听
-版本支持：7.0.35
-更新日期：2024-02-11
+https://raw.githubusercontent.com/chxm1023/Rewrite/main/yunting.js
+云@听
+7.0.35
+2024-02-11
 
 [rewrite_local]
 (^https?:\/\/(ytmsout|ytapi|getway)\.radio\.cn|60\.205\.171\.165)\/(contentBiz|publish|rights|(user|ytsrv\/srv)\/(appUser|webPage)\/getUserInfo|app.+) url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/Yunting/yunting.js
@@ -11,7 +11,6 @@
 hostname = *.radio.cn, 60.205.171.165
 
 */
-
 
 var body = $response.body;
 var chxm1023 = JSON.parse(body);
