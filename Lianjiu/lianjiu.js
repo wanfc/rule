@@ -1,5 +1,7 @@
 /*
-练@就 1.0.7 
+https://raw.githubusercontent.com/Yu9191/Rewrite/main/lianjiu.js
+练@就
+1.0.7 
 
 [rewrite_local]
 ^https:\/\/api\.lianjiu\.fun\/app\/api\/v1\/profile url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/Lianjiu/lianjiu.js
