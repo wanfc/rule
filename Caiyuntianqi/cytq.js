@@ -1,5 +1,6 @@
-/*************************************
-
+/*
+https://raw.githubusercontent.com/chxm1023/Rewrite/main/caiyuntianqi.js
+彩云天气-净化/解锁SVIP
 更新日期：2024-04-12
 # 带频道名
 [rewrite_local]
@@ -9,8 +10,7 @@
 [mitm]
 hostname = *.cyapi.cn, *.caiyunapp.com
 
-*************************************/
-
+*/
 
 const chxm1024 = {};
 const chxm1023 = JSON.parse(typeof $response != "undefined" && $response.body || null);
