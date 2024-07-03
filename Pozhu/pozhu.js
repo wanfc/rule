@@ -1,6 +1,8 @@
 /*
-软件版本：2.3.6
-更新时间：2024年2月28日 18:39
+https://raw.githubusercontent.com/WeiGiegie/666/main/pozhu.js
+破@竹@SVIP+财@富@圈+部分付费课程
+2.3.6
+2024年2月28日
 
 [rewrite_local]
 ^https?:\/\/www\.pozhu\.com\/(v1|v2)\/(package\/playinfo\?|notes\/index|notes\/notes|notes\/audio|notes\/video|package\/subart|package\/artlist2|video\/show|college\/chapter2|member\/userinfo|home\/startimg|deep\/course|notes\/secret_lives).*$ url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/Pozhu/pozhu.js
