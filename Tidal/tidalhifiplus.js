@@ -2,7 +2,7 @@
 https://raw.githubusercontent.com/yqc007/QuantumultX/master/TIDALHiFiPlusCrack.js
 TIDAL解锁HiFi Plus
 2.48.0
-更新时间：2022-08-05
+2022-08-05
 
 [rewrite_local]
 ^https?:\/\/api\.tidal\.com\/v1\/users\/\d+\/subscription.+ url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/Tidal/tidalhifiplus.js
