@@ -1,7 +1,8 @@
 /*
-
+https://raw.githubusercontent.com/chxm1023/Rewrite/main/ssfyg.js
+https://apps.apple.com/us/app/translator-talk-and-translate/id1606572387
 实@时@翻@译@官
-更新日期：2024-1-23
+2024-1-23
 
 [rewrite_local]
 http:\/\/new\.xslm333\.xyz\/api\/getUserInfo url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/Shishifanyiguan/ssfyg.js
