@@ -1,4 +1,5 @@
 /*
+https://raw.githubusercontent.com/Guding88/Script/main/qingningsheji.js
 青@柠@设@计
 
 [rewrite_local]
