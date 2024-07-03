@@ -5,7 +5,7 @@ Picsew解锁专业版
 更新时间：2022-10-14
 
 [rewrite_local]
-^https?:\/\/buy\.itunes\.apple\.com\/verifyReceipt$ url script-response-body https://raw.githubusercontent.com/yqc007/QuantumultX/master/PicsewProCrack.js
+^https?:\/\/buy\.itunes\.apple\.com\/verifyReceipt$ url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/Picsew/pc0yqc.js
 
 [mitm] 
 hostname = buy.itunes.apple.com
