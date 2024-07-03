@@ -3,7 +3,7 @@ https://raw.githubusercontent.com/chxm1023/Rewrite/main/iTunes/LogInput.js
 落@格@输@入@法
 
 [rewrite_local]
-^https?:\/\/buy\.itunes\.apple\.com\/verifyReceipt$ url script-response-body https://raw.githubusercontent.com/chxm1023/Rewrite/main/iTunes/LogInput.js
+^https?:\/\/buy\.itunes\.apple\.com\/verifyReceipt$ url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/LogInput/lgsrf.js
 
 [mitm]
 hostname = buy.itunes.apple.com
