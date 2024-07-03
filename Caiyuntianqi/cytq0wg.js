@@ -1,19 +1,22 @@
 /*
+https://raw.githubusercontent.com/WeiGiegie/666/main/cytq.js
+彩云天气
 更新时间：2024年4.23
 # 不带频道名
 [rewrite_local]
 # 普通版广告
 ^https:\/\/ad\.cyapi\.cn\/v2\/req\?app_name=weather url reject-dict
 # 赏叶赏花
-^https:\/\/wrapper\.cyapi\.cn\/v1\/activity\?app_name=weather url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/Caiyuntianqi/cytq2.js
+^https:\/\/wrapper\.cyapi\.cn\/v1\/activity\?app_name=weather url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/Caiyuntianqi/cytq0wg.js
 # 解锁vip
-^https:\/\/biz\.cyapi\.cn\/v2\/user url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/Caiyuntianqi/cytq2.js
+^https:\/\/biz\.cyapi\.cn\/v2\/user url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/Caiyuntianqi/cytq0wg.js
 # 卫星云图 48小时预报
-^https:\/\/wrapper\.cyapi\.cn\/v1\/(satellite|nafp\/origin_images) url script-request-header https://raw.githubusercontent.com/wanfc/rule/re/Caiyuntianqi/cytq2.js
+^https:\/\/wrapper\.cyapi\.cn\/v1\/(satellite|nafp\/origin_images) url script-request-header https://raw.githubusercontent.com/wanfc/rule/re/Caiyuntianqi/cytq0wg.js
 
 [mitm]
 hostname = *.cyapi.cn
 */
+
 var huihui = {},
     url = $request.url;
 if (url.includes("/v2/user")) {
