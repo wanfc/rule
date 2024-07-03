@@ -4,8 +4,8 @@ https://raw.githubusercontent.com/Yuheng0101/X/main/Scripts/tidal.js
 1.1.1
 
 [rewrite_local]
-^https?:\/\/api\.tidal\.com\/v1\/users\/\d+\/subscription.+ url script-response-body https://raw.githubusercontent.com/yqc007/QuantumultX/master/TIDALHiFiPlusCrack.js
-^https?:\/\/api\.tidal\.com\/v1\/tracks/\d+\/playbackinfo url script-analyze-echo-response https://raw.githubusercontent.com/Yuheng0101/X/main/Scripts/tidal.js
+^https?:\/\/api\.tidal\.com\/v1\/users\/\d+\/subscription.+ url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/Tidal/tidalhifiplus.js
+^https?:\/\/api\.tidal\.com\/v1\/tracks/\d+\/playbackinfo url script-analyze-echo-response https://raw.githubusercontent.com/wanfc/rule/re/Tidal/tidal.js
 
 [mitm]
 hostname = api.tidal.com
