@@ -3,7 +3,7 @@ https://raw.githubusercontent.com/chxm1023/Rewrite/main/luqijianggushi.js
 陆@琪@讲@故@事
 
 [rewrite_local]
-https?:\/\/www\.luqijianggushi\.com\/api url script-response-body https://raw.githubusercontent.com/chxm1023/Rewrite/main/luqijianggushi.js
+https?:\/\/www\.luqijianggushi\.com\/api url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/Luqijianggushi/lqjgs.js
 
 [mitm]
 hostname = www.luqijianggushi.com
