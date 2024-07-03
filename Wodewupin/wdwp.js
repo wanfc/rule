@@ -1,5 +1,5 @@
 /*
-
+https://raw.githubusercontent.com/Reviewa/Review/main/Wodewupin.js
 我@的@物@品
 
 [rewrite_local]
