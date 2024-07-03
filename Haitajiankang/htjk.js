@@ -1,4 +1,6 @@
 /*
+https://raw.githubusercontent.com/kkwhf/Qx-backup/main/Test.js
+
 [rewrite_local]
 ^https?:\/\/otter-api\.codefuture\.top\/v1\/user\/current url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/Haitajiankang/htjk.js
 [mitm]
