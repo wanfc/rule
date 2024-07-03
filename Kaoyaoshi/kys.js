@@ -1,8 +1,8 @@
 /*
 https://raw.githubusercontent.com/Yu9191/Rewrite/main/kaoyaoshi.js
-考*药*狮
-超*级*题*库
-考*护*狮
+考@药@狮
+超@级@题@库
+考@护@狮
 解锁全会员功能 不显示会员
 
 [rewrite_local]
