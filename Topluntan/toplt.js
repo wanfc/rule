@@ -4,7 +4,7 @@ Top@论@坛
 6.26更新
 
 [rewrite_local]
-https://super.toppps.com/app-api/v1/toppps/(live/getLiveSpaceDetailsV|products) url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/TOPluntan/toplt.js
+https://super.toppps.com/app-api/v1/toppps/(live/getLiveSpaceDetailsV|products) url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/Topluntan/toplt.js
 
 [mitm]
 hostname = super.toppps.com
