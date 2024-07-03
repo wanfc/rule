@@ -1,4 +1,7 @@
-#!name = 小@蓝@医@学（蓝@基@因）
+/*
+https://gist.githubusercontent.com/Yu9191/5d7cbbf36a7db7e92623a1e5ab079dce/raw/b076c15826f4830a74256026decc96ccc3b022a2/xiaolanyixue.sgmodule
+小@蓝@医@学（蓝@基@因）
+*/
 
 [Script]
 小蓝医学 = type=http-response,pattern=^https:\/\/edu\.lezaitizhong\.com\/(vod|tiku)\/(class_list|getclassifychapter)\?,requires-body=1,max-size=0,script-path=https://raw.githubusercontent.com/wanfc/rule/re/Xiaolanyixue/xlyx1.js
