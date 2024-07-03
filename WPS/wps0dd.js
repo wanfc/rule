@@ -1,4 +1,5 @@
 /*
+https://raw.githubusercontent.com/chxm1023/Rewrite/main/WPS.js
 WPS Office国区 2099
 [rewrite_local]
 ^https?:\/\/(vas|account|drive)\.wps\.cn\/(query\/api\/.+\/list_purchase_info|api\/(v\d\/spaces|users\/.+\/overview)) url script-response-body https://raw.githubusercontent.com/chxm1023/Rewrite/main/WPS.js
