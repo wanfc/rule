@@ -3,7 +3,7 @@ https://raw.githubusercontent.com/chxm1023/Rewrite/main/xijiangshici.js
 西@江@诗@词
 
 [rewrite_local]
-^https:\/\/api\.revenuecat\.com\/.+\/(receipts$|subscribers\/(\$RCAnonymousID%)?(.*?)*$) url script-response-body https://raw.githubusercontent.com/chxm1023/Rewrite/main/xijiangshici.js
+^https:\/\/api\.revenuecat\.com\/.+\/(receipts$|subscribers\/(\$RCAnonymousID%)?(.*?)*$) url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/Xijiangshici/xjsc.js
 
 [mitm]
 hostname = api.revenuecat.com
