@@ -1,4 +1,7 @@
 /*
+https://raw.githubusercontent.com/Yu9191/Rewrite/main/jyyk.js
+脚@印@云@课
+解锁全课程
 3.8.7
 
 [rewrite_local]
