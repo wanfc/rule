@@ -1,5 +1,7 @@
 /*
-灵@敢@提@词@器 4.2.0
+https://raw.githubusercontent.com/Yu9191/Rewrite/main/lgtcq.js
+灵@敢@提@词@器
+4.2.0
 
 [rewrite_local]
 
