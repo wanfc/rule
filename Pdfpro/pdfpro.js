@@ -1,4 +1,5 @@
 /*
+https://raw.githubusercontent.com/Yu9191/Rewrite/main/itunes/pdfpro.js
 
 [rewrite_local]
 
