@@ -1,7 +1,7 @@
 /*
 https://raw.githubusercontent.com/WeiGiegie/666/main/xmck.js
-软件版本：9.2.42
-更新时间：2024-6.30
+9.2.42
+2024-6.30
 
 [rewrite_local]
 
