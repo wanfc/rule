@@ -6,7 +6,7 @@ Fimo 免登录
 
 [rewrite_local]
 # > Fimo 解锁永久会员
-^https?:\/\/server\.yoyiapp\.com\/fimo-user\/apple\/certificate$ url script-response-body https://raw.githubusercontent.com/yqc007/QuantumultX/master/FimoCamVipCrack.js
+^https?:\/\/server\.yoyiapp\.com\/fimo-user\/apple\/certificate$ url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/Fimo/fm0yqc.js
 
 [mitm] 
 hostname = server.yoyiapp.com
