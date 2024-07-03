@@ -1,4 +1,6 @@
 /*
+https://raw.githubusercontent.com/Yu9191/Rewrite/main/1998.js
+1998 解锁全课程全资料
 
 [rewrite_local]
 
