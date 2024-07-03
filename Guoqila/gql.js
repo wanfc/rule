@@ -3,7 +3,7 @@ https://raw.githubusercontent.com/Yu9191/Rewrite/main/guoqila.js
 过@期@啦
 
 [rewrite_local]
-^https:\/\/api\.guoqi365\.com\/1\.1\/functions\/getUserInfo url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/main/guoqila.js
+^https:\/\/api\.guoqi365\.com\/1\.1\/functions\/getUserInfo url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/Guoqila/gql.js
 
 [mitm]
 hostname = api.guoqi365.com
