@@ -1,7 +1,8 @@
 /*
+https://raw.githubusercontent.com/WeiGiegie/666/main/slzd.js
 三@联@中@读
-脚本功能：知@识@会@员+数@字@刊@会@员
-更新时间：2024年6月30日
+知识会员+数字刊会员
+2024年6月30日
 
 [rewrite_local]
 ^https?:\/\/apis\.lifeweek\.com\.cn\/(vip\/loadMyVipV2\?|index\/home.do\?).*$ url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/Sanlianzhongdu/slzd.js
