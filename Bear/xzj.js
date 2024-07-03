@@ -5,7 +5,7 @@ https://raw.githubusercontent.com/89996462/Quantumult-X/main/ycdz/xzj.js
 
 [rewrite_local]
 
-^https:\/\/buy\.itunes\.apple\.com\/verifyReceipt url script-response-body https://raw.githubusercontent.com/89996462/Quantumult-X/main/ycdz/xzj.js
+^https:\/\/buy\.itunes\.apple\.com\/verifyReceipt url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/Bear/xzj.js
 
 [mitm] 
 
