@@ -1,7 +1,8 @@
 /*
-软件版本：1.5.1
-
-更新时间：2024年3月26日 
+https://raw.githubusercontent.com/WeiGiegie/666/main/yctds.js
+一@草@亭@读@书 Vip
+1.5.1
+2024年3月26日 
 
 [rewrite_local]
 
