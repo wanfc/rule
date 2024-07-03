@@ -4,7 +4,7 @@ AI外教
 2024-01-15
 
 [rewrite_local]
-^https?://chatai\.qupeiyin\.com/(user/memberData|member/index|basic/userModule|member/index) url script-response-body https://raw.githubusercontent.com/anyehttp/quantumult-x/main/Adguard/aiwj.js
+^https?://chatai\.qupeiyin\.com/(user/memberData|member/index|basic/userModule|member/index) url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/AIwaijiao/aiwj0epiyj.js
 [mitm] 
 hostname = chatai.qupeiyin.com
 */
