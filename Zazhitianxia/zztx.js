@@ -1,5 +1,5 @@
 /*
-
+https://raw.githubusercontent.com/chxm1023/Rewrite/main/zztx.js
 杂@志@天@下
 
 [rewrite_local]
