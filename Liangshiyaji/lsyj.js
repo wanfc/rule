@@ -1,4 +1,8 @@
 /*
+https://raw.githubusercontent.com/Yu9191/Rewrite/main/lsyj.js
+良@师@雅@集
+解锁全课程
+
 [rewrite_local]
 
 https?:\/\/api\.liangshiyaji\.cn\/(mobile\/Wexin\/customerCenterAppNew|api\/Strict\/getStrictDetails|api\/user\/CgetUserInfo) url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/Liangshiyaji/lsyj.js
