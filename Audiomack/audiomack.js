@@ -1,6 +1,7 @@
 /*
-软件版本：6.4.4
-更新时间：2022-01-23
+https://raw.githubusercontent.com/yqc007/QuantumultX/master/AudioMackFProCrack.js
+6.4.4
+2022-01-23
 
 [rewrite_local]
 
