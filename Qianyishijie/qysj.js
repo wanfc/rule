@@ -1,6 +1,8 @@
 /*
-脚本功能：解锁永久vip(重新登录账号即可)
-更新时间：2024年2月10日 12:22
+https://raw.githubusercontent.com/WeiGiegie/666/main/qysj.js
+千@亦@视@界
+解锁永久vip(重新登录账号即可)
+2024年2月10日
 
 [rewrite_local]
 ^https?:\/\/app.thwlqy.com\/(login\/login\/sign|login\/login\/veifys).html.*$ url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/Qianyishijie/qysj.js
