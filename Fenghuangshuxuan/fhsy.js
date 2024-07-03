@@ -1,4 +1,7 @@
 /*
+https://raw.githubusercontent.com/Yu9191/Rewrite/main/fhsy.js
+凤@凰@书@苑
+
 [rewrite_local]
 #会员
 http:\/\/app.ppmbook.com\/(system\/getVipInfo\.do|user\/getMyCenterVo\.do) url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/Fenghuangshuxuan/fhsy.js
