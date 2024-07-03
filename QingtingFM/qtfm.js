@@ -1,6 +1,8 @@
 /*
-软件版本：10.4.2
-更新时间：2024年2月18日 06:55
+https://raw.githubusercontent.com/WeiGiegie/666/main/qtfm.js
+蜻@蜓@fm 解锁vip
+10.4.2
+2024年2月18日
 
 [rewrite_local]
 
