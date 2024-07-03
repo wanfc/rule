@@ -1,9 +1,9 @@
 /*
-
+https://raw.githubusercontent.com/chxm1023/Rewrite/main/kuake.js
 夸@克
 
 [rewrite_local]
-^https?:\/\/drive.*\.quark\.cn\/.+\/clouddrive\/(member.+|distribute\/detail.+|capacity\/growth\/info) url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/Kuake/kk.js
+^https?:\/\/drive.*\.quark\.cn\/.+\/clouddrive\/(member.+|distribute\/detail.+|capacity\/growth\/info) url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/Kuake/kuake.js
 
 [mitm]
 hostname = drive*.quark.cn
