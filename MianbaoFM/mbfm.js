@@ -1,7 +1,9 @@
 /*
-脚本功能：解锁vip，付费讲书
-软件版本：3.3.7
-更新时间：2024年2月17日 22:39
+https://raw.githubusercontent.com/WeiGiegie/666/main/mbfm.js
+面@包@fm
+解锁vip，付费讲书
+3.3.7
+2024年2月17日
 
 [rewrite_local]
 ^https?:\/\/wx.voxpie.com\/api\/(fmapp_bookinfo|fmapp_user).*$ url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/MianbaoFM/mbfm.js
