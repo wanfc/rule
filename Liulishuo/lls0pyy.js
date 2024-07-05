@@ -1,8 +1,8 @@
 /*
 https://raw.githubusercontent.com/89996462/Quantumult-X/main/ycdz/llsyd.js
 流@利@说·阅读+解锁VIP
-软件版本：2.28.0
-更新时间：2022-10-17
+2.28.0
+2022-10-17
 
 [rewrite_local]
 
