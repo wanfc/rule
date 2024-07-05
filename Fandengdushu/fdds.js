@@ -5,7 +5,7 @@ https://raw.githubusercontent.com/WeiGiegie/666/main/fdds.js
 
 [rewrite_local]
 # > 帆书-原樊登读书 解锁樊登讲书+课程
-^https?:\/\/.+dushu365.com\/(sns-orchestration-system\/homePage\/api\/v100\/myPage|smart-orch\/program|smart-orch\/course\/v100\/info|innovation-orchestration\/api\/ebook\/v100\/ebookInfo) url script-response-body https://raw.githubusercontent.com/WeiGiegie/666/main/fdds.js
+^https?:\/\/.+dushu365.com\/(sns-orchestration-system\/homePage\/api\/v100\/myPage|smart-orch\/program|smart-orch\/course\/v100\/info|innovation-orchestration\/api\/ebook\/v100\/ebookInfo) url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/Fandengdushu/fdds.js
 ^https?:\/\/.+dushu365.com\/resource-orchestration-system\/book\/v101\/content url script-request-body https://raw.githubusercontent.com/WeiGiegie/666/main/fdtk.js
 
 [mitm]
