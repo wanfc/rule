@@ -1,7 +1,7 @@
 /*
 https://raw.githubusercontent.com/WeiGiegie/666/main/fdds.js
 帆@书-解锁@樊@登@讲@书+课程+电子书
-软件版本：5.89.0
+5.89.0
 
 [rewrite_local]
 # > 帆书-原樊登读书 解锁樊登讲书+课程
