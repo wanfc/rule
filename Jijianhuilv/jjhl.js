@@ -3,7 +3,7 @@ https://raw.githubusercontent.com/chxm1023/Rewrite/main/jijianhuilv.js
 极@简@汇@率
 
 [rewrite_local]
-^https?:\/\/(xremit\.xcurrency|explorer.tratao)\.com\/api\/client\/xtool\/vip url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/Jijianhuilv/jjhl.jsj
+^https?:\/\/(xremit\.xcurrency|explorer.tratao)\.com\/api\/client\/xtool\/vip url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/Jijianhuilv/jjhl.js
 
 [mitm]
 hostname = xremit.xcurrency.com, explorer.tratao.com
