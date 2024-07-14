@@ -5,7 +5,7 @@ https://raw.githubusercontent.com/WeiGiegie/666/main/jjhl.js
 2024年
 
 [rewrite_local]
-^https?:\/\/explorer.tratao.com\/api\/client\/xtool\/vip url script-response-body https://raw.githubusercontent.com/WeiGiegie/666/main/jjhl.js
+^https?:\/\/explorer.tratao.com\/api\/client\/xtool\/vip url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/Jijianhuilv/jjhl0wg.js
 
 [mitm] 
 hostname = explorer.tratao.com
