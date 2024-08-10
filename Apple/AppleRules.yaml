@@ -1,37 +1,4 @@
 payload:
-  - DOMAIN-WILDCARD,apple.*
-  - DOMAIN-WILDCARD,apple.com.*
-  - DOMAIN-WILDCARD,appleworldwidedeveloper.*.net
-  - DOMAIN-WILDCARD,imac.*
-  - DOMAIN-WILDCARD,iphone.*
-  - DOMAIN-WILDCARD,ipod.*
-  - DOMAIN-WILDCARD,macbook.*
-  - USER-AGENT,*com.apple.mobileme.fmip1
-  - USER-AGENT,*WeatherFoundation*
-  - DOMAIN,weather-data.apple.com
-  - USER-AGENT,*com.apple.Maps*
-  - USER-AGENT,Maps*
-  - DOMAIN,gs-loc-cn.apple.com
-  - USER-AGENT,FindMyFriends*
-  - USER-AGENT,*FindMyiPhone*
-  - USER-AGENT,FMDClient*
-  - USER-AGENT,FMFD*
-  - USER-AGENT,fmflocatord*
-  - USER-AGENT,geod*
-  - USER-AGENT,locationd*
-  - DOMAIN,fmfmobile.icloud.com
-  - DOMAIN,fmipmobile.icloud.com
-  - DOMAIN,statici.icloud.com
-  - IP-CIDR,17.0.0.0/8
-  - IP-CIDR,63.92.224.0/19
-  - IP-CIDR,65.199.22.0/23
-  - IP-CIDR,139.178.128.0/18
-  - IP-CIDR,144.178.0.0/19
-  - IP-CIDR,144.178.36.0/22
-  - IP-CIDR,144.178.48.0/20
-  - IP-CIDR,192.35.50.0/24
-  - IP-CIDR,198.183.17.0/24
-  - IP-CIDR,205.180.175.0/24
   - DOMAIN-SUFFIX,apple.com
   - DOMAIN-SUFFIX,apple.co
   - DOMAIN-SUFFIX,apple.cn
@@ -47,10 +14,22 @@ payload:
   - DOMAIN-SUFFIX,me.com
   - DOMAIN-SUFFIX,mzstatic.com
   - DOMAIN-SUFFIX,akadns.net
-  - USER-AGENT,*Music*
-  - DOMAIN-KEYWORD,smp-device
-  - USER-AGENT,passd*
-  - USER-AGENT,Wallet*
+  - DOMAIN,weather-data.apple.com
+  - DOMAIN,gs-loc-cn.apple.com
+  - DOMAIN,fmfmobile.icloud.com
+  - DOMAIN,fmipmobile.icloud.com
+  - DOMAIN,statici.icloud.com
   - DOMAIN-SUFFIX,ls.apple.com.edgesuite.net
   - DOMAIN-SUFFIX,dispatcher.is.autonavi.com
   - DOMAIN-SUFFIX,apple.news
+  - DOMAIN-KEYWORD,smp-device
+  - IP-CIDR,17.0.0.0/8
+  - IP-CIDR,63.92.224.0/19
+  - IP-CIDR,65.199.22.0/23
+  - IP-CIDR,139.178.128.0/18
+  - IP-CIDR,144.178.0.0/19
+  - IP-CIDR,144.178.36.0/22
+  - IP-CIDR,144.178.48.0/20
+  - IP-CIDR,192.35.50.0/24
+  - IP-CIDR,198.183.17.0/24
+  - IP-CIDR,205.180.175.0/24
