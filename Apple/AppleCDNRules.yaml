@@ -1,6 +1,6 @@
 payload:
   - DOMAIN,iosapps.itunes.apple.com
-  - DOMAIN-SUFFIX,apple.com
+  - USER-AGENT,com.apple.appstored*
   - DOMAIN,osxapps.itunes.apple.com
   - DOMAIN,oscdn.apple.com
   - DOMAIN,supportdownload.apple.com
