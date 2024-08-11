@@ -1,7 +1,8 @@
 /*
-脚本功能：扫描宝（永久会员）
-软件版本：6.69
-更新时间：2024年
+https://raw.githubusercontent.com/WeiGiegie/666/main/smb.js
+扫描宝（永久会员）
+6.69
+2024年
 [rewrite_local]
 # >扫描宝（永久会员）
 ^https?:\/\/app.yinxiang.com\/third\/scanner\/scanner\/app\/userInfo\/get url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/Saomiaobao/smb2.js
