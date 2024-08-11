@@ -32,9 +32,9 @@
 
 [rewrite_local]
 #修改
-^https?:\/\/api\.revenuecat\.com\/v1\/(subscribers\/[^\/]+$|receipts$) url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/heji/Revenuecat.js
+^https?:\/\/api\.revenuecat\.com\/v1\/(subscribers\/[^\/]+$|receipts$) url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/Heji/Revenuecat0bb.js
 #清理
-^https?:\/\/api\.revenuecat\.com\/v1\/(subscribers\/[^\/]+$|receipts$) url script-request-header https://raw.githubusercontent.com/wanfc/rule/re/heji/Revenuecat.js
+^https?:\/\/api\.revenuecat\.com\/v1\/(subscribers\/[^\/]+$|receipts$) url script-request-header https://raw.githubusercontent.com/wanfc/rule/re/Heji/Revenuecat0bb.js
 https://api.lianjiu.fun/app/api/v1/profile url reject
 
 [mitm] 
