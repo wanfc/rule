@@ -3,7 +3,7 @@ https://raw.githubusercontent.com/kkwhf/Qx-backup/main/Test.js
 海@獭@健@康
 
 [rewrite_local]
-^https?:\/\/otter-api\.codefuture\.top\/v1\/user\/current url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/Haitajiankang/htjk.js
+^https?:\/\/otter-api\.codefuture\.top\/v1\/user\/current url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/OtterLife/htjk0kk.js
 [mitm]
 hostname = otter-api.codefuture.top
 */
