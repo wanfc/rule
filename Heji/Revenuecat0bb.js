@@ -1,5 +1,5 @@
 /*************************************
-
+https://raw.githubusercontent.com/Yu9191/Rewrite/main/Revenuecat.js
 项目名称：revenuecat合集 （此合集只包含10.5及以后的软件）
 软件版本：均适配2023.9.8最新 （每一个下载地址对应一个UAMappings）
 下载地址：星锤日记 https://is.gd/R5KqD4
@@ -25,16 +25,13 @@
 下载地址：Langster https://too.st/7aW 同作者5个软件 
 下载地址：muse 同作者2个软件
 下载地址：Funexpected 
-下载地址：中国法律
-使用声明：⚠️仅供参考，🈲️转载与售卖！
-
 **************************************
 
 [rewrite_local]
 #修改
-^https?:\/\/api\.revenuecat\.com\/v1\/(subscribers\/[^\/]+$|receipts$) url script-response-body https://raw.githubusercontent.com/wanfc/rule/re/Heji/Revenuecat0bb.js
+^https?:\/\/api\.revenuecat\.com\/v1\/(subscribers\/[^\/]+$|receipts$) url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/main/Revenuecat.js
 #清理
-^https?:\/\/api\.revenuecat\.com\/v1\/(subscribers\/[^\/]+$|receipts$) url script-request-header https://raw.githubusercontent.com/wanfc/rule/re/Heji/Revenuecat0bb.js
+^https?:\/\/api\.revenuecat\.com\/v1\/(subscribers\/[^\/]+$|receipts$) url script-request-header https://raw.githubusercontent.com/Yu9191/Rewrite/main/Revenuecat.js
 https://api.lianjiu.fun/app/api/v1/profile url reject
 
 [mitm] 
@@ -63,6 +60,8 @@ if (typeof $response == "undefined") {
   var UA = $request.headers['user-agent'];
   const app = '1';
   const UAMappings = {
+    'Loora':{ name: 'Yearly', id: 'yearly_119_99_no_trial'},//8.14
+    'Browser':{ name: 'pro', id: 'pro_zoomable'},//8.7
     'becoming':{ name: 'Strength Pro', id: 'strength_membership_monthly'},//练就
     'Chords':{ name: 'FullUnlock', id: 'cas_full_unlock_yearly_50_off'},//8.1
     'reader':{ name: 'subscriptions', id: 'com.valo.reader.vip1.forever'},
@@ -73,7 +72,7 @@ if (typeof $response == "undefined") {
     'PrevisShot':{ name: 'VIP', id: 'com.previsshot.previsshot.continuous_subscribe_12month_vip'},//7.9
     'Super%20AI%20Chat':{ name: 'premium', id: 'chatbot_v4_1999_1y'},
     'MusicPutty':{ name: 'pro_version', id: 'mp_3599_1y'},//6.24
-    'Linearity':{ name: 'pro', id: 'linearity_curve_pro_yearly_launch_offer'},
+    'Linearity':{ name: 'pro', id: 'linearity_curve_pro_yearly_special_offer_trial'},
     'iplayTV':{ name: 'com.ll.btplayer.12', id: 'com.ll.btplayer.12'},//6.21
     '%E8%B5%84%E6%BA%90%E6%90%AC%E8%BF%90%E5%A4%A7%E5%B8%88':{ name: 'SaveTikYoutu_common', id: 'LifetimeSubscription'},
     'DHWaterMarkManager':{ name: 'Vip', id: 'lifetimeVIP_001'},//6.20
