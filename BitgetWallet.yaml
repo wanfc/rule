@@ -1,10 +1,5 @@
 payload:
-  - DOMAIN-SUFFIX,web3.bitget.com
-  - DOMAIN-SUFFIX,api.bitget.com
-  - DOMAIN-SUFFIX,capi.bitget.com
-  - DOMAIN-SUFFIX,ws.bitget.com
-  - DOMAIN-SUFFIX,api.bitkeep.com
-  - DOMAIN-SUFFIX,bkapi.bitkeep.com
+  - DOMAIN-SUFFIX,bitget.com
   - DOMAIN-SUFFIX,bitkeep.com
   - DOMAIN-SUFFIX,bitkeep.cn
   - DOMAIN-SUFFIX,bitkeep.io
@@ -15,7 +10,7 @@ payload:
   - DOMAIN-SUFFIX,bitkeep.asia
   - DOMAIN-SUFFIX,bitkeep.fun
   - DOMAIN-SUFFIX,bitkeep.top
-  - DOMAIN-SUFFIX,bitget.com
+  - DOMAIN-SUFFIX,bitapi.vip
   - DOMAIN-SUFFIX,bitgetapp.com
   - DOMAIN-SUFFIX,walletconnect.com
   - DOMAIN-SUFFIX,walletconnect.org
