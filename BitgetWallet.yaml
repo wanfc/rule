@@ -11,8 +11,10 @@ payload:
   - DOMAIN-SUFFIX,bitkeep.fun
   - DOMAIN-SUFFIX,bitkeep.top
   - DOMAIN-SUFFIX,bitapi.vip
+  - DOMAIN-SUFFIX,bwb.global
   - DOMAIN-SUFFIX,bitgetapp.com
   - DOMAIN-SUFFIX,walletconnect.com
   - DOMAIN-SUFFIX,walletconnect.org
   - DOMAIN-KEYWORD,bitget
   - DOMAIN-KEYWORD,bitkeep
+
