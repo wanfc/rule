@@ -290,7 +290,7 @@ proxy-groups:
   - {name: 🦊 拼多多, <<: *cus-groups}
   - {name: 🍟 美团, <<: *cus-groups}
   - {name: 🚕 滴滴, <<: *cus-groups}
-  - {name: 🐾 百度, <<: *cus-groups}
+  - {name: 🐻‍❄️ 百度, <<: *cus-groups}
   - {name: 🐯 奇虎360, <<: *cus-groups}
   - {name: ☁️ OneDrive, <<: *cus-groups}
   - {name: 🍍 Bing, <<: *cus-groups}
@@ -745,7 +745,7 @@ rules:
   - RULE-SET,pinduoduo_domain,🦊 拼多多
   - RULE-SET,meituan_domain,🍟 美团
   - RULE-SET,didi_domain,🚕 滴滴
-  - RULE-SET,baidu_domain,🐾 百度
+  - RULE-SET,baidu_domain,🐻‍❄️ 百度
   - RULE-SET,qihoo360_domain,🐯 奇虎360
   - RULE-SET,onedrive_domain,☁️ OneDrive
   - RULE-SET,bing_domain,🍍 Bing
@@ -893,4 +893,5 @@ rule-providers:
   geo-cn_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/geolocation-cn.mrs"}
   geo-!cn_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/geolocation-!cn.mrs"}
   cn_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/cn.mrs"}
+
   cn_ip: { <<: *mip, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geoip/cn.mrs"}
