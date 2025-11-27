@@ -1,0 +1,896 @@
+# ====================
+# 机场节点订阅
+
+proxy-providers:
+
+  阿Q云:
+    url: "https://nVx81Q0ouJA21x8U.xn--fiqs8s40dz2j.com/api/v1/client/subscribe?token=2c85d91c1adfea2e23c8e3a25172652b"
+    type: http
+    interval: 10800
+    health-check:
+      enable: true
+      url: https://cp.cloudflare.com/generate_204
+      interval: 600
+    proxy: 直连
+    header:
+      User-Agent:
+#     - "Clash/v1.18.0"
+      - "Clash-verge/2.4.2"
+#     - "mihomo/1.19.13"
+#     - "Clash"
+#     - "mihomo"
+#     - "Clash.meta"
+    override:
+      skip-cert-verify: true
+      additional-prefix: "阿Q云-"
+    
+  Alphalo:
+    url: "https://links.azurefd.net/api/v1/client/subscribe?token=145b6d7d1965b155b58a810ecae9327a"
+    type: http
+    interval: 10800
+    health-check:
+      enable: true
+      url: https://cp.cloudflare.com/generate_204
+      interval: 600
+    proxy: 直连
+    header:
+      User-Agent:
+#     - "Clash/v1.18.0"
+      - "mihomo/1.19.13"
+    override:
+      skip-cert-verify: true
+      additional-prefix: "Alphalo-"
+
+
+  赔钱:
+    url: "https://dash.pqjc.site/api/v1/client/subscribe?token=25612456e52e3b7841472e9b1c3b9194"
+    type: http
+    interval: 10800
+    health-check:
+      enable: true
+      url: https://cp.cloudflare.com/generate_204
+      interval: 600
+    proxy: 直连
+    header:
+      User-Agent:
+#     - "Clash/v1.18.0"
+      - "mihomo/1.19.13"
+    override:
+      skip-cert-verify: true
+      additional-prefix: "赔钱-"
+
+
+# ====================
+# 节点信息
+
+proxies:
+  - {name: 直连, type: direct}
+  - {name: 拒绝, type: reject}
+
+
+# ====================
+# 全局配置 
+
+port: 7890
+socks-port: 7891
+redir-port: 7892
+mixed-port: 7893
+tproxy-port: 7894
+
+allow-lan: true
+bind-address: "*"
+ipv6: false
+unified-delay: true
+tcp-concurrent: true
+# interface-name: enp6s18
+mode: rule
+log-level: silent
+find-process-mode: 'off'
+global-client-fingerprint: ios
+keep-alive-idle: 600
+keep-alive-interval: 15
+
+profile:
+  store-selected: true
+  store-fake-ip: true
+
+external-controller: 0.0.0.0:9090
+# external-ui: ui
+# external-ui-name: zashboard
+# external-ui-url: https://gh-proxy.com/github.com/Zephyruso/zashboard/archive/refs/heads/gh-pages.zip
+secret: "123456"
+
+
+# ====================
+# DNS 设置
+
+dns:
+  cache-algorithm: arc
+  enable: true
+  prefer-h3: false
+  listen: 0.0.0.0:7874
+  ipv6: false
+  default-nameserver:
+    - 223.5.5.5
+    - 119.29.29.29
+  enhanced-mode: fake-ip
+  fake-ip-range: 28.0.0.1/8
+  fake-ip-filter:
+#  注意: 不要 在这里加入 'geosite:cn'。我们希望国内域名也走 Fake-IP,这样我们才能在`rules:`中对它们应用广告拦截等规则
+#   - "+.lan"
+#   - "+.local"
+#  排除所有局域网和私有地址
+    - 'rule-set:private_domain'  # 已经包含上面
+#  排除与 Fake-IP 不兼容的 App/设备
+#  小米/米家生态
+    - '+.market.xiaomi.com'
+    - 'Mijia Cloud'
+    - 'Mijia-Cloud'
+#   排除与 Fake-IP 不兼容的服务
+#   QQ 登录/银行
+    - 'localhost.ptlogin2.qq.com'
+#   排除 Windows 网络检查
+#   防止 Windows 误判“网络已断开”
+    - '+.msftconnecttest.com'
+    - '+.msftncsi.com'
+#   [可选] Apple 生态 (如果遇到登录/iCloud 问题)
+#   Apple 服务的 IP 验证也非常严格
+# - '+.apple.com'
+# - '+.icloud.com'
+#   Steam 下载
+    - 'lancache.steamcontent.com'
+  fake-ip-filter-mode: blacklist
+  use-hosts: true
+  respect-rules: true
+  nameserver:
+    - https://dns.alidns.com/dns-query
+    - https://doh.pub/dns-query
+
+  proxy-server-nameserver:
+    - https://dns.alidns.com/dns-query
+    - https://doh.pub/dns-query
+  block-quic: true
+
+
+
+# ====================
+# 入站  
+
+tun:
+  enable: true
+# system/gvisor/mixed
+  stack: system
+  dns-hijack: ["any:53", "tcp://any:53"]
+  device: utun
+  endpoint-independent-nat: true
+  auto-route: true
+  auto-redirect: true
+  auto-detect-interface: false
+  strict-route: false
+  mtu: 1500
+
+# ====================
+# 嗅探
+
+sniffer:
+  enable: true
+  parse-pure-ip: true
+  override-destination: true
+  sniff:
+    HTTP:
+      ports: [80, 8080-8880] # (注意)这里不再需要 "override-destination: true"，因为它会自动继承上面全局的 "true"
+    TLS:
+      ports: [443, 8443]
+  skip-domain:
+#  本地和 mDNS (必须)
+# - 'localhost'
+# - '*.local'                # Apple mDNS / Bonjour
+  - 'rule-set:private_domain' # 已经包含上面
+#  已知的非 TLS 流量 (必须)
+# (WebRTC 语音/视频)
+  - '*stun*'
+  - '*turn*'
+# (远程桌面 / 内网穿透)
+  - '+.oray.com'             # 花生壳
+  - '+.sunlogin.net'         # 向日葵
+# (网易云音乐)
+  - 'music.163.com'
+  - '+.music.126.net'
+#  Apple 生态 (APNS & iCloud) (强烈推荐)
+  - '+.push.apple.com'       # Apple 推送通知
+  - 'mask.icloud.com'        # iCloud 私人中继
+  - 'mask-h2.icloud.com'     # iCloud 私人中继
+  - '+.gc.apple.com'         # Apple Game Center
+#  特定 App/设备兼容性 (推荐)
+  - 'Mijia Cloud'            # 小米/米家设备
+  - 'Mijia-Cloud'
+  - '+.v.qq.com'             # 腾讯视频
+  - '+.biliapi.net'          # Bilibili
+  # skip-src-address: # 对于来源ip跳过嗅探
+  #   - 192.168.0.3/32
+  skip-dst-address: # 对于目标ip跳过嗅探
+  - 'rule-set:private_ip'
+
+
+# ====================
+# 策略组定义
+
+cus-groups: &cus-groups
+  type: select
+  proxies:
+    - 直连
+    - 所有-自动
+    - 所有-手动
+    - 香港-故障转移
+    - 香港-手动
+    - 香港-Alphalo-自动
+    - 香港-阿Q云-自动
+    - 香港-赔钱-自动
+    - 台湾-故障转移
+    - 台湾-手动
+    - 台湾-Alphalo-自动
+    - 台湾-阿Q云-自动
+    - 台湾-赔钱-自动
+    - 日本-故障转移
+    - 日本-手动
+    - 日本-Alphalo-自动
+    - 日本-阿Q云-自动
+    - 日本-赔钱-自动
+    - 新加坡-故障转移
+    - 新加坡-手动
+    - 新加坡-Alphalo-自动
+    - 新加坡-阿Q云-自动
+    - 新加坡-赔钱-自动
+    - 韩国-故障转移
+    - 韩国-手动
+    - 韩国-阿Q云-自动
+    - 韩国-赔钱-自动
+    - 美国-故障转移
+    - 美国-手动
+    - 美国-Alphalo-自动
+    - 美国-阿Q云-自动
+    - 美国-赔钱-自动
+    - 英国-故障转移
+    - 英国-手动
+    - 英国-阿Q云-自动
+    - 英国-赔钱-自动
+    - 低倍率-故障转移
+    - 低倍率-手动
+    - 低倍率-阿Q云-手动
+    - 低倍率-美国0.1-自动
+    - 低倍率-美国0.01-自动
+    - 低倍率-日本0.1-自动
+    - 拒绝
+
+
+# ====================
+proxy-groups:
+
+  # 业务分流组
+  - {name: 🎠 私有地址, type: select, proxies: [直连, 拒绝]}
+  - {name: 🆎 广告, type: select, proxies: [拒绝, 直连]}
+  - {name: ⛓️ Tracker, <<: *cus-groups}
+  - {name: 📦 PT, <<: *cus-groups}
+  - {name: ☄️ 自定-外, <<: *cus-groups}
+  - {name: 🎰 Speedtest, <<: *cus-groups}
+  - {name: 🥝 中区开发者, <<: *cus-groups}
+  - {name: 🥝 全球开发者中国CDN, <<: *cus-groups}
+  - {name: 🥝 全球开发者, <<: *cus-groups}
+  - {name: 🥥 Github1s, <<: *cus-groups}
+  - {name: 🍎 Apple智能, <<: *cus-groups}
+  - {name: 🍏 Apple中国CDN, <<: *cus-groups}
+  - {name: 🍏 Apple中国, <<: *cus-groups}
+  - {name: 🍎 Apple, <<: *cus-groups}
+  - {name: 🔆 国外AI, <<: *cus-groups}
+  - {name: 🔅 国内AI, <<: *cus-groups}
+  - {name: 🐧 腾讯国际, <<: *cus-groups}
+  - {name: 🐧 腾讯, <<: *cus-groups}
+  - {name: 🐹 阿里巴巴, <<: *cus-groups}
+  - {name: 🐶 京东, <<: *cus-groups}
+  - {name: 🦊 拼多多, <<: *cus-groups}
+  - {name: 🍟 美团, <<: *cus-groups}
+  - {name: 🚕 滴滴, <<: *cus-groups}
+  - {name: 🐻‍❄️ 百度, <<: *cus-groups}
+  - {name: 🐯 奇虎360, <<: *cus-groups}
+  - {name: ☁️ OneDrive, <<: *cus-groups}
+  - {name: 🍍 Bing, <<: *cus-groups}
+  - {name: 🦀 网易, <<: *cus-groups}
+  - {name: 🦚 华为, <<: *cus-groups}
+  - {name: 🏖️ 金山软件, <<: *cus-groups}
+  - {name: 🍥 小米, <<: *cus-groups}
+  - {name: 🏦 银行, <<: *cus-groups}
+  - {name: 🧰 Password, <<: *cus-groups}
+  - {name: 💳 贝宝, <<: *cus-groups}
+  - {name: 💳 PayPal, <<: *cus-groups}
+  - {name: 💶 国内加密货币, <<: *cus-groups}
+  - {name: 💶 加密货币, <<: *cus-groups}
+  - {name: 📡 运营商, <<: *cus-groups}
+  - {name: 📮 Telegram, <<: *cus-groups}
+  - {name: 💊 Adguard, <<: *cus-groups}
+  - {name: 🍞 中文传媒, <<: *cus-groups}
+  - {name: 🍞 外文传媒, <<: *cus-groups}
+  - {name: 🍀 Dcard, <<: *cus-groups}
+  - {name: 🍉 中文社媒, <<: *cus-groups}
+  - {name: 🍉 外文社媒, <<: *cus-groups}
+  - {name: 💡 Nvidia, <<: *cus-groups}
+  - {name: 🕹️ 游戏下载, <<: *cus-groups}
+  - {name: 🎮 国际游戏中区CDN, <<: *cus-groups}
+  - {name: 🎮 游戏国内, <<: *cus-groups}
+  - {name: 🎮 游戏国际, <<: *cus-groups}
+  - {name: 🍋 国内娱乐媒体, <<: *cus-groups}
+  - {name: 🍋 国外娱乐媒体, <<: *cus-groups}
+  - {name: 🧀 Google, <<: *cus-groups}
+  - {name: 🔞 NSFW, <<: *cus-groups}
+  - {name: 🖍️ Adobe激活, <<: *cus-groups}
+  - {name: 🖍️ Adobe, <<: *cus-groups}
+  - {name: Ⓜ️ 微软中国, <<: *cus-groups}
+  - {name: Ⓜ️ 微软, <<: *cus-groups}
+  - {name: 🗼 GEO国内, <<: *cus-groups}
+  - {name: 🛫 GEO国外, <<: *cus-groups}
+  - {name: 🏰 中国, <<: *cus-groups}
+  - {name: 🛟 兜底, <<: *cus-groups}
+
+
+# ====================
+  # 所有组
+
+  - name: 所有-自动
+    type: smart
+    include-all: true
+    policy-priority: "家宽:0.8;直连:0.8;下载:0.8;hy2:0.8"
+    uselightgbm: true
+    collectdata: true
+    interval: 600
+    filter: "^(?i)(?:(?!拒绝).)*$"
+
+  - name: 所有-手动
+    type: select
+    include-all: true
+    filter: "^(?i)(?:(?!拒绝).)*$"
+
+
+  # 香港组
+
+  - name: 香港-故障转移
+    type: fallback
+    interval: 600
+    lazy: false
+    proxies:
+      - 香港-手动
+      - 香港-Alphalo-自动
+      - 香港-阿Q云-自动
+      - 香港-赔钱-自动
+  
+  - name: 香港-手动
+    type: select
+    include-all: true
+    filter: "^(?i)(?=.*?(?:🇭🇰|香港|(?<![a-zA-Z])(?:HK|Hong\\s*Kong)(?![a-zA-Z])))(?!.*?(?:0(?:\\.(?>\\d+))?|1\\.(?>\\d*)[1-9](?>\\d*)|(?:[2-9]|[1-9](?>[0-9]+))(?:\\.(?>\\d+))?)\\s*(?:x|倍)).*$"
+
+  - name: 香港-Alphalo-自动
+    type: smart
+    use:
+      - Alphalo
+    policy-priority: "家宽:0.8"
+    uselightgbm: true
+    collectdata: true
+    interval: 600
+    filter: "^(?i)(?=.*?(?:🇭🇰|香港|(?<![a-zA-Z])(?:HK|Hong\\s*Kong)(?![a-zA-Z])))(?!.*?(?:0(?:\\.(?>\\d+))?|1\\.(?>\\d*)[1-9](?>\\d*)|(?:[2-9]|[1-9](?>[0-9]+))(?:\\.(?>\\d+))?)\\s*(?:x|倍)).*$"
+
+  - name: 香港-阿Q云-自动
+    type: smart
+    use:
+      - 阿Q云
+    policy-priority: "家宽:0.8"
+    uselightgbm: true
+    collectdata: true
+    interval: 600
+    filter: "^(?i)(?=.*?(?:🇭🇰|香港|(?<![a-zA-Z])(?:HK|Hong\\s*Kong)(?![a-zA-Z])))(?!.*?(?:0(?:\\.(?>\\d+))?|1\\.(?>\\d*)[1-9](?>\\d*)|(?:[2-9]|[1-9](?>[0-9]+))(?:\\.(?>\\d+))?)\\s*(?:x|倍)).*$"
+
+  - name: 香港-赔钱-自动
+    type: smart
+    use:
+      - 赔钱
+    policy-priority: "家宽:0.8"
+    uselightgbm: true
+    collectdata: true
+    interval: 600
+    filter: "^(?i)(?=.*?(?:🇭🇰|香港|(?<![a-zA-Z])(?:HK|Hong\\s*Kong)(?![a-zA-Z])))(?!.*?(?:0(?:\\.(?>\\d+))?|1\\.(?>\\d*)[1-9](?>\\d*)|(?:[2-9]|[1-9](?>[0-9]+))(?:\\.(?>\\d+))?)\\s*(?:x|倍)).*$"
+
+  # 台湾组
+
+  - name: 台湾-故障转移
+    type: fallback
+    interval: 600
+    lazy: false
+    proxies:
+      - 台湾-手动
+      - 台湾-Alphalo-自动
+      - 台湾-阿Q云-自动
+      - 台湾-赔钱-自动
+  
+  - name: 台湾-手动
+    type: select
+    include-all: true
+    filter: "^(?i)(?=.*?(?:🇹🇼|🇨🇳|台[湾灣]|(?<![a-zA-Z])(?:TW|Taiwan|Taipei)(?![a-zA-Z])))(?!.*?(?:0(?:\\.(?>\\d+))?|1\\.(?>\\d*)[1-9](?>\\d*)|(?:[2-9]|[1-9](?>[0-9]+))(?:\\.(?>\\d+))?)\\s*(?:x|倍)).*$"
+
+  - name: 台湾-Alphalo-自动
+    type: smart
+    use:
+      - Alphalo
+    policy-priority: "家宽:0.8"
+    uselightgbm: true
+    collectdata: true
+    interval: 600
+    filter: "^(?i)(?=.*?(?:🇹🇼|🇨🇳|台[湾灣]|(?<![a-zA-Z])(?:TW|Taiwan|Taipei)(?![a-zA-Z])))(?!.*?(?:0(?:\\.(?>\\d+))?|1\\.(?>\\d*)[1-9](?>\\d*)|(?:[2-9]|[1-9](?>[0-9]+))(?:\\.(?>\\d+))?)\\s*(?:x|倍)).*$"
+
+  - name: 台湾-阿Q云-自动
+    type: smart
+    use:
+      - 阿Q云
+    policy-priority: "家宽:0.8"
+    uselightgbm: true
+    collectdata: true
+    interval: 600
+    filter: "^(?i)(?=.*?(?:🇹🇼|🇨🇳|台[湾灣]|(?<![a-zA-Z])(?:TW|Taiwan|Taipei)(?![a-zA-Z])))(?!.*?(?:0(?:\\.(?>\\d+))?|1\\.(?>\\d*)[1-9](?>\\d*)|(?:[2-9]|[1-9](?>[0-9]+))(?:\\.(?>\\d+))?)\\s*(?:x|倍)).*$"
+
+  - name: 台湾-赔钱-自动
+    type: smart
+    use:
+      - 赔钱
+    policy-priority: "家宽:0.8"
+    uselightgbm: true
+    collectdata: true
+    interval: 600
+    filter: "^(?i)(?=.*?(?:🇹🇼|🇨🇳|台[湾灣]|(?<![a-zA-Z])(?:TW|Taiwan|Taipei)(?![a-zA-Z])))(?!.*?(?:0(?:\\.(?>\\d+))?|1\\.(?>\\d*)[1-9](?>\\d*)|(?:[2-9]|[1-9](?>[0-9]+))(?:\\.(?>\\d+))?)\\s*(?:x|倍)).*$"
+
+
+  # 日本组
+
+  - name: 日本-故障转移
+    type: fallback
+    interval: 600
+    lazy: false
+    proxies:
+      - 日本-手动
+      - 日本-Alphalo-自动
+      - 日本-阿Q云-自动
+      - 日本-赔钱-自动
+  
+  - name: 日本-手动
+    type: select
+    include-all: true
+    filter: "^(?i)(?=.*?(?:🇯🇵|日本|东京|广日|川日|大阪|泉日|埼玉|沪日|深日|(?<![a-zA-Z])(?:JP|Japan|Tokyo)(?![a-zA-Z])))(?!.*?(?:0(?:\\.(?>\\d+))?|1\\.(?>\\d*)[1-9](?>\\d*)|(?:[2-9]|[1-9](?>[0-9]+))(?:\\.(?>\\d+))?)\\s*(?:x|倍)).*$"
+
+  - name: 日本-Alphalo-自动
+    type: smart
+    use:
+      - Alphalo
+    policy-priority: "家宽:0.8"
+    uselightgbm: true
+    collectdata: true
+    interval: 600
+    filter: "^(?i)(?=.*?(?:🇯🇵|日本|东京|广日|川日|大阪|泉日|埼玉|沪日|深日|(?<![a-zA-Z])(?:JP|Japan|Tokyo)(?![a-zA-Z])))(?!.*?(?:0(?:\\.(?>\\d+))?|1\\.(?>\\d*)[1-9](?>\\d*)|(?:[2-9]|[1-9](?>[0-9]+))(?:\\.(?>\\d+))?)\\s*(?:x|倍)).*$"
+
+  - name: 日本-阿Q云-自动
+    type: smart
+    use:
+      - 阿Q云
+    policy-priority: "家宽:0.8"
+    uselightgbm: true
+    collectdata: true
+    interval: 600
+    filter: "^(?i)(?=.*?(?:🇯🇵|日本|东京|广日|川日|大阪|泉日|埼玉|沪日|深日|(?<![a-zA-Z])(?:JP|Japan|Tokyo)(?![a-zA-Z])))(?!.*?(?:0(?:\\.(?>\\d+))?|1\\.(?>\\d*)[1-9](?>\\d*)|(?:[2-9]|[1-9](?>[0-9]+))(?:\\.(?>\\d+))?)\\s*(?:x|倍)).*$"
+
+  - name: 日本-赔钱-自动
+    type: smart
+    use:
+      - 赔钱
+    policy-priority: "hy2:0.8"
+    uselightgbm: true
+    collectdata: true
+    interval: 600
+    filter: "^(?i)(?=.*?(?:🇯🇵|日本|东京|广日|川日|大阪|泉日|埼玉|沪日|深日|(?<![a-zA-Z])(?:JP|Japan|Tokyo)(?![a-zA-Z])))(?!.*?(?:0(?:\\.(?>\\d+))?|1\\.(?>\\d*)[1-9](?>\\d*)|(?:[2-9]|[1-9](?>[0-9]+))(?:\\.(?>\\d+))?)\\s*(?:x|倍)).*$"
+
+  # 新加坡组
+
+  - name: 新加坡-故障转移
+    type: fallback
+    interval: 600
+    lazy: false
+    proxies:
+      - 新加坡-手动
+      - 新加坡-Alphalo-自动
+      - 新加坡-阿Q云-自动
+      - 新加坡-赔钱-自动
+  
+  - name: 新加坡-手动
+    type: select
+    include-all: true
+    filter: "^(?i)(?=.*?(?:🇸🇬|新加坡|[狮獅]城|(?<![a-zA-Z])(?:SG|Singapore)(?![a-zA-Z])))(?!.*?(?:0(?:\\.(?>\\d+))?|1\\.(?>\\d*)[1-9](?>\\d*)|(?:[2-9]|[1-9](?>[0-9]+))(?:\\.(?>\\d+))?)\\s*(?:x|倍)).*$"
+
+  - name: 新加坡-Alphalo-自动
+    type: smart
+    use:
+      - Alphalo
+    policy-priority: "家宽:0.8"
+    uselightgbm: true
+    collectdata: true
+    interval: 600
+    filter: "^(?i)(?=.*?(?:🇸🇬|新加坡|[狮獅]城|(?<![a-zA-Z])(?:SG|Singapore)(?![a-zA-Z])))(?!.*?(?:0(?:\\.(?>\\d+))?|1\\.(?>\\d*)[1-9](?>\\d*)|(?:[2-9]|[1-9](?>[0-9]+))(?:\\.(?>\\d+))?)\\s*(?:x|倍)).*$"
+
+  - name: 新加坡-阿Q云-自动
+    type: smart
+    use:
+      - 阿Q云
+    policy-priority: "家宽:0.8"
+    uselightgbm: true
+    collectdata: true
+    interval: 600
+    filter: "^(?i)(?=.*?(?:🇸🇬|新加坡|[狮獅]城|(?<![a-zA-Z])(?:SG|Singapore)(?![a-zA-Z])))(?!.*?(?:0(?:\\.(?>\\d+))?|1\\.(?>\\d*)[1-9](?>\\d*)|(?:[2-9]|[1-9](?>[0-9]+))(?:\\.(?>\\d+))?)\\s*(?:x|倍)).*$"
+
+  - name: 新加坡-赔钱-自动
+    type: smart
+    use:
+      - 赔钱
+    policy-priority: "hy2:0.8"
+    uselightgbm: true
+    collectdata: true
+    interval: 600
+    filter: "^(?i)(?=.*?(?:🇸🇬|新加坡|[狮獅]城|(?<![a-zA-Z])(?:SG|Singapore)(?![a-zA-Z])))(?!.*?(?:0(?:\\.(?>\\d+))?|1\\.(?>\\d*)[1-9](?>\\d*)|(?:[2-9]|[1-9](?>[0-9]+))(?:\\.(?>\\d+))?)\\s*(?:x|倍)).*$"
+
+
+  # 韩国组
+
+  - name: 韩国-故障转移
+    type: fallback
+    interval: 600
+    lazy: false
+    proxies:
+      - 韩国-手动
+      - 韩国-阿Q云-自动
+      - 韩国-赔钱-自动
+  
+  - name: 韩国-手动
+    type: select
+    include-all: true
+    filter: "^(?i)(?=.*?(?:🇰🇷|[韩韓]国|首尔|春川|广韩|(?<![a-zA-Z])(?:KR|Korea|South\\s*Korea)(?![a-zA-Z])))(?!.*?(?:0(?:\\.(?>\\d+))?|1\\.(?>\\d*)[1-9](?>\\d*)|(?:[2-9]|[1-9](?>[0-9]+))(?:\\.(?>\\d+))?)\\s*(?:x|倍)).*$"
+
+  - name: 韩国-阿Q云-自动
+    type: smart
+    use:
+      - 阿Q云
+    policy-priority: "家宽:0.8"
+    uselightgbm: true
+    collectdata: true
+    interval: 600
+    filter: "^(?i)(?=.*?(?:🇰🇷|[韩韓]国|首尔|春川|广韩|(?<![a-zA-Z])(?:KR|Korea|South\\s*Korea)(?![a-zA-Z])))(?!.*?(?:0(?:\\.(?>\\d+))?|1\\.(?>\\d*)[1-9](?>\\d*)|(?:[2-9]|[1-9](?>[0-9]+))(?:\\.(?>\\d+))?)\\s*(?:x|倍)).*$"
+
+  - name: 韩国-赔钱-自动
+    type: smart
+    use:
+      - 赔钱
+    policy-priority: "hy2:0.8"
+    uselightgbm: true
+    collectdata: true
+    interval: 600
+    filter: "^(?i)(?=.*?(?:🇰🇷|[韩韓]国|首尔|春川|广韩|(?<![a-zA-Z])(?:KR|Korea|South\\s*Korea)(?![a-zA-Z])))(?!.*?(?:0(?:\\.(?>\\d+))?|1\\.(?>\\d*)[1-9](?>\\d*)|(?:[2-9]|[1-9](?>[0-9]+))(?:\\.(?>\\d+))?)\\s*(?:x|倍)).*$"
+
+
+  # 美国组
+
+  - name: 美国-故障转移
+    type: fallback
+    interval: 600
+    lazy: false
+    proxies:
+      - 美国-手动
+      - 美国-Alphalo-自动
+      - 美国-阿Q云-自动
+      - 美国-赔钱-自动
+  
+  - name: 美国-手动
+    type: select
+    include-all: true
+    filter: "^(?i)(?=.*?(?:🇺🇸|美国|广美|纽约|波特兰|达拉斯|俄勒|凤凰城|费利蒙|洛杉|圣何塞|圣克拉|西雅|芝加|(?<![a-zA-Z])(?:US|USA|States|America|United\\s*States|Dallas|Houston)(?![a-zA-Z])))(?!.*?(?:0(?:\\.(?>\\d+))?|1\\.(?>\\d*)[1-9](?>\\d*)|(?:[2-9]|[1-9](?>[0-9]+))(?:\\.(?>\\d+))?)\\s*(?:x|倍)).*$"
+
+  - name: 美国-Alphalo-自动
+    type: smart
+    use:
+      - Alphalo
+    policy-priority: "家宽:0.8"
+    uselightgbm: true
+    collectdata: true
+    interval: 600
+    filter: "^(?i)(?=.*?(?:🇺🇸|美国|广美|纽约|波特兰|达拉斯|俄勒|凤凰城|费利蒙|洛杉|圣何塞|圣克拉|西雅|芝加|(?<![a-zA-Z])(?:US|USA|States|America|United\\s*States|Dallas|Houston)(?![a-zA-Z])))(?!.*?(?:0(?:\\.(?>\\d+))?|1\\.(?>\\d*)[1-9](?>\\d*)|(?:[2-9]|[1-9](?>[0-9]+))(?:\\.(?>\\d+))?)\\s*(?:x|倍)).*$"
+
+  - name: 美国-阿Q云-自动
+    type: smart
+    use:
+      - 阿Q云
+    policy-priority: "家宽:0.8"
+    uselightgbm: true
+    collectdata: true
+    interval: 600
+    filter: "^(?i)(?=.*?(?:🇺🇸|美国|广美|纽约|波特兰|达拉斯|俄勒|凤凰城|费利蒙|洛杉|圣何塞|圣克拉|西雅|芝加|(?<![a-zA-Z])(?:US|USA|States|America|United\\s*States|Dallas|Houston)(?![a-zA-Z])))(?!.*?(?:0(?:\\.(?>\\d+))?|1\\.(?>\\d*)[1-9](?>\\d*)|(?:[2-9]|[1-9](?>[0-9]+))(?:\\.(?>\\d+))?)\\s*(?:x|倍)).*$"
+
+  - name: 美国-赔钱-自动
+    type: smart
+    use:
+      - 赔钱
+    policy-priority: "hy2:0.8"
+    uselightgbm: true
+    collectdata: true
+    interval: 600
+    filter: "^(?i)(?=.*?(?:🇺🇸|美国|广美|纽约|波特兰|达拉斯|俄勒|凤凰城|费利蒙|洛杉|圣何塞|圣克拉|西雅|芝加|(?<![a-zA-Z])(?:US|USA|States|America|United\\s*States|Dallas|Houston)(?![a-zA-Z])))(?!.*?(?:0(?:\\.(?>\\d+))?|1\\.(?>\\d*)[1-9](?>\\d*)|(?:[2-9]|[1-9](?>[0-9]+))(?:\\.(?>\\d+))?)\\s*(?:x|倍)).*$"
+
+
+  # 英国组
+
+  - name: 英国-故障转移
+    type: fallback
+    interval: 600
+    lazy: false
+    proxies:
+      - 英国-手动
+      - 英国-阿Q云-自动
+      - 英国-赔钱-自动
+  
+  - name: 英国-手动
+    type: select
+    include-all: true
+    filter: "^(?i)(?=.*?(?:🇬🇧|英国|伦敦|(?<![a-zA-Z])(?:UK|United\\s*Kingdom|London)(?![a-zA-Z])))(?!.*?(?:0(?:\\.(?>\\d+))?|1\\.(?>\\d*)[1-9](?>\\d*)|(?:[2-9]|[1-9](?>[0-9]+))(?:\\.(?>\\d+))?)\\s*(?:x|倍)).*$"
+
+  - name: 英国-阿Q云-自动
+    type: smart
+    use:
+      - 阿Q云
+    policy-priority: "家宽:0.8"
+    uselightgbm: true
+    collectdata: true
+    interval: 600
+    filter: "^(?i)(?=.*?(?:🇬🇧|英国|伦敦|(?<![a-zA-Z])(?:UK|United\\s*Kingdom|London)(?![a-zA-Z])))(?!.*?(?:0(?:\\.(?>\\d+))?|1\\.(?>\\d*)[1-9](?>\\d*)|(?:[2-9]|[1-9](?>[0-9]+))(?:\\.(?>\\d+))?)\\s*(?:x|倍)).*$"
+
+  - name: 英国-赔钱-自动
+    type: smart
+    use:
+      - 赔钱
+    policy-priority: "hy2:0.8"
+    uselightgbm: true
+    collectdata: true
+    interval: 600
+    filter: "^(?i)(?=.*?(?:🇬🇧|英国|伦敦|(?<![a-zA-Z])(?:UK|United\\s*Kingdom|London)(?![a-zA-Z])))(?!.*?(?:0(?:\\.(?>\\d+))?|1\\.(?>\\d*)[1-9](?>\\d*)|(?:[2-9]|[1-9](?>[0-9]+))(?:\\.(?>\\d+))?)\\s*(?:x|倍)).*$"
+
+
+  # 其他组
+  
+  - name: 低倍率-故障转移
+    type: fallback
+    interval: 600
+    lazy: false
+    proxies:
+      - 低倍率-手动
+      - 低倍率-阿Q云-手动
+      - 低倍率-美国0.1-自动
+      - 低倍率-美国0.01-自动
+      - 低倍率-日本0.1-自动
+
+  - name: 低倍率-手动
+    type: select
+    include-all: true
+    filter: "^(?i)(?=.*?(?:0(?:\\.(?>\\d+))?)\\s*(?:x|倍)).*$"
+
+  - name: 低倍率-阿Q云-手动
+    type: select
+    use:
+      - 阿Q云
+    filter: "^(?i)(?=.*?(?:0(?:\\.(?>\\d+))?)\\s*(?:x|倍)).*$"
+
+  - name: 低倍率-美国0.1-自动
+    type: smart
+    use:
+      - 赔钱
+    policy-priority: "优化:1.2;hy2:0.8"
+    uselightgbm: true
+    collectdata: true
+    interval: 600
+    filter: "^(?i)(?=.*?(?:🇺🇸|美国|广美|纽约|波特兰|达拉斯|俄勒|凤凰城|费利蒙|洛杉|圣何塞|圣克拉|西雅|芝加|(?<![a-zA-Z])(?:US|USA|States|America|United\\s*States|Dallas|Houston)(?![a-zA-Z])))(?=.*?(?:(?<![\\d\\.])0\\.1(?>0*))\\s*(?:x|倍)).*$"
+
+  - name: 低倍率-美国0.01-自动
+    type: smart
+    use:
+      - 赔钱
+    policy-priority: "优化:1.2;hy2:0.8"
+    uselightgbm: true
+    collectdata: true
+    interval: 600
+    filter: "^(?i)(?=.*?(?:🇺🇸|美国|广美|纽约|波特兰|达拉斯|俄勒|凤凰城|费利蒙|洛杉|圣何塞|圣克拉|西雅|芝加|(?<![a-zA-Z])(?:US|USA|States|America|United\\s*States|Dallas|Houston)(?![a-zA-Z])))(?=.*?(?:(?<![\\d\\.])0\\.01(?>0*))\\s*(?:x|倍)).*$"
+
+  - name: 低倍率-日本0.1-自动
+    type: smart
+    use:
+      - 赔钱
+    policy-priority: "优化:1.2;hy2:0.8"
+    uselightgbm: true
+    collectdata: true
+    interval: 600
+    filter: "^(?i)(?=.*?(?:🇯🇵|日本|东京|广日|川日|大阪|泉日|埼玉|沪日|深日|(?<![a-zA-Z])(?:JP|Japan|Tokyo)(?![a-zA-Z])))(?=.*?(?:(?<![\\d\\.])0\\.1(?>0*))\\s*(?:x|倍)).*$"
+
+# ====================
+# 规则匹配
+
+rules:
+  - RULE-SET,private_domain,🎠 私有地址
+  - RULE-SET,private_ip,🎠 私有地址,no-resolve
+  - RULE-SET,block_domain,🆎 广告
+  - RULE-SET,tracker_domain,⛓️ Tracker
+  - RULE-SET,public-tracker_domain,⛓️ Tracker
+  - RULE-SET,pt_domain,📦 PT
+  - RULE-SET,outer_classical,☄️ 自定-外
+  - RULE-SET,speedtest_domain,🎰 Speedtest
+  - RULE-SET,cd-cn_domain,🥝 中区开发者
+  - RULE-SET,cd@cn_domain,🥝 全球开发者中国CDN
+  - RULE-SET,cd_domain,🥝 全球开发者
+  - RULE-SET,github1s_domain,🥥 Github1s
+  - RULE-SET,apple-intelligence_domain,🍎 Apple智能
+  - RULE-SET,apple-cn_domain,🍏 Apple中国CDN
+  - RULE-SET,apple@cn_domain,🍏 Apple中国
+  - RULE-SET,apple_domain,🍎 Apple
+  - RULE-SET,apple_ip,🍎 Apple,no-resolve
+  - RULE-SET,ai-!cn_domain,🔆 国外AI
+  - RULE-SET,aicn_domain,🔅 国内AI
+  - RULE-SET,tencent@!cn_domain,🐧 腾讯国际
+  - RULE-SET,tencent_domain,🐧 腾讯
+  - RULE-SET,alibaba_domain,🐹 阿里巴巴
+  - RULE-SET,jd_domain,🐶 京东
+  - RULE-SET,pinduoduo_domain,🦊 拼多多
+  - RULE-SET,meituan_domain,🍟 美团
+  - RULE-SET,didi_domain,🚕 滴滴
+  - RULE-SET,baidu_domain,🐻‍❄️ 百度
+  - RULE-SET,qihoo360_domain,🐯 奇虎360
+  - RULE-SET,onedrive_domain,☁️ OneDrive
+  - RULE-SET,bing_domain,🍍 Bing
+  - RULE-SET,netease_domain,🦀 网易
+  - RULE-SET,huawei_domain,🦚 华为
+  - RULE-SET,kingsoft_domain,🏖️ 金山软件
+  - RULE-SET,xiaomi_domain,🍥 小米
+  - RULE-SET,bank-cn_domain,🏦 银行
+  - RULE-SET,password_domain,🧰 Password
+  - RULE-SET,paypal@cn_domain,💳 贝宝
+  - RULE-SET,paypal_domain,💳 PayPal
+  - RULE-SET,crypto@cn_domain,💶 国内加密货币
+  - RULE-SET,crypto_domain,💶 加密货币
+  - RULE-SET,Bitget_classical,💶 加密货币
+  - RULE-SET,chinamobile_domain,📡 运营商
+  - RULE-SET,chinatelecom_domain,📡 运营商
+  - RULE-SET,chinaunicom_domain,📡 运营商
+  - RULE-SET,chinabroadnet_domain,📡 运营商
+  - RULE-SET,chinatower_domain,📡 运营商
+  - RULE-SET,telegram_domain,📮 Telegram
+  - RULE-SET,telegram_ip,📮 Telegram,no-resolve
+  - RULE-SET,adguard_domain,💊 Adguard
+  - RULE-SET,cm-cn_domain,🍞 中文传媒
+  - RULE-SET,cm_domain,🍞 外文传媒
+  - RULE-SET,dcard_domain,🍀 Dcard
+  - RULE-SET,csm-cn_domain,🍉 中文社媒
+  - RULE-SET,csm-!cn_domain,🍉 外文社媒
+  - RULE-SET,twitter_ip,🍉 外文社媒,no-resolve
+  - RULE-SET,nvidia_domain,💡 Nvidia
+  - RULE-SET,gd_domain,🕹️ 游戏下载
+  - RULE-SET,games@cn_domain,🎮 国际游戏中区CDN
+  - RULE-SET,games-cn_domain,🎮 游戏国内
+  - RULE-SET,games-!cn_domain,🎮 游戏国际
+  - RULE-SET,ce-cn_domain,🍋 国内娱乐媒体
+  - RULE-SET,bilibili_ip,🍋 国内娱乐媒体,no-resolve
+  - RULE-SET,bilibili2_domain,🍋 国内娱乐媒体
+  - RULE-SET,ce_domain,🍋 国外娱乐媒体
+  - RULE-SET,google_domain,🧀 Google
+  - RULE-SET,google_ip,🧀 Google,no-resolve
+  - RULE-SET,porn_domain,🔞 NSFW
+  - RULE-SET,adobe-jh_domain,🖍️ Adobe激活
+  - RULE-SET,adobe_domain,🖍️ Adobe
+  - RULE-SET,microsoft@cn_domain,Ⓜ️ 微软中国
+  - RULE-SET,microsoft_domain,Ⓜ️ 微软
+  - RULE-SET,geo-cn_domain,🗼 GEO国内
+  - RULE-SET,geo-!cn_domain,🛫 GEO国外
+  - RULE-SET,cn_domain,🏰 中国
+  - RULE-SET,cn_ip,🏰 中国,no-resolve 
+  - MATCH,🛟 兜底
+
+# ====================
+# 规则集
+# type：可选http/file/inline  behavior：可选domain/ipcidr/classical format：可选yaml/text/mrs
+
+rule-anchor:
+  mip: &mip {type: http, interval: 86400, behavior: ipcidr, format: mrs}
+  mdomain: &mdomain {type: http, interval: 86400, behavior: domain, format: mrs}
+  classical: &classical {type: http, interval: 86400, behavior: classical, format: yaml}
+  yip: &yip {type: http, interval: 86400, behavior: ipcidr, format: yaml}
+  ydomain: &ydomain {type: http, interval: 86400, behavior: domain, format: yaml}
+
+rule-providers:
+  private_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/private.mrs"}
+  private_ip: { <<: *mip, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geoip/private.mrs"}
+  block_domain: { <<: *ydomain, url: "https://anti-ad.net/clash.yaml"}
+  tracker_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/tracker.mrs"}
+  public-tracker_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-public-tracker.mrs"}
+  pt_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-pt.mrs"}
+  outer_classical: { <<: *classical, url: "https://gh-proxy.com/raw.githubusercontent.com/wanfc/rule/refs/heads/main/Outer.yaml"}
+  speedtest_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-speedtest.mrs"}
+# 中国开发者资源
+  cd-cn_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-dev-cn.mrs"}
+# 全球开发者资源的中国特供/CDN
+  cd@cn_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-dev@cn.mrs"}
+  cd_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-dev.mrs"}
+  github1s_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/github1s.mrs"}
+  apple-intelligence_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/apple-intelligence.mrs"}
+# Apple 中国 CDN (内容分发网络) 和 公共服务
+  apple-cn_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/apple-cn.mrs"}
+# Apple 中国区的服务
+  apple@cn_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/apple@cn.mrs"}
+  apple_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/apple.mrs"}
+  apple_ip: { <<: *mip, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo-lite/geoip/apple.mrs"}
+  ai-!cn_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-ai-!cn.mrs"}
+  aicn_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-ai-cn.mrs"}
+# 腾讯国际
+  tencent@!cn_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/tencent@!cn.mrs"}
+  tencent_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/tencent.mrs"}
+  alibaba_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/alibaba.mrs"}
+  jd_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/jd.mrs"}
+  pinduoduo_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/pinduoduo.mrs"}
+  meituan_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/meituan.mrs"}
+  didi_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/didi.mrs"}
+  baidu_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/baidu.mrs"}
+  qihoo360_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/qihoo360.mrs"}
+  onedrive_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/onedrive.mrs"}
+  bing_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/bing.mrs"}
+  netease_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/netease.mrs"}
+  huawei_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/huawei.mrs"}
+  kingsoft_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/kingsoft.mrs"}
+  xiaomi_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/xiaomi.mrs"}
+  bank-cn_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-bank-cn.mrs"}
+  password_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-password-management.mrs"}
+  paypal@cn_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/paypal@cn.mrs"}
+  paypal_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/paypal.mrs"}
+  crypto@cn_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-cryptocurrency@cn.mrs"}
+  crypto_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/cryptocurrency.mrs"}
+  Bitget_classical: { <<: *classical, url: "https://gh-proxy.com/raw.githubusercontent.com/wanfc/rule/refs/heads/main/BitgetWallet.yaml"}
+  chinamobile_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/chinamobile.mrs"}
+  chinatelecom_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/chinatelecom.mrs"}
+  chinaunicom_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/chinaunicom.mrs"}
+  chinabroadnet_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/chinabroadnet.mrs"}
+  chinatower_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/chinatower.mrs"}
+  telegram_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/telegram.mrs"}
+  telegram_ip: { <<: *mip, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geoip/telegram.mrs"}
+  adguard_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/adguard.mrs"}
+# 传媒资讯
+  cm-cn_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-media-cn.mrs"}
+  cm_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-media.mrs"}
+  dcard_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/dcard.mrs"}
+# 社交媒体
+  csm-cn_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-social-media-cn.mrs"}
+  csm-!cn_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-social-media-!cn.mrs"}
+  twitter_ip: { <<: *mip, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geoip/twitter.mrs"}
+  nvidia_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/nvidia.mrs"}
+  gd_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-game-platforms-download.mrs"}
+# 国际游戏厂商中国区服务 & CDN (Steam/Xbox/Nintendo/Ubisoft)
+  games@cn_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-games@cn.mrs"}
+# 国内本土游戏厂商 & 平台 (Mihoyo/Tencent/NetEase/TapTap)
+  games-cn_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-games-cn.mrs"}
+  games-!cn_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-games-!cn.mrs"}
+# 娱乐媒体 哔哩哔哩台湾如果加入的话加在entertainment-cn之上
+  ce-cn_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-entertainment-cn.mrs"}
+  ce_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-entertainment.mrs"}
+  bilibili_ip: { <<: *mip, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo-lite/geoip/bilibili.mrs"}
+  bilibili2_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/bilibili2.mrs"}
+  google_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/google.mrs"}
+  google_ip: { <<: *mip, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geoip/google.mrs"}
+  porn_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-porn.mrs"}
+  adobe-jh_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/adobe-activation.mrs"}
+  adobe_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/adobe.mrs"}
+# 微软中国特供/CDN
+  microsoft@cn_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/microsoft@cn.mrs"}
+  microsoft_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/microsoft.mrs"}
+  geo-cn_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/geolocation-cn.mrs"}
+  geo-!cn_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/geolocation-!cn.mrs"}
+  cn_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/cn.mrs"}
+  cn_ip: { <<: *mip, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geoip/cn.mrs"}
