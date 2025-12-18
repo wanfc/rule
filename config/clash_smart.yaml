@@ -4,7 +4,7 @@
 proxy-providers:
 
   阿Q云:
-    url: "https://nVx81Q0ouJA21x8U.xn--fiqs8s40dz2j.com/api/v1/client/subscribe?token=2c85d91c1adfea2e23c8e3a25172652b"
+    url: "https://api.v1.mk/sub?target=clash&url=https%3A%2F%2Fnvx81q0ouja21x8u.xn--fiqs8s40dz2j.com%2Fapi%2Fv1%2Fclient%2Fsubscribe%3Ftoken%3D2c85d91c1adfea2e23c8e3a25172652b&insert=false&config=https%3A%2F%2Fraw.githubusercontent.com%2FSleepyHeeead%2Fsubconverter-config%2Fmaster%2Fremote-config%2Fspecial%2Fbasic.ini&emoji=true&list=true&xudp=false&udp=true&tfo=true&expand=false&scv=false&fdn=false&new_name=true"
     type: http
     interval: 10800
     health-check:
@@ -894,3 +894,4 @@ rule-providers:
   geo-!cn_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/geolocation-!cn.mrs"}
   cn_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/cn.mrs"}
   cn_ip: { <<: *mip, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geoip/cn.mrs"}
+
