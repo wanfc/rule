@@ -25,7 +25,7 @@ proxy-providers:
       additional-prefix: "☁️-"
     
   Alpha:
-    url: "https://links.azurefd.net/api/v1/client/subscribe?token=145b6d7d1965b155b58a810ecae9327a"
+    url: "https://api.alphalo.net/alphaio/id/menu?token=145b6d7d1965b155b58a810ecae9327a"
     type: http
     interval: 3600
     health-check:
