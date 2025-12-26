@@ -15,17 +15,16 @@ proxy-providers:
     header:
       User-Agent:
 #     - "Clash/v1.18.0"
-      - "Clash-verge/2.4.2"
-#     - "mihomo/1.19.13"
+#      - "Clash-verge/2.4.2"
 #     - "Clash"
-#     - "mihomo"
+      - "mihomo"
 #     - "Clash.meta"
     override:
       skip-cert-verify: true
       additional-prefix: "☁️-"
     
   Alpha:
-    url: "https://api.alphalo.net/alphaio/id/menu?token=145b6d7d1965b155b58a810ecae9327a"
+    url: "https://a-gvgya9fuh2fyd7bx.z01.azurefd.net/alphaio/id/menu?token=145b6d7d1965b155b58a810ecae9327a"
     type: http
     interval: 3600
     health-check:
@@ -36,7 +35,7 @@ proxy-providers:
     header:
       User-Agent:
 #     - "Clash/v1.18.0"
-      - "mihomo/1.19.13"
+      - "mihomo"
     override:
       skip-cert-verify: true
       additional-prefix: "🌀-"
@@ -54,7 +53,7 @@ proxy-providers:
     header:
       User-Agent:
 #     - "Clash/v1.18.0"
-      - "mihomo/1.19.13"
+      - "mihomo"
     override:
       skip-cert-verify: true
       additional-prefix: "💸-"
