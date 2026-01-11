@@ -104,9 +104,13 @@ allow-lan: true
 bind-address: "*"
 ipv6: false
 
-# 核心：TCP Fast Open
-# 开启全局 TFO 选项
+# 影响 Clash 与 代理服务器 之间的连接 (最推荐开启)
+global-tfo: true
+
+# 影响 你的设备 与 Clash 本地端口 之间的连接 (可选)
+# 注意：在 Windows 上开启这个可能需要管理员权限或特定系统设置
 tcp-fast-open: false
+
 # 流量处理优化
 # 统一延迟：减去握手消耗，让延迟显示更真实
 unified-delay: true
@@ -940,3 +944,4 @@ rule-providers:
   cn_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/cn.mrs"}
 
   cn_ip: { <<: *mip, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geoip/cn.mrs"}
+
