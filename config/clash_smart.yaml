@@ -8,7 +8,7 @@ proxy-providers:
     type: http
     interval: 3600
     # 强制开启该提供者内所有节点的 TFO 和 UDP
-    tfo: false
+    tfo: true
     udp: true
     health-check:
       enable: true
@@ -27,8 +27,9 @@ proxy-providers:
 #     - "Clash.meta"
     override:
       skip-cert-verify: true
+      # 删掉 tfo: false 这行，它会自动使用全局的 global-tfo: true
+      tfo: true
       udp: true
-      tfo: false
       additional-prefix: "☁️-"
     
   Alpha:
@@ -36,7 +37,7 @@ proxy-providers:
     type: http
     interval: 3600
     # 强制开启该提供者内所有节点的 TFO 和 UDP
-    tfo: false
+    tfo: true
     udp: true
     health-check:
       enable: true
@@ -52,8 +53,9 @@ proxy-providers:
       - "mihomo"
     override:
       skip-cert-verify: true
+      # 删掉 tfo: false 这行，它会自动使用全局的 global-tfo: true
+      tfo: true
       udp: true
-      tfo: false
       additional-prefix: "🌀-"
 
 
@@ -62,7 +64,7 @@ proxy-providers:
     type: http
     interval: 3600
     # 强制开启该提供者内所有节点的 TFO 和 UDP
-    tfo: false
+    tfo: true
     udp: true
     health-check:
       enable: true
@@ -78,8 +80,9 @@ proxy-providers:
       - "mihomo"
     override:
       skip-cert-verify: true
+      # 删掉 tfo: false 这行，它会自动使用全局的 global-tfo: true
+      tfo: true
       udp: true
-      tfo: false
       additional-prefix: "💸-"
 
 
@@ -106,7 +109,6 @@ ipv6: false
 
 # 影响 Clash 与 代理服务器 之间的连接 (最推荐开启)
 global-tfo: true
-
 # 影响 你的设备 与 Clash 本地端口 之间的连接 (可选)
 # 注意：在 Windows 上开启这个可能需要管理员权限或特定系统设置
 tcp-fast-open: false
@@ -944,4 +946,5 @@ rule-providers:
   cn_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/cn.mrs"}
 
   cn_ip: { <<: *mip, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geoip/cn.mrs"}
+
 
