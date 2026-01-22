@@ -949,8 +949,8 @@ rules:
   - RULE-SET,microsoft_domain,Ⓜ️ 微软
   - RULE-SET,geo-cn_domain,🗼 GEO国内
   - RULE-SET,geo-!cn_domain,🛫 GEO国外
+  - RULE-SET,cn_ip,🏰 中国,no-resolve  
   - RULE-SET,cn_domain,🏰 中国
-  - RULE-SET,cn_ip,🏰 中国,no-resolve 
   - MATCH,🛟 兜底
 
 # ====================
@@ -1051,3 +1051,4 @@ rule-providers:
   geo-!cn_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/geolocation-!cn.mrs"}
   cn_ip: { <<: *mip, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geoip/cn.mrs"}
   cn_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/cn.mrs"}
+
