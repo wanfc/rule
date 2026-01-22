@@ -884,16 +884,16 @@ rules:
   - RULE-SET,pt_domain,📦 PT
   - RULE-SET,outer_classical,☄️ 自定-外
   - RULE-SET,speedtest_domain,🎰 Speedtest
-  - RULE-SET,cd-cn_domain,🥝 中区开发者
-  - RULE-SET,cd@cn_domain,🥝 全球开发者中国CDN
-  - RULE-SET,cd_domain,🥝 全球开发者
+  - RULE-SET,dev-cn_domain,🥝 中区开发者
+  - RULE-SET,dev@cn_domain,🥝 全球开发者中国CDN
+  - RULE-SET,dev_domain,🥝 全球开发者
   - RULE-SET,github1s_domain,🥥 Github1s
-  - RULE-SET,apple-intelligence_domain,🍎 Apple智能
+  - RULE-SET,apple-intelligenentertainment_domain,🍎 Apple智能
   - RULE-SET,apple-cn_domain,🍏 Apple中国CDN
   - RULE-SET,apple@cn_domain,🍏 Apple中国
   - RULE-SET,apple_domain,🍎 Apple
   - RULE-SET,apple_ip,🍎 Apple,no-resolve
-  - RULE-SET,ai-!cn_domain,🔆 国外AI
+  - RULE-SET,ai!cn_domain,🔆 国外AI
   - RULE-SET,aicn_domain,🔅 国内AI
   - RULE-SET,tencent@!cn_domain,🐧 腾讯国际
   - RULE-SET,tencent_domain,🐧 腾讯
@@ -925,25 +925,25 @@ rules:
   - RULE-SET,telegram_domain,📮 Telegram
   - RULE-SET,telegram_ip,📮 Telegram,no-resolve
   - RULE-SET,adguard_domain,💊 Adguard
-  - RULE-SET,cm-cn_domain,🍞 中文传媒
-  - RULE-SET,cm_domain,🍞 外文传媒
+  - RULE-SET,media-cn_domain,🍞 中文传媒
+  - RULE-SET,media_domain,🍞 外文传媒
   - RULE-SET,dcard_domain,🍀 Dcard
-  - RULE-SET,csm-cn_domain,🍉 中文社媒
-  - RULE-SET,csm-!cn_domain,🍉 外文社媒
+  - RULE-SET,socialmedia-cn_domain,🍉 中文社媒
+  - RULE-SET,socialmedia-!cn_domain,🍉 外文社媒
   - RULE-SET,twitter_ip,🍉 外文社媒,no-resolve
   - RULE-SET,nvidia_domain,💡 Nvidia
-  - RULE-SET,gd_domain,🕹️ 游戏下载
+  - RULE-SET,gamedownload_domain,🕹️ 游戏下载
   - RULE-SET,games@cn_domain,🎮 国际游戏中区CDN
   - RULE-SET,games-cn_domain,🎮 游戏国内
   - RULE-SET,games-!cn_domain,🎮 游戏国际
-  - RULE-SET,ce-cn_domain,🍋 国内娱乐媒体
+  - RULE-SET,entertainment-cn_domain,🍋 国内娱乐媒体
   - RULE-SET,bilibili_ip,🍋 国内娱乐媒体,no-resolve
   - RULE-SET,bilibili2_domain,🍋 国内娱乐媒体
-  - RULE-SET,ce_domain,🍋 国外娱乐媒体
+  - RULE-SET,entertainment_domain,🍋 国外娱乐媒体
   - RULE-SET,google_domain,🧀 Google
   - RULE-SET,google_ip,🧀 Google,no-resolve
   - RULE-SET,porn_domain,🔞 NSFW
-  - RULE-SET,adobe-jh_domain,🖍️ Adobe激活
+  - RULE-SET,adobe-activation_domain,🖍️ Adobe激活
   - RULE-SET,adobe_domain,🖍️ Adobe
   - RULE-SET,microsoft@cn_domain,Ⓜ️ 微软中国
   - RULE-SET,microsoft_domain,Ⓜ️ 微软
@@ -974,19 +974,19 @@ rule-providers:
   outer_classical: { <<: *classical, url: "https://gh-proxy.com/raw.githubusercontent.com/wanfc/rule/refs/heads/main/Outer.yaml"}
   speedtest_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-speedtest.mrs"}
 # 中国开发者资源
-  cd-cn_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-dev-cn.mrs"}
+  dev-cn_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-dev-cn.mrs"}
 # 全球开发者资源的中国特供/CDN
-  cd@cn_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-dev@cn.mrs"}
-  cd_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-dev.mrs"}
+  dev@cn_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-dev@cn.mrs"}
+  dev_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-dev.mrs"}
   github1s_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/github1s.mrs"}
-  apple-intelligence_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/apple-intelligence.mrs"}
+  apple-intelligenentertainment_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/apple-intelligence.mrs"}
 # Apple 中国 CDN (内容分发网络) 和 公共服务
   apple-cn_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/apple-cn.mrs"}
 # Apple 中国区的服务
   apple@cn_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/apple@cn.mrs"}
   apple_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/apple.mrs"}
   apple_ip: { <<: *mip, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo-lite/geoip/apple.mrs"}
-  ai-!cn_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-ai-!cn.mrs"}
+  ai!cn_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-ai-!cn.mrs"}
   aicn_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-ai-cn.mrs"}
 # 腾讯国际
   tencent@!cn_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/tencent@!cn.mrs"}
@@ -1020,36 +1020,34 @@ rule-providers:
   telegram_ip: { <<: *mip, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geoip/telegram.mrs"}
   adguard_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/adguard.mrs"}
 # 传媒资讯
-  cm-cn_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-media-cn.mrs"}
-  cm_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-media.mrs"}
+  media-cn_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-media-cn.mrs"}
+  media_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-media.mrs"}
   dcard_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/dcard.mrs"}
 # 社交媒体
-  csm-cn_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-social-media-cn.mrs"}
-  csm-!cn_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-social-media-!cn.mrs"}
+  socialmedia-cn_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-social-media-cn.mrs"}
+  socialmedia-!cn_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-social-media-!cn.mrs"}
   twitter_ip: { <<: *mip, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geoip/twitter.mrs"}
   nvidia_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/nvidia.mrs"}
-  gd_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-game-platforms-download.mrs"}
+  gamedownload_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-game-platforms-download.mrs"}
 # 国际游戏厂商中国区服务 & CDN (Steam/Xbox/Nintendo/Ubisoft)
   games@cn_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-games@cn.mrs"}
 # 国内本土游戏厂商 & 平台 (Mihoyo/Tencent/NetEase/TapTap)
   games-cn_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-games-cn.mrs"}
   games-!cn_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-games-!cn.mrs"}
 # 娱乐媒体 哔哩哔哩台湾如果加入的话加在entertainment-cn之上
-  ce-cn_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-entertainment-cn.mrs"}
-  ce_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-entertainment.mrs"}
+  entertainment-cn_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-entertainment-cn.mrs"}
+  entertainment_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-entertainment.mrs"}
   bilibili_ip: { <<: *mip, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo-lite/geoip/bilibili.mrs"}
   bilibili2_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/bilibili2.mrs"}
   google_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/google.mrs"}
   google_ip: { <<: *mip, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geoip/google.mrs"}
   porn_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-porn.mrs"}
-  adobe-jh_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/adobe-activation.mrs"}
+  adobe-activation_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/adobe-activation.mrs"}
   adobe_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/adobe.mrs"}
 # 微软中国特供/CDN
   microsoft@cn_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/microsoft@cn.mrs"}
   microsoft_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/microsoft.mrs"}
   geo-cn_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/geolocation-cn.mrs"}
   geo-!cn_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/geolocation-!cn.mrs"}
-  cn_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/cn.mrs"}
   cn_ip: { <<: *mip, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geoip/cn.mrs"}
-
-
+  cn_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/cn.mrs"}
