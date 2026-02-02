@@ -3,7 +3,7 @@
 
 proxy-providers:
 
-  阿Q云:
+  QYun:
     url: "https://api.v1.mk/sub?target=clash&url=https%3A%2F%2Fnvx81q0ouja21x8u.xn--fiqs8s40dz2j.com%2Fapi%2Fv1%2Fclient%2Fsubscribe%3Ftoken%3D2c85d91c1adfea2e23c8e3a25172652b&insert=false&config=https%3A%2F%2Fraw.githubusercontent.com%2FSleepyHeeead%2Fsubconverter-config%2Fmaster%2Fremote-config%2Fspecial%2Fbasic.ini&emoji=true&list=true&xudp=false&udp=true&tfo=true&expand=false&scv=false&fdn=false&new_name=true"
     type: http
     interval: 3600  # 订阅更新间隔，1小时一次没问题
@@ -56,7 +56,7 @@ proxy-providers:
       additional-prefix: "🌀-"
 
 
-  赔钱:
+  Pei:
     url: "https://xn--cp3a08l.com/api/v1/client/subscribe?token=ed4708b76ef848653436a049b0dd64f0"
     type: http
     interval: 3600
@@ -347,7 +347,7 @@ global-structure: &global-structure
     - 低倍率-美国0.01-自动
     - 低倍率-美国0.1-自动
     - 低倍率-日本0.1-自动
-    - 低倍率-英国0.1-自动
+    # - 低倍率-英国0.1-自动
     - 低倍率-☁️-手动
     - 直连
     - 拒绝
@@ -397,7 +397,7 @@ cdn-structure: &cdn-structure
     - 低倍率-美国0.01-自动
     - 低倍率-美国0.1-自动
     - 低倍率-日本0.1-自动
-    - 低倍率-英国0.1-自动
+    # - 低倍率-英国0.1-自动
     - 低倍率-☁️-手动
     - 拒绝
   <<: *global-check
@@ -510,7 +510,7 @@ proxy-groups:
   - name: 香港-☁️-自动
     type: smart
     use:
-      - 阿Q云
+      - QYun
     policy-priority: "家宽:0.8"
     uselightgbm: true
     collectdata: true
@@ -530,7 +530,7 @@ proxy-groups:
   - name: 香港-💸-自动
     type: smart
     use:
-      - 赔钱
+      - Pei
     policy-priority: "电信:1.2"
     uselightgbm: true
     collectdata: true
@@ -557,7 +557,7 @@ proxy-groups:
   - name: 台湾-☁️-自动
     type: smart
     use:
-      - 阿Q云
+      - QYun
     policy-priority: "家宽:0.8"
     uselightgbm: true
     collectdata: true
@@ -577,7 +577,7 @@ proxy-groups:
   - name: 台湾-💸-自动
     type: smart
     use:
-      - 赔钱
+      - Pei
     policy-priority: "电信:1.2"
     uselightgbm: true
     collectdata: true
@@ -606,7 +606,7 @@ proxy-groups:
   - name: 日本-☁️-自动
     type: smart
     use:
-      - 阿Q云
+      - QYun
     policy-priority: "家宽:0.8"
     uselightgbm: true
     collectdata: true
@@ -626,7 +626,7 @@ proxy-groups:
   - name: 日本-💸-自动
     type: smart
     use:
-      - 赔钱
+      - Pei
     policy-priority: "hy2:0.8;专线:1.2;电信:1.1"
     uselightgbm: true
     collectdata: true
@@ -653,7 +653,7 @@ proxy-groups:
   - name: 新加坡-☁️-自动
     type: smart
     use:
-      - 阿Q云
+      - QYun
     policy-priority: "家宽:0.8"
     uselightgbm: true
     collectdata: true
@@ -673,7 +673,7 @@ proxy-groups:
   - name: 新加坡-💸-自动
     type: smart
     use:
-      - 赔钱
+      - Pei
     policy-priority: "hy2:0.8;专线:1.2;电信:1.1"
     uselightgbm: true
     collectdata: true
@@ -700,7 +700,7 @@ proxy-groups:
   - name: 韩国-☁️-自动
     type: smart
     use:
-      - 阿Q云
+      - QYun
     policy-priority: "家宽:0.8"
     uselightgbm: true
     collectdata: true
@@ -710,7 +710,7 @@ proxy-groups:
   - name: 韩国-💸-自动
     type: smart
     use:
-      - 赔钱
+      - Pei
     policy-priority: "hy2:0.8"
     uselightgbm: true
     collectdata: true
@@ -740,7 +740,7 @@ proxy-groups:
   - name: 美国-☁️-自动
     type: smart
     use:
-      - 阿Q云
+      - QYun
     policy-priority: "家宽:0.8"
     uselightgbm: true
     collectdata: true
@@ -760,7 +760,7 @@ proxy-groups:
   - name: 美国-💸-自动
     type: smart
     use:
-      - 赔钱
+      - Pei
     policy-priority: "hy2:0.8"
     uselightgbm: true
     collectdata: true
@@ -776,7 +776,7 @@ proxy-groups:
       - 英国-手动
       - 英国-☁️-自动
 #      - 英国-💸-自动
-      - 低倍率-英国0.1-自动
+      # - 低倍率-英国0.1-自动
     <<: *fault-check
   
   - name: 英国-手动
@@ -788,7 +788,7 @@ proxy-groups:
   - name: 英国-☁️-自动
     type: smart
     use:
-      - 阿Q云
+      - QYun
     policy-priority: "家宽:0.8"
     uselightgbm: true
     collectdata: true
@@ -798,7 +798,7 @@ proxy-groups:
 #  - name: 英国-💸-自动
 #    type: smart
 #    use:
-#      - 赔钱
+#      - Pei
 #    policy-priority: "hy2:0.8"
 #    uselightgbm: true
 #    collectdata: true
@@ -815,7 +815,7 @@ proxy-groups:
       - 低倍率-美国0.01-自动
       - 低倍率-美国0.1-自动
       - 低倍率-日本0.1-自动
-      - 低倍率-英国0.1-自动
+      # - 低倍率-英国0.1-自动
       - 低倍率-☁️-手动
     <<: *fault-check
 
@@ -828,7 +828,7 @@ proxy-groups:
   - name: 低倍率-美国0.01-自动
     type: smart
     use:
-      - 赔钱
+      - Pei
     policy-priority: "hy2:0.8"
     uselightgbm: true
     collectdata: true
@@ -838,7 +838,7 @@ proxy-groups:
   - name: 低倍率-美国0.1-自动
     type: smart
     use:
-      - 赔钱
+      - Pei
     policy-priority: "hy2:0.8;推荐:0.8"
     uselightgbm: true
     collectdata: true
@@ -848,27 +848,27 @@ proxy-groups:
   - name: 低倍率-日本0.1-自动
     type: smart
     use:
-      - 赔钱
+      - Pei
     policy-priority: "hy2:0.8"
     uselightgbm: true
     collectdata: true
     filter: "^(?i)(?=.*?(?:🇯🇵|日本|东京|广日|川日|大阪|泉日|埼玉|沪日|深日|(?<![a-zA-Z])(?:JP|Japan|Tokyo)(?![a-zA-Z])))(?=.*?(?:(?<![\\d\\.])0\\.1(?>0*))\\s*(?:x|倍)).*$"
     <<: *auto-check
 
-  - name: 低倍率-英国0.1-自动
-    type: smart
-    use:
-      - 赔钱
-    policy-priority: "hy2:0.8"
-    uselightgbm: true
-    collectdata: true
-    filter: "^(?i)(?=.*?(?:🇬🇧|英国|伦敦|(?<![a-zA-Z])(?:UK|United\\s*Kingdom|London)(?![a-zA-Z])))(?=.*?(?:(?<![\\d\\.])0\\.1(?>0*))\\s*(?:x|倍)).*$"
-    <<: *auto-check
+  # - name: 低倍率-英国0.1-自动
+  #   type: smart
+  #   use:
+  #     - Pei
+  #   policy-priority: "hy2:0.8"
+  #   uselightgbm: true
+  #   collectdata: true
+  #   filter: "^(?i)(?=.*?(?:🇬🇧|英国|伦敦|(?<![a-zA-Z])(?:UK|United\\s*Kingdom|London)(?![a-zA-Z])))(?=.*?(?:(?<![\\d\\.])0\\.1(?>0*))\\s*(?:x|倍)).*$"
+  #   <<: *auto-check
 
   - name: 低倍率-☁️-手动
     type: select
     use:
-      - 阿Q云
+      - QYun
     filter: "^(?i)(?=.*?(?:0(?:\\.(?>\\d+))?)\\s*(?:x|倍)).*$"
     <<: *manual-check
 
