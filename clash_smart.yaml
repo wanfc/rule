@@ -110,7 +110,7 @@ unified-delay: true
 tcp-concurrent: true
 # interface-name: enp6s18
 mode: rule
-log-level: silent
+log-level: info
 find-process-mode: 'off'
 global-client-fingerprint: ios
 keep-alive-idle: 600
