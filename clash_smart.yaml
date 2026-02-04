@@ -34,6 +34,7 @@ proxy-providers:
       udp: true
       # 很多机场节点前缀很乱，这里统一加前缀很好
       additional-prefix: "☁️-"
+      client-fingerprint: chrome
     
   Alpha:
     url: "https://a-gvgya9fuh2fyd7bx.z01.azurefd.net/alphaio/id/menu?token=145b6d7d1965b155b58a810ecae9327a"
@@ -54,6 +55,7 @@ proxy-providers:
       tfo: true
       udp: true
       additional-prefix: "🌀-"
+      client-fingerprint: chrome
 
 
   Pei:
@@ -75,6 +77,7 @@ proxy-providers:
       tfo: true
       udp: true
       additional-prefix: "💸-"
+      client-fingerprint: chrome
 
 
 # ====================
@@ -112,7 +115,6 @@ tcp-concurrent: true
 mode: rule
 log-level: info
 find-process-mode: 'off'
-global-client-fingerprint: ios
 keep-alive-idle: 600
 keep-alive-interval: 15
 
