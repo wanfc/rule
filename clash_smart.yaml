@@ -222,13 +222,13 @@ dns:
   proxy-server-nameserver:
     - https://dns.alidns.com/dns-query
     - https://doh.pub/dns-query
-    - https://1.1.1.1/dns-query                   # 👈 增加 Cloudflare DNS 作为保险
+    - https://cloudflare-dns.com/dns-query        # 👈 增加 Cloudflare DNS 作为保险
 
   # ============================================
   # 5. 默认通用解析 (CN 域名 & IP 匹配)
   # ============================================
   # nameserver 列表主要用于解析国内域名（直连流量）以及在 Fake-IP 模式下进行 IP 规则匹配
-  # 千万不要在 nameserver 列表中加入 https://1.1.1.1/dns-query
+  # 千万不要在 nameserver 列表中加入 https://cloudflare-dns.com/dns-query
   nameserver:
     - https://dns.alidns.com/dns-query
     - https://doh.pub/dns-query
@@ -852,8 +852,9 @@ proxy-groups:
   - {name: 🍞 外文传媒, <<: *global-structure}
   - {name: 🔞 NSFW, <<: *global-structure}
   - {name: 🗼 GEO国内, <<: *cn-structure}
-  - {name: 🏰 中国, <<: *cn-structure}
+  - {name: 🏰 中国1️⃣, <<: *cn-structure}
   - {name: 🛫 GEO国外, <<: *global-structure}
+  - {name: 🏰 中国2️⃣, <<: *cn-structure}
   - {name: 🛟 兜底, <<: *global-structure}
 
 
@@ -1338,9 +1339,9 @@ rules:
   - RULE-SET,media_domain,🍞 外文传媒
   - RULE-SET,porn_domain,🔞 NSFW
   - RULE-SET,geo-cn_domain,🗼 GEO国内
-  - RULE-SET,cn_domain,🏰 中国
+  - RULE-SET,cn_domain,🏰 中国1️⃣
   - RULE-SET,geo-!cn_domain,🛫 GEO国外
-  - RULE-SET,cn_ip,🏰 中国,no-resolve  
+  - RULE-SET,cn_ip,🏰 中国2️⃣,no-resolve  
   - MATCH,🛟 兜底
 
 # ====================
@@ -1526,6 +1527,3 @@ rule-providers:
   # 如果域名也没查到，最后查 IP 归属地。
   # 既然您不想用 GEOIP 数据库，这个 Rule-Set 形式的 IP 表是最好的替代
   cn_ip: { <<: *mip, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geoip/cn.mrs"}
-
-
-
