@@ -304,6 +304,13 @@ dns:
   fake-ip-filter-mode: blacklist
   use-hosts: true
   respect-rules: true
+  nameserver-policy:
+    # 遇到 private 列表里的域名，强制向本地网关(DHCP)或具体路由器IP查询
+    # 或者写死网关 IP，例如 '192.168.31.1'
+    'rule-set:private_domain': 'dhcp://br-lan'  # 局域网域名 -> 问本地网关 
+    'miwifi.com': '192.168.31.1'          # 特定路由域名 -> 问指定IP
+    '+.company.com': '10.10.10.1'         # 公司内网 -> 问公司DNS
+    
   # nameserver 列表主要用于解析国内域名（直连流量）以及在 Fake-IP 模式下进行 IP 规则匹配
   nameserver: # 千万不要在 nameserver 列表中加入 https://1.1.1.1/dns-query
     - https://dns.alidns.com/dns-query
@@ -695,6 +702,7 @@ proxy-groups:
 
   # 业务分流组
   - {name: 🎠 私有地址, type: select, <<: *cn-structure}
+  - {name: 🕰️ NTP, type: select, <<: *cn-structure}
   - {name: 🆎 广告, type: select, proxies: [❌ 拒绝, ⭕️ 直连], <<: *cn-check}
   - {name: 📦 PT, <<: *cn-structure}
   - {name: 🍻 BT/P2P, <<: *cn-structure}
@@ -708,7 +716,7 @@ proxy-groups:
   - {name: 🍞 中文传媒, <<: *cn-structure}
   - {name: 🎮 游戏国内, <<: *cn-structure}
   - {name: 🎮 国际游戏中区CDN, <<: *cdn-structure}
-  - {name: 🐧 腾讯国际, <<: *cdn-structure}
+  - {name: 🐧 腾讯国际, <<: *global-structure}
   - {name: 🐧 腾讯, <<: *cn-structure}
   - {name: 🐹 阿里巴巴, <<: *cn-structure}
   - {name: 🐶 京东, <<: *cn-structure}
@@ -1168,12 +1176,13 @@ proxy-groups:
 rules:
   - RULE-SET,private_domain,🎠 私有地址
   - RULE-SET,private_ip,🎠 私有地址,no-resolve
+  - RULE-SET,ntp_domain,🕰️ NTP
+  - DST-PORT,123,🕰️ NTP  # 简单粗暴，所有时间同步全部直连
   - RULE-SET,block_domain,🆎 广告
   - RULE-SET,pt_domain,📦 PT
   - RULE-SET,pt_ip,📦 PT,no-resolve
   - RULE-SET,p2p_domain,🍻 BT/P2P
-  # 保留这个：BT 默认端口防漏
-  - DST-PORT,6881-6889,⭕️ 直连
+  - DST-PORT,6881-6889,🍻 BT/P2P    # 保留这个：BT 默认端口防漏
   - RULE-SET,outer_custom,☄️ 自定-外
   - RULE-SET,speedtest_domain,🎰 Speedtest
   - RULE-SET,xunlei_domain,🦌 迅雷
@@ -1264,6 +1273,7 @@ rule-providers:
   # 局域网与私有地址 (防止断网)
   private_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/private.mrs"}
   private_ip: { <<: *mip, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geoip/private.mrs"}
+  ntp_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-ntp.mrs"}
   # 广告拦截 (一票否决)
   block_domain: { <<: *ydomain, url: "https://anti-ad.net/clash.yaml"}
   # 私有 Tracker (PT站) 列表,包含了馒头(M-Team)、HDSky、CHDBits、TTG 等所有国内外 PT 站点的官网域名和Tracker 域名
@@ -1428,4 +1438,5 @@ rule-providers:
   # 如果域名也没查到，最后查 IP 归属地。
   # 既然您不想用 GEOIP 数据库，这个 Rule-Set 形式的 IP 表是最好的替代
   cn_ip: { <<: *mip, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geoip/cn.mrs"}
+
 
