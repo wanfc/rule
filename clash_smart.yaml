@@ -68,7 +68,7 @@ proxy-providers:
       interval: 1800
       lazy: true
       timeout: 5000
-    proxy: ⭕️ 直连
+    proxy: 香港-🌀-自动
     header:
       User-Agent:
       - "mihomo"
@@ -1526,5 +1526,6 @@ rule-providers:
   # 如果域名也没查到，最后查 IP 归属地。
   # 既然您不想用 GEOIP 数据库，这个 Rule-Set 形式的 IP 表是最好的替代
   cn_ip: { <<: *mip, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geoip/cn.mrs"}
+
 
 
