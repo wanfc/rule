@@ -1,7 +1,12 @@
 payload:
-  - DOMAIN-SUFFIX,aca.dog
-  - DOMAIN-SUFFIX,acaisbest.online
-  - DOMAIN-SUFFIX,acaisbest.com
   - DOMAIN-SUFFIX,mediafire.com
   - DOMAIN-SUFFIX,s1-filecr.xyz
+  - DOMAIN-SUFFIX,s2-filecr.xyz
+  - DOMAIN-SUFFIX,s3-filecr.xyz
+  - DOMAIN-SUFFIX,s4-filecr.xyz
+  - DOMAIN-SUFFIX,s5-filecr.xyz
+  - DOMAIN-SUFFIX,s1-download.xyz
   - DOMAIN-SUFFIX,s2-download.xyz
+  - DOMAIN-SUFFIX,s3-download.xyz
+  - DOMAIN-SUFFIX,s4-download.xyz
+  - DOMAIN-SUFFIX,s5-download.xyz
