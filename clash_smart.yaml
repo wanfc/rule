@@ -794,6 +794,7 @@ proxy-groups:
   - {name: 🆎 广告, type: select, proxies: [❌ 拒绝, ⭕️ 直连], <<: *cn-check}
   - {name: 📦 PT, <<: *cn-structure}
   - {name: 🍻 BT/P2P, <<: *cn-structure}
+  - {name: ☀️ 自定-内, <<: *cn-structure}
   - {name: ☄️ 自定-外, <<: *cdn-structure}
   - {name: 🎰 Speedtest, <<: *cdn-structure}
   - {name: 🦌 迅雷, <<: *cn-structure}
@@ -1272,6 +1273,7 @@ rules:
   - RULE-SET,pt_ip,📦 PT,no-resolve
   - RULE-SET,p2p_domain,🍻 BT/P2P
   - DST-PORT,6881-6889,🍻 BT/P2P    # 保留这个：BT 默认端口防漏
+  - RULE-SET,inner_custom,☀️ 自定-内
   - RULE-SET,outer_custom,☄️ 自定-外
   - RULE-SET,speedtest_domain,🎰 Speedtest
   - RULE-SET,xunlei_domain,🦌 迅雷
@@ -1382,7 +1384,7 @@ rule-providers:
   # 🟣 第二梯队：用户自定义区 (User Overrides - 最高权重)
   # ========================================================
   # 1. 自定义直连 (Inner)
-  # inner_custom: { <<: *classical, url: "https://gh-proxy.com/raw.githubusercontent.com/wanfc/rule/refs/heads/main/Outer.yaml"}
+  inner_custom: { <<: *classical, url: "https://gh-proxy.com/raw.githubusercontent.com/wanfc/rule/refs/heads/main/Inner.yaml"}
   # 2. 自定义代理 (Outer)
   outer_custom: { <<: *classical, url: "https://gh-proxy.com/raw.githubusercontent.com/wanfc/rule/refs/heads/main/Outer.yaml"}
 
@@ -1527,3 +1529,4 @@ rule-providers:
   # 如果域名也没查到，最后查 IP 归属地。
   # 既然您不想用 GEOIP 数据库，这个 Rule-Set 形式的 IP 表是最好的替代
   cn_ip: { <<: *mip, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geoip/cn.mrs"}
+
