@@ -11,3 +11,5 @@ payload:
   - DOMAIN-SUFFIX,s4-download.xyz
   - DOMAIN-SUFFIX,s5-download.xyz
   - DOMAIN,xn--cp3a08l.com
+  - DOMAIN,token.safebrowsing.apple
+  - DOMAIN,safebrowsing.g.applimg.com
