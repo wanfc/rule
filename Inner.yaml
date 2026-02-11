@@ -1,4 +1,4 @@
 payload:
   - DOMAIN-SUFFIX,xn--fiqs8s40dz2j.com
   - DOMAIN-SUFFIX,blip.net
-  - DOMAIN,gh-proxy.com
+  - DOMAIN-SUFFIX,gh-proxy.com
