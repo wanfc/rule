@@ -16,5 +16,3 @@ payload:
   - DOMAIN-SUFFIX,bitgetapp.com
   - DOMAIN-SUFFIX,walletconnect.com
   - DOMAIN-SUFFIX,walletconnect.org
-  - DOMAIN-KEYWORD,bitget
-  - DOMAIN-KEYWORD,bitkeep
