@@ -59,8 +59,8 @@ proxy-providers:
 
 
   Pei:
-    url: "https://dash.xn--cp3a08l.com/api/v1/pq/ed4708b76ef848653436a049b0dd64f0"
-    # url: "https://dash.pqjc.site/api/v1/pq/ed4708b76ef848653436a049b0dd64f0"
+    # url: "https://dash.xn--cp3a08l.com/api/v1/pq/ed4708b76ef848653436a049b0dd64f0"
+    url: "https://dash.pqjc.site/api/v1/pq/ed4708b76ef848653436a049b0dd64f0"
     type: http
     interval: 3600
     health-check:
@@ -69,7 +69,7 @@ proxy-providers:
       interval: 1800
       lazy: true
       timeout: 5000
-    proxy: 🔴🔴🔴香港-故障
+    proxy: ⭕️ 直连
     header:
       User-Agent:
       - "mihomo"
@@ -2121,3 +2121,4 @@ rule-providers:
   # 既然您不想用 GEOIP 数据库，这个 Rule-Set 形式的 IP 表是最好的替代
 
   cn_ip: { <<: *mip, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geoip/cn.mrs"}
+
