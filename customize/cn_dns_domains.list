@@ -83,6 +83,7 @@ DOMAIN-SUFFIX,apidns.kwd.inkuai.com
 # --- 其他公共 DNS ---
 DOMAIN,114dns.com
 DOMAIN,doh.360.cn
+DOMAIN,dot.360.cn
 DOMAIN-SUFFIX,rubyfish.cn
 DOMAIN-SUFFIX,dns.rubyfish.cn
 DOMAIN-SUFFIX,httpdns.pro
