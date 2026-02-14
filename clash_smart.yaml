@@ -1279,9 +1279,9 @@ proxy-groups:
   # ==============================
   - {name: 🎠 私有地址, type: select, proxies: [⭕️ 直连], <<: *cn-check}
   - {name: 🕰️ NTP, type: select, proxies: [⭕️ 直连], <<: *cn-check}
-  - {name: ⛔️ 广告|阻断, type: select, proxies: [❌ 拒绝, ⭕️ 直连], <<: *cn-check}
   - {name: 🔺 国内DNS, type: select, proxies: [⭕️ 直连], <<: *cn-check}
   - {name: 🔸™️国外DNS, type: select, proxies: [🔴🔴🔴香港-故障], <<: *global-check}
+  - {name: ⛔️ 广告|阻断, type: select, proxies: [❌ 拒绝, ⭕️ 直连], <<: *cn-check}
   # ==============================
   # 2. 下载与P2P
   # ==============================
@@ -1946,14 +1946,14 @@ rule-providers:
   private_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/private.mrs"}
   private_ip: { <<: *mip, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geoip/private.mrs"}
   ntp_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-ntp.mrs"}
-  # 广告拦截 (一票否决)
-  block_domain: { <<: *ydomain, url: "https://anti-ad.net/clash.yaml"}
   # 国内 DNS -> 必须直连 (防止 CDN 跑偏)
   cn_dns_domain: { <<: *tedomain, url: "https://gh-proxy.com/raw.githubusercontent.com/wanfc/rule/refs/heads/main/cn_dns_domains.list"}
   cn_dns_ip: { <<: *teip, url: "https://gh-proxy.com/raw.githubusercontent.com/wanfc/rule/refs/heads/main/cn_dns_ips.list"}
   # 国外 DNS -> 必须代理 (防止被墙/DNS污染)
   global_dns_domain: { <<: *tedomain, url: "https://gh-proxy.com/raw.githubusercontent.com/wanfc/rule/refs/heads/main/global_dns_domains.list"}
   global_dns_ip: { <<: *teip, url: "https://gh-proxy.com/raw.githubusercontent.com/wanfc/rule/refs/heads/main/global_dns_ips.list"}
+  # 广告拦截 (一票否决)
+  block_domain: { <<: *tedomain, url: "https://gh-proxy.com/raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/block_domain.list"}  
 
   # ========================================================
   # 🟣 2. 下载与P2P
@@ -1972,9 +1972,9 @@ rule-providers:
   p2p_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-public-tracker.mrs"}
 
   # 1. 自定义直连 (Inner)
-  inner_custom: { <<: *ydomain, url: "https://gh-proxy.com/raw.githubusercontent.com/wanfc/rule/refs/heads/main/Inner.yaml"}
+  inner_custom: { <<: *tedomain, url: "https://gh-proxy.com/raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/inner_custom.list"}
   # 2. 自定义代理 (Outer)
-  outer_custom: { <<: *ydomain, url: "https://gh-proxy.com/raw.githubusercontent.com/wanfc/rule/refs/heads/main/Outer.yaml"}
+  outer_custom: { <<: *tedomain, url: "https://gh-proxy.com/raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/outer_custom.list"}
 
 
   # 测速与下载 (跑满带宽，越前越好)
@@ -2095,7 +2095,7 @@ rule-providers:
   socialmedia-!cn_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-social-media-!cn.mrs"}
 
   # 2. 金融与加密
-  bitget_domain: { <<: *ydomain, url: "https://gh-proxy.com/raw.githubusercontent.com/wanfc/rule/refs/heads/main/BitgetWallet.yaml"}
+  bitget_domain: { <<: *tedomain, url: "https://gh-proxy.com/raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/bitget_domain.list"}
   crypto@cn_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-cryptocurrency@cn.mrs"}
   crypto_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-cryptocurrency.mrs"}
   paypal@cn_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/paypal@cn.mrs"}
@@ -2134,6 +2134,7 @@ rule-providers:
   # 既然您不想用 GEOIP 数据库，这个 Rule-Set 形式的 IP 表是最好的替代
 
   cn_ip: { <<: *mip, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geoip/cn.mrs"}
+
 
 
 
