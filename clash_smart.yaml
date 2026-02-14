@@ -1329,10 +1329,10 @@ proxy-groups:
   - {name: 🔅 国内AI, <<: *cn-structure}
   # 游戏国际与开发
   - {name: 🎮™️游戏国际, <<: *global-structure}
-  - {name: 🥝 中区开发者, <<: *cdn-structure}
-  - {name: 🥝 全球开发者中国CDN, <<: *cdn-structure}
+  - {name: 🥥 中区开发者, <<: *cdn-structure}
+  - {name: 🥥 全球开发者中国CDN, <<: *cdn-structure}
   - {name: 🥥™️Github1s, <<: *global-structure}
-  - {name: 🥝™️全球开发者, <<: *global-structure}
+  - {name: 🥥™️全球开发者, <<: *global-structure}
   # Apple / MS / Google
   - {name: 🍏 Apple中国CDN, <<: *cdn-structure}
   - {name: 🍏 Apple中国, <<: *cdn-structure}
@@ -1356,7 +1356,7 @@ proxy-groups:
   - {name: 💊™️Adguard, <<: *global-structure}
   - {name: 🖍️™️Adobe激活, <<: *global-structure}
   - {name: 🖍️™️Adobe, <<: *global-structure}
-  - {name: 💡 Nvidia, <<: *cdn-structure}
+  - {name: 💡™️Nvidia, <<: *cdn-structure}
   # 最后的兜底
   - {name: 🍞™️外文传媒, <<: *global-structure}
   - {name: 🍋™️国外娱乐, <<: *global-structure}
@@ -1868,10 +1868,10 @@ rules:
   - RULE-SET,aicn_domain,🔅 国内AI
   # 游戏国际与开发
   - RULE-SET,games-!cn_domain,🎮™️游戏国际
-  - RULE-SET,dev-cn_domain,🥝 中区开发者
-  - RULE-SET,dev@cn_domain,🥝 全球开发者中国CDN
+  - RULE-SET,dev-cn_domain,🥥 中区开发者
+  - RULE-SET,dev@cn_domain,🥥 全球开发者中国CDN
   - RULE-SET,github1s_domain,🥥™️Github1s
-  - RULE-SET,dev_domain,🥝™️全球开发者
+  - RULE-SET,dev_domain,🥥™️全球开发者
   # Apple / MS / Google
   - RULE-SET,apple-cn_domain,🍏 Apple中国CDN
   - RULE-SET,apple@cn_domain,🍏 Apple中国
@@ -1900,7 +1900,7 @@ rules:
   - RULE-SET,adguard_domain,💊™️Adguard
   - RULE-SET,adobe-activation_domain,🖍️™️Adobe激活
   - RULE-SET,adobe_domain,🖍️™️Adobe
-  - RULE-SET,nvidia_domain,💡 Nvidia
+  - RULE-SET,nvidia_domain,💡™️Nvidia
   # 最后的兜底
   - RULE-SET,media_domain,🍞™️外文传媒
   - RULE-SET,entertainment_domain,🍋™️国外娱乐
@@ -2027,7 +2027,7 @@ rule-providers:
   media-cn_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-media-cn.mrs"}
   # 国内社交(微博/知乎等)
   socialmedia-cn_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-social-media-cn.mrs"}
-  # 国内娱乐媒体
+  # 国内娱乐
   entertainment-cn_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-entertainment-cn.mrs"}
 
   # ========================================================
@@ -2100,7 +2100,7 @@ rule-providers:
   # ========================================================
   # 外文传媒资讯
   media_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-media.mrs"}
-  # 国外娱乐媒体
+  # 国外娱乐
   entertainment_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-entertainment.mrs"}
   porn_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-porn.mrs"}
 
@@ -2121,4 +2121,5 @@ rule-providers:
   # 既然您不想用 GEOIP 数据库，这个 Rule-Set 形式的 IP 表是最好的替代
 
   cn_ip: { <<: *mip, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geoip/cn.mrs"}
+
 
