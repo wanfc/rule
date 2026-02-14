@@ -318,10 +318,14 @@ dns:
 
     # Microsoft P2P 更新 (解决 Windows 更新转圈)
     - '+.windowsupdate.com'
-    - '+.delivery.mp.microsoft.com'
+    - 'v10.events.data.microsoft.com' # 环境探测与日志
+    - 'settings-win.data.microsoft.com'
+    - '+.delivery.mp.microsoft.com'  # [核心] 传递优化服务
+    - 'sls.update.microsoft.com'     # 更新服务引导
+    - 'ctldl.windowsupdate.com'      # 证书吊销列表更新
 
     # 解决 Office 激活、Teams 登录、账号风控报错
-    - 'login.microsoftonline.com'   # O365 登录核心
+    - 'login.microsoftonline.com'    # O365 登录核心
     - 'logincdn.msauth.net'          # 登录资源
     - 'login.live.com'               # 个人账户登录
     - 'account.live.com'             # 账户管理
@@ -671,6 +675,11 @@ sniffer:
   - '+.cloud.microsoft'      # 微软新一代统一域名
   - '+.1drv.com'             # 后端数据块
   - '+.svc.ms'               # 核心服务架构
+  - '+.g.akamaized.net'      # 微软常用的 CDN 后缀
+  - '+.msecnd.net'
+  - '+.aspnetcdn.com'
+  - '+.delivery.mp.microsoft.com' # P2P 流量传输，必须跳过嗅探
+  - 'p2p.rtm.microsoft.com'       # P2P 握手
 
   # ------------------------------------------------
   # [3] ☁️ 全量网盘与下载 (必跳过，防卡死)
@@ -1776,12 +1785,13 @@ rules:
   # ==============================
   # 1. 基础阻断与网络服务
   # ==============================
-  - AND,((NETWORK,UDP),(DST-PORT,443)),⛔️ 广告|阻断
   - RULE-SET,private_domain,🎠 私有地址
   - RULE-SET,private_ip,🎠 私有地址,no-resolve
+  # [第二层] 协议执法：强制降级 (就是你说的这条)
+  # 理由：先封死 UDP 443，逼浏览器退回到 TCP，后续的域名嗅探和拦截才 100% 有效。
+  - AND,((NETWORK,UDP),(DST-PORT,443)),⛔️ 广告|阻断
   - RULE-SET,ntp_domain,🕰️ NTP
   - DST-PORT,123,🕰️ NTP  # 简单粗暴，所有时间同步全部直连
-  - RULE-SET,block_domain,⛔️ 广告|阻断
   # ==============================
   # 1.5. DNS 分流 (防止握手失败/绕路)
   # ==============================
@@ -1791,9 +1801,12 @@ rules:
   # 国外 DNS -> 必须代理 (防止被墙/DNS污染)
   - RULE-SET,global_dns_domain,🔸™️国外DNS
   - RULE-SET,global_dns_ip,🔸™️国外DNS,no-resolve
+  - RULE-SET,block_domain,⛔️ 广告|阻断
+
   # ==============================
   # 2. 下载与P2P
   # ==============================
+  - DST-PORT,7680,Ⓜ️ 微软中国        # Windows P2P
   - RULE-SET,pt_domain,📦 PT
   - RULE-SET,pt_ip,📦 PT,no-resolve
   - RULE-SET,p2p_domain,🍻 BT/P2P
@@ -2121,6 +2134,7 @@ rule-providers:
   # 既然您不想用 GEOIP 数据库，这个 Rule-Set 形式的 IP 表是最好的替代
 
   cn_ip: { <<: *mip, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geoip/cn.mrs"}
+
 
 
 
