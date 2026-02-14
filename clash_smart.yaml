@@ -1929,13 +1929,13 @@ rules:
 # type：可选http/file/inline  behavior：可选domain/ipcidr/classical format：可选yaml/text/mrs
 
 rule-anchor:
-  mdomain: &mdomain {type: http, interval: 86400, behavior: domain, format: mrs}
-  mip: &mip {type: http, interval: 86400, behavior: ipcidr, format: mrs}
-  ydomain: &ydomain {type: http, interval: 86400, behavior: domain, format: yaml}
-  yip: &yip {type: http, interval: 86400, behavior: ipcidr, format: yaml}
-  tedomain: &tedomain {type: http, interval: 86400, behavior: domain, format: text}
-  teip: &teip {type: http, interval: 86400, behavior: ipcidr, format: text}
-  classical: &classical {type: http, interval: 86400, behavior: classical, format: yaml}
+  mdomain: &mdomain {type: http, interval: 604800, behavior: domain, format: mrs}
+  mip: &mip {type: http, interval: 604800, behavior: ipcidr, format: mrs}
+  ydomain: &ydomain {type: http, interval: 604800, behavior: domain, format: yaml}
+  yip: &yip {type: http, interval: 604800, behavior: ipcidr, format: yaml}
+  tedomain: &tedomain {type: http, interval: 604800, behavior: domain, format: text}
+  teip: &teip {type: http, interval: 604800, behavior: ipcidr, format: text}
+  classical: &classical {type: http, interval: 604800, behavior: classical, format: yaml}
 
 
 rule-providers:
@@ -2134,6 +2134,7 @@ rule-providers:
   # 既然您不想用 GEOIP 数据库，这个 Rule-Set 形式的 IP 表是最好的替代
 
   cn_ip: { <<: *mip, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geoip/cn.mrs"}
+
 
 
 
