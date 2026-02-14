@@ -2035,7 +2035,7 @@ rule-providers:
   # ========================================================
   # 1. AI 服务(必须在 Google/MS 之前)
   ai!cn_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-ai-!cn.mrs"}
-  apple-intelligenentertainment_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/apple-intelligence.mrs"}
+  apple-intelligence_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/apple-intelligence.mrs"}
   aicn_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-ai-cn.mrs"}
 
   # 2. 游戏外服 (必须在通用规则之前)
@@ -2121,5 +2121,6 @@ rule-providers:
   # 既然您不想用 GEOIP 数据库，这个 Rule-Set 形式的 IP 表是最好的替代
 
   cn_ip: { <<: *mip, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geoip/cn.mrs"}
+
 
 
