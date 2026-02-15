@@ -477,6 +477,7 @@ dns:
     # 移动
     - '+.cmpassport.com'       # 统一认证
     - '+.10086.cn'
+    - 'wap.sc.10086.cn'        # 根据你所在省份可能不同
     - '+.mmarket.com'          # 移动应用商店/资料
     - '+.cmicrwx.cn'
     # 电信
@@ -568,10 +569,16 @@ dns:
     # 字节跳动/抖音核心 (强制 Real-IP)
     - '+.snssdk.com'
     - '+.amemv.com'
+    - '+.douyin.com'
     - '+.toutiao.com'      # 字节系通用验证
     - '+.toutiaoimg.com'
     - '+.douyincdn.com'
     - '+.douyinvod.com'
+    - '+.bytev.com'
+    - '+.pstatp.com'
+    - '+.kuaishou.com'
+    - '+.kwaicdn.com'
+    - '+.yximgs.com'
 
     # ------------------------------------------------
     # [14] 🎮 游戏规则集兜底 (自动更新/覆盖冷门)
@@ -762,23 +769,18 @@ sniffer:
   # ------------------------------------------------
   # [5] 🎵 字节跳动 (抖音/快手)
   # ------------------------------------------------
-  # - '+.snssdk.com'
   - '+.pstatp.com'
   - '+.byteimg.com'
-  # - '+.douyin.com'
   - '+.douyincdn.com'
   - '+.douyinpic.com'
   - '+.douyinvod.com'
   - '+.ixigua.com'
-  # - '+.kuaishou.com'
   - '+.kwaicdn.com'
-  # - '+.gifshow.com'
   - '+.yximgs.com'
   - '+.kwimgs.com'
   - '+.bytev.com'
   - '+.byteeffecttos.com'
   - '+.ibyteimg.com'
-  # - '+.amemv.com'
 
   # ------------------------------------------------
   # [6] 📺 全量视频平台 (B站/优酷/爱奇艺/芒果/央视)
