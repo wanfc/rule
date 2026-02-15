@@ -477,6 +477,7 @@ dns:
     # 移动
     - '+.cmpassport.com'       # 统一认证
     - '+.10086.cn'
+    - '+.mmarket.com'          # 移动应用商店/资料
     - '+.cmicrwx.cn'
     # 电信
     - '+.189.cn'
@@ -567,6 +568,7 @@ dns:
     # 字节跳动/抖音核心 (强制 Real-IP)
     - '+.snssdk.com'
     - '+.amemv.com'
+    - '+.toutiao.com'      # 字节系通用验证
     - '+.toutiaoimg.com'
     - '+.douyincdn.com'
     - '+.douyinvod.com'
@@ -760,23 +762,23 @@ sniffer:
   # ------------------------------------------------
   # [5] 🎵 字节跳动 (抖音/快手)
   # ------------------------------------------------
-  - '+.snssdk.com'
+  # - '+.snssdk.com'
   - '+.pstatp.com'
   - '+.byteimg.com'
-  - '+.douyin.com'
+  # - '+.douyin.com'
   - '+.douyincdn.com'
   - '+.douyinpic.com'
   - '+.douyinvod.com'
   - '+.ixigua.com'
-  - '+.kuaishou.com'
+  # - '+.kuaishou.com'
   - '+.kwaicdn.com'
-  - '+.gifshow.com'
+  # - '+.gifshow.com'
   - '+.yximgs.com'
   - '+.kwimgs.com'
   - '+.bytev.com'
   - '+.byteeffecttos.com'
   - '+.ibyteimg.com'
-  - '+.amemv.com'
+  # - '+.amemv.com'
 
   # ------------------------------------------------
   # [6] 📺 全量视频平台 (B站/优酷/爱奇艺/芒果/央视)
@@ -2144,11 +2146,3 @@ rule-providers:
   # 既然您不想用 GEOIP 数据库，这个 Rule-Set 形式的 IP 表是最好的替代
 
   cn_ip: { <<: *mip, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geoip/cn.mrs"}
-
-
-
-
-
-
-
-
