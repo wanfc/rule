@@ -769,6 +769,8 @@ sniffer:
   # ------------------------------------------------
   # [5] 🎵 字节跳动 (抖音/快手)
   # ------------------------------------------------
+  - '+.snssdk.com'
+  - '+.amemv.com'
   - '+.pstatp.com'
   - '+.byteimg.com'
   - '+.douyincdn.com'
@@ -2148,3 +2150,4 @@ rule-providers:
   # 既然您不想用 GEOIP 数据库，这个 Rule-Set 形式的 IP 表是最好的替代
 
   cn_ip: { <<: *mip, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geoip/cn.mrs"}
+
