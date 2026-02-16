@@ -1372,7 +1372,6 @@ proxy-groups:
   - {name: 🍀™️Dcard, <<: *global-structure}
   - {name: 🍉™️外文社媒, <<: *global-structure}
   # 金融
-  - {name: 💶 国内加密货币, <<: *cdn-structure}
   - {name: 💶™️加密货币, <<: *global-structure}
   - {name: 💳 贝宝, <<: *cdn-structure}
   - {name: 💳™️PayPal, <<: *global-structure}
@@ -1920,7 +1919,6 @@ rules:
   - RULE-SET,socialmedia-!cn_domain,🍉™️外文社媒
   # 金融
   - RULE-SET,bitget_domain,💶™️加密货币
-  - RULE-SET,crypto@cn_domain,💶 国内加密货币
   - RULE-SET,crypto_domain,💶™️加密货币
   - RULE-SET,paypal@cn_domain,💳 贝宝
   - RULE-SET,paypal_domain,💳™️PayPal
@@ -2112,7 +2110,6 @@ rule-providers:
 
   # 2. 金融与加密
   bitget_domain: { <<: *tedomain, url: "https://gh-proxy.com/raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/bitget_domain.list"}
-  crypto@cn_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-cryptocurrency@cn.mrs"}
   crypto_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-cryptocurrency.mrs"}
   paypal@cn_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/paypal@cn.mrs"}
   paypal_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/paypal.mrs"}
@@ -2150,5 +2147,3 @@ rule-providers:
   # 既然您不想用 GEOIP 数据库，这个 Rule-Set 形式的 IP 表是最好的替代
 
   cn_ip: { <<: *mip, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geoip/cn.mrs"}
-
-
