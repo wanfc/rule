@@ -1389,6 +1389,7 @@ proxy-groups:
   - {name: 🏰 中国1️⃣, <<: *cn-structure}
   - {name: 🛫™️GEO国外, <<: *global-structure}
   - {name: 🏰 中国2️⃣, <<: *cn-structure}
+  - {name: 🏰 中国ASN, <<: *cn-structure}
   - {name: 🛟™️兜底, <<: *global-structure}
 
 
@@ -1935,7 +1936,8 @@ rules:
   - RULE-SET,geo-cn_domain,🗼 GEO国内
   - RULE-SET,cn_domain,🏰 中国1️⃣
   - RULE-SET,geo-!cn_domain,🛫™️GEO国外
-  - RULE-SET,cn_ip,🏰 中国2️⃣,no-resolve  
+  - RULE-SET,cn_ip,🏰 中国2️⃣,no-resolve
+  - RULE-SET,china_asn,🏰 中国ASN,no-resolve
   - MATCH,🛟™️兜底
 
 # ====================
@@ -1949,7 +1951,8 @@ rule-anchor:
   yip: &yip {type: http, interval: 604800, behavior: ipcidr, format: yaml}
   tedomain: &tedomain {type: http, interval: 604800, behavior: domain, format: text}
   teip: &teip {type: http, interval: 604800, behavior: ipcidr, format: text}
-  classical: &classical {type: http, interval: 604800, behavior: classical, format: yaml}
+  classicay: &classicay {type: http, interval: 604800, behavior: classical, format: yaml}
+  classicat: &classicat {type: http, interval: 604800, behavior: classical, format: text}
 
 
 rule-providers:
@@ -2147,3 +2150,4 @@ rule-providers:
   # 既然您不想用 GEOIP 数据库，这个 Rule-Set 形式的 IP 表是最好的替代
 
   cn_ip: { <<: *mip, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geoip/cn.mrs"}
+  china_asn: { <<: *classicat, url: "https://gh-proxy.com/raw.githubusercontent.com/missuo/ASN-China/refs/heads/main/ASN.China.list"}
