@@ -1963,7 +1963,7 @@ rule-providers:
   private_ip: { <<: *mip, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geoip/private.mrs"}
   ntp_domain: { <<: *mdomain, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-ntp.mrs"}
   # 国内 DNS -> 必须直连 (防止 CDN 跑偏)
-  cn_dns_domain: { <<: *tedomain, url: "https://gh-proxy.com/raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/cn_dns_domain.list"}
+  cn_dns_domain: { <<: *tedomain, url: "https://gh-proxy.com/raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/cn_dns_domain.list", pre-resolve: true}
   cn_dns_ip: { <<: *teip, url: "https://gh-proxy.com/raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/IP/cn_dns_ip.list"}
   # 国外 DNS -> 必须代理 (防止被墙/DNS污染)
   global_dns_domain: { <<: *tedomain, url: "https://gh-proxy.com/raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/global_dns_domain.list"}
@@ -2150,4 +2150,5 @@ rule-providers:
   # 既然您不想用 GEOIP 数据库，这个 Rule-Set 形式的 IP 表是最好的替代
 
   cn_ip: { <<: *mip, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geoip/cn.mrs"}
+
 
