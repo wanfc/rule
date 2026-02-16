@@ -1848,6 +1848,12 @@ rules:
   - RULE-SET,douyu_domain,🦈 斗鱼
   # 短视频
   - RULE-SET,douyin_domain,🎵 抖音
+  # 字节跳动/抖音国内全家桶
+  - IP-ASN,138690,🎵 抖音,no-resolve
+  - IP-ASN,137775,🎵 抖音,no-resolve
+  - IP-ASN,137718,🎵 抖音,no-resolve  # 必须加，火山引擎
+  - IP-ASN,139341,🎵 抖音,no-resolve
+  - IP-ASN,133111,🎵 抖音,no-resolve
   - RULE-SET,kuaishou_domain,📸 快手
   # 腾讯系
   - RULE-SET,tencent@!cn_domain,🐧™️腾讯国际
@@ -1915,6 +1921,11 @@ rules:
   # 国际社媒
   - RULE-SET,telegram_domain,📮™️Telegram
   - RULE-SET,telegram_ip,📮™️Telegram,no-resolve
+  - IP-ASN,44907,📮™️Telegram,no-resolve
+  - IP-ASN,62041,📮™️Telegram,no-resolve
+  - IP-ASN,59930,📮™️Telegram,no-resolve
+  - IP-ASN,62014,📮™️Telegram,no-resolve
+  - IP-ASN,211157,📮™️Telegram,no-resolve
   - RULE-SET,twitter_ip,🍉™️外文社媒,no-resolve
   - RULE-SET,dcard_domain,🍀™️Dcard
   - RULE-SET,socialmedia-!cn_domain,🍉™️外文社媒
@@ -2151,3 +2162,4 @@ rule-providers:
 
   cn_ip: { <<: *mip, url: "https://gh-proxy.com/raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geoip/cn.mrs"}
   china_asn: { <<: *classicat, url: "https://gh-proxy.com/raw.githubusercontent.com/missuo/ASN-China/refs/heads/main/ASN.China.list"}
+
