@@ -1,0 +1,1599 @@
+# ====================
+# 机场节点订阅
+
+proxy-providers:
+
+  ➊-ahQ:
+    url: "https://api.v1.mk/sub?target=clash&url=https%3A%2F%2Fnvx81q0ouja21x8u.xn--fiqs8s40dz2j.com%2Fapi%2Fv1%2Fclient%2Fsubscribe%3Ftoken%3D2c85d91c1adfea2e23c8e3a25172652b&insert=false&config=https%3A%2F%2Fraw.githubusercontent.com%2FSleepyHeeead%2Fsubconverter-config%2Fmaster%2Fremote-config%2Fspecial%2Fbasic.ini&emoji=true&list=true&xudp=false&udp=true&tfo=true&expand=false&scv=false&fdn=false&new_name=true"
+    type: http
+    interval: 3600  # 订阅更新间隔，1小时一次没问题
+    # 强制开启该提供者内所有节点的 TFO 和 UDP
+
+    health-check:
+      enable: true
+      url: 'https://cp.cloudflare.com/generate_204'
+      # ⚡️ 修改重点：从 300 改为 1800 (30分钟)
+      # 机场订阅层面的健康检查主要用于剔除彻底挂掉的节点，不需要太频繁
+      # 这是机场封号的重灾区
+      interval: 1800
+      # 【核心：懒加载】
+      # 开启后，只有被策略组选中的节点才会高频测速，
+      # 没用的节点不会一直测，防机场封号的神器。一定要开！
+      lazy: true
+      timeout: 5000  # 建议给宽容点，太低太容易误杀稍微有抖动的节点了
+
+    # 订阅更新走直连，如果更新失败，可以改成具体的代理组名称
+    proxy: ⭕️ 直连
+    header:
+      User-Agent:
+      - "mihomo"
+    override:
+      skip-cert-verify: true
+      tfo: true
+      udp: true
+      # 很多机场节点前缀很乱，这里统一加前缀很好
+      additional-prefix: "☁️-"
+      client-fingerprint: chrome
+    
+  ➋-alpha:
+    url: "https://a-gvgya9fuh2fyd7bx.z01.azurefd.net/alphaio/id/menu?token=db06dc100f1d3e6fc7ac209bcdea289a"
+    type: http
+    interval: 3600
+    health-check:
+      enable: true
+      url: 'https://cp.cloudflare.com/generate_204'
+      interval: 1800
+      lazy: true
+      timeout: 5000
+    proxy: ⭕️ 直连
+    header:
+      User-Agent:
+      - "mihomo"
+    override:
+      skip-cert-verify: true
+      tfo: true
+      udp: true
+      additional-prefix: "🌀-"
+      client-fingerprint: chrome
+
+
+  ➌-peiqian:
+    url: "https://dash.pqjc.site/api/v1/pq/ed4708b76ef848653436a049b0dd64f0"
+    type: http
+    interval: 3600
+    health-check:
+      enable: true
+      url: 'https://cp.cloudflare.com/generate_204'
+      interval: 1800
+      lazy: true
+      timeout: 5000
+    proxy: ⭕️ 直连
+    header:
+      User-Agent:
+      - "mihomo"
+    override:
+      skip-cert-verify: true
+      tfo: true
+      udp: true
+      additional-prefix: "💸-"
+      client-fingerprint: chrome
+
+
+  ➍-GG:
+    url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo_Proxies.yaml"
+    type: http
+    interval: 3600
+    health-check:
+      enable: true
+      url: 'https://cp.cloudflare.com/generate_204'
+      interval: 1800
+      lazy: true
+      timeout: 5000
+    proxy: ⭕️ 直连
+    header:
+      User-Agent:
+      - "Quantumult%20X/1.5.6%20(iPhone18,4;%20iOS%2026.3)"
+    override:
+      skip-cert-verify: true
+      tfo: true
+      udp: true
+      additional-prefix: "🧩-"
+      client-fingerprint: chrome
+
+
+  # WC:
+  #   url: "https://shz.al/~WangCai"
+  #   type: http
+  #   interval: 3600
+  #   health-check:
+  #     enable: true
+  #     url: 'https://cp.cloudflare.com/generate_204'
+  #     interval: 1800
+  #     lazy: true
+  #     timeout: 5000
+  #   proxy: ⭕️ 直连
+  #   header:
+  #     User-Agent:
+  #     - "mihomo"
+  #   override:
+  #     skip-cert-verify: true
+  #     tfo: true
+  #     udp: true
+  #     additional-prefix: "🐶-"
+  #     client-fingerprint: chrome
+
+# ====================
+# 节点信息
+
+proxies:
+  - {name: ⭕️ 直连, type: direct, udp: true}
+  - {name: ❌ 拒绝, type: reject}
+
+
+# ====================
+# 全局配置 
+
+# ====================
+# 1. 端口设置 (保持原样即可)
+# ====================
+port: 7890
+socks-port: 7891
+redir-port: 7892
+mixed-port: 7893
+tproxy-port: 7894
+
+# ====================
+# 2. 局域网访问
+# ====================
+allow-lan: true
+udp: true
+bind-address: "*"
+
+# ⚠️ IPv6：软路由建议关闭，防止 IPv6 泄露导致 Google 认为你位置跳动
+# 除非你有明确的 IPv6 直连需求且配置了完美的防火墙
+ipv6: false
+
+# ====================
+# 3. 连接与性能 (关键优化)
+# ====================
+# 影响 Clash 与 机场服务器 的连接 (推荐开启)
+global-tfo: true
+# 影响 局域网设备 与 Clash 的连接 (建议关闭，Windows 客户端兼容性差)
+tcp-fast-open: false
+
+# 统一延迟：不仅减去握手消耗，还能平滑抖动，选节点更准
+unified-delay: true
+# TCP 并发：并发连接所有节点测速，选节点更快 (软路由性能足够时建议开启)
+tcp-concurrent: false
+
+# ❌ 必须注释掉 interface-name！
+# 因为我们在 tun 配置里已经开了 auto-detect-interface: true
+# 这里再写死会导致冲突或报错
+# interface-name: enp6s18
+
+# ====================
+# 4. 运行模式与日志
+# ====================
+mode: rule
+log-level: silent
+
+# [重点] 进程匹配模式
+# 软路由必须设为 "off"。因为路由层无法获取局域网电脑上的进程名(exe)
+# 开启 strict/always 只会徒增 CPU 消耗且永远匹配不到
+find-process-mode: 'off'
+
+# 长连接保活 (优化参数)
+# idle默认 600s 有点长，建议改为 30s-60s，防止运营商 NAT 表老化导致断连
+keep-alive-idle: 180
+keep-alive-interval: 30 
+# 建议开启 external-controller-tls 后的安全验证 (家庭环境可忽略)
+# 含义：它给您的 9090 控制台端口加上 HTTPS 加密锁。
+# 作用：防止有人在局域网里抓包窃听您控制 Clash 的指令。
+# 结论：在家里完全不需要。 开启后反而会导致很多 Dashboard 面板连不上（因为证书是自签名的，浏览器会报警），请保持关闭。
+
+# ====================
+# 5. GEO 数据库自动更新
+# ====================
+# Mihomo 特性：自动更新 GeoIP 和 GeoSite 数据库
+# 防止 "RuleSet 找不到域名" 或者 "IP 库太旧识别错误"
+# geodata-mode: true         # 使用 .dat 版数据库 (体积小，加载快)
+# geodata-loader: standard   # 标准加载器
+# geo-auto-update: true      # 开启自动更新
+# geo-update-interval: 24    # 每 24 小时检查一次
+
+# [新增] 全局 User-Agent
+# 拉取订阅或数据库时伪装成浏览器，防止被某些源拒绝
+global-ua: chrome
+
+# ====================
+# 6. 持久化与控制台
+# ====================
+profile:
+  store-selected: true   # 重启后记住上次选的节点
+  store-fake-ip: false    # 记住 Fake-IP 映射 (加快二次访问，但会写硬盘)
+
+external-controller: 0.0.0.0:9090
+secret: "123456"         # ⚠️ 强烈建议修改！如果家里有访客，这个弱密码很危险
+
+# # 推荐开启内置 Dashboard，方便手机浏览器直接管理，不用装 App
+# external-ui: ui
+# external-ui-name: metacubexd 
+# external-ui-url: "https://gh-proxy.com/github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip"
+# external-ui-name: zashboard
+# external-ui-url: https://gh-proxy.com/github.com/Zephyruso/zashboard/archive/refs/heads/gh-pages.zip
+
+# ====================
+# hosts 设置
+
+hosts:
+  'openwrt.lan': 10.0.0.1   # 替换为你路由器的后台域名
+  'op': 10.0.0.1           # 顺便给自己加个短域名，方便输入
+  # 'miwifi.com': 192.168.31.1   # 如果是小米
+  # 'router.asus.com': 192.168.50.1 # 如果是华硕
+
+# ====================
+# DNS 设置
+
+dns:
+  enable: true
+  listen: 0.0.0.0:7874
+  ipv6: false
+  enhanced-mode: fake-ip
+  fake-ip-range: 28.0.0.1/8
+
+  # ============================================
+  # 1. 引导 DNS (Bootstrap - 启动第一步)
+  # ============================================
+  # 用于解析下面 DoH 域名的 IP，必须是纯 IP 格式
+  default-nameserver:
+    - 223.5.5.5
+    - 119.29.29.29
+
+  # ============================================
+  # 2. 行为与性能参数
+  # ============================================
+  cache-algorithm: arc      # 缓存算法
+  prefer-h3: false          # 是否优先 H3
+  use-hosts: true           # 是否加载系统 hosts
+  respect-rules: true       # 遵循分流规则
+
+  # ============================================
+  # 3. 策略分流 (优先级 Max - 局域网/内网/特例)
+  # ============================================
+  nameserver-policy:
+    # 遇到 private 列表里的域名，强制向本地网关(DHCP)或具体路由器IP查询
+    # 或者写死网关 IP，例如 '192.168.31.1'
+    'rule-set:private_domain': 'dhcp://br-lan'    # 局域网域名 -> 问本地网关
+    'rule-set:geo-!cn_domain':
+      - https://cloudflare-dns.com/dns-query
+      - https://dns.google/dns-query
+    # 强制让 OpenClash 用纯净外网 IP 帮 AGH 解析 DoH 域名，彻底切断循环！
+    # 'dns.alidns.com': '223.5.5.5'
+    # '+.doh.pub': '119.29.29.29'          # 一行兼容 doh.pub 和 sm2.doh.pub
+    # '+.dot.pub': '119.29.29.29'
+    # '+.onedns.net': '223.5.5.5'          # 一行秒杀所有 OneDNS 的拦截/纯净/家庭版
+    # 'miwifi.com': '192.168.31.1'                # 特定路由域名 -> 问指定IP
+    # '+.company.com': '10.10.10.1'               # 公司内网 -> 问公司DNS
+
+
+  # ============================================
+  # 4. 节点域名解析 (优先级 High - 机场连接)
+  # ============================================
+  proxy-server-nameserver:
+    - 10.0.0.1:5335
+    # - https://dns.alidns.com/dns-query
+    # - https://sm2.doh.pub/dns-query
+
+  # ============================================
+  # 5. 默认通用解析 (CN 域名 & IP 匹配)
+  # ============================================
+  # nameserver 列表主要用于解析国内域名（直连流量）以及在 Fake-IP 模式下进行 IP 规则匹配
+  # 千万不要在 nameserver 列表中加入 https://cloudflare-dns.com/dns-query
+  nameserver:
+    - 10.0.0.1:5335
+
+  # ============================================
+  # 6. Fake-IP 过滤设置
+  # ============================================
+  fake-ip-filter-mode: blacklist
+  fake-ip-filter:
+    # ... (逻辑顺序：私有 -> 运营商 -> 银行 -> 大厂兼容 -> 游戏) ...
+    # 注意: 不要在这里加入 'geosite:cn'。我们希望国内域名也走 Fake-IP,这样我们才能在`rules:`中对它们应用广告拦截等规则
+    # 不要只依赖 rule-set，手动加上这几个通配符做双重保险
+    - '+.lan'
+    - '+.local'
+    - 'openwrt'
+    - 'localhost'    
+
+    # 基础设施与局域网 (绝对核心)
+    - 'rule-set:private_domain'  # 已经包含上面
+    - 'rule-set:ntp_domain'
+    - 'rule-set:pt_domain'       # PT 站 (防封号，必须 Real-IP)
+    - 'rule-set:p2p_domain'      # 公共 BT Tracker
+
+    # 🏠 智能家居 (小米/米家 - 纯为了保物理设备不掉线)
+    - '+.io.mi.com'            # 物理设备心跳维持与控制
+    - '+.home.mi.com'          # 核心云端交互
+    - '+.mina.mi.com'          # 小爱同学语音通道
+
+    # 🍎 苹果 (极致精简 - 仅限证书与推送)
+    - 'ocsp.apple.com'         # 证书撤销检查 (极其重要，走 Fake-IP 易导致 App 闪退或加载卡死)
+    - 'ocsp2.apple.com'
+    - 'valid.apple.com'
+    - '+.push.apple.com'       # 消息推送 (保持长连接稳定，防微信/短信延迟)
+    - '+.push.apple.com.cn'
+    - '+.mzstatic.com'                 # 商店的图标、预览图、静态资源
+    - '+.iosapps.itunes.apple.com'     # iOS App 核心下载包
+    - '+.osxapps.itunes.apple.com'     # Mac App 核心下载包
+    - '+.swcdn.apple.com'              # iOS/Mac 系统固件更新包
+    # 刷机与固件签名验证 (防变砖核心)
+    - 'mesu.apple.com'         # 资产目录配置 (检查更新的核心)
+    - 'gs.apple.com'           # 全球签名验证服务器 (最容易导致报错变砖的元凶)
+    - 'ig.apple.com'           # 设备激活与基础带验证
+    - 'tbsc.apple.com'         # 授权与时间戳校验
+    - 'gdmf.apple.com'         # 设备管理与固件放行验证
+    - 'tss.apple.com'          # 备用签名服务器
+
+    # 🪟 微软 (极致精简 - 仅限网络探针与更新调度)
+    # 网络状态探测 (防止电脑右下角出现“无网络”地球仪)
+    - '+.msftconnecttest.com'
+    - '+.msftncsi.com'
+    
+    # 微软 DO/P2P 引擎：跳过 Fake-IP 以维持 P2P 协议完整性，防止高并发 UDP 洪流击穿内核 NAT 映射表
+    - '+.delivery.mp.microsoft.com'
+    - 'p2p.rtm.microsoft.com'
+
+    # 📞 四大运营商核心 (免密登录、防劫持与菜单秒开，必须真实IP)
+    - '+.pub.3gppnetwork.org'  # 📞 VoWiFi 运营商底层通信
+
+    # 中国移动 (含和多号)
+    - '+.10086.cn'             # 涵盖业务API、和多号菜单与省市营业厅
+    - '+.cmpassport.com'       # 统一认证网关
+    - '+.cmicrwx.cn'           # 移动底层数据与安全校验探针
+    
+    # 中国电信
+    - '+.189.cn'               # 电信营业厅核心与天翼账号认证
+    - '+.vnet.cn'              # 电信互联星空与网关底层交互
+    
+    # 中国联通
+    - '+.10010.com'            # 联通营业厅核心API
+    - '+.wo.cn'                # 联通免密认证与王卡服务
+    - '+.wosms.cn'             # 联通免密登录验证与核心短信网关 (防踢下线必备)
+    
+    # 中国广电 (CBN)
+    - '+.10099.com.cn'         # 广电网上营业厅与中国广电 App 核心
+    - '+.chn.cn'               # 广电 5G 专属域名与底层短链交互
+
+    # 迅雷
+    - '+.xunlei.com'       # 迅雷主站与核心调度
+    - '+.sandai.net'       # 迅雷三代 P2P 加速网络 (最核心)
+    - '+.xycdn.com'        # 星域 CDN (迅雷自家的 P2P 边缘计算网络)
+    - '+.thundercdn.com'   # 迅雷专属分布式下载节点
+
+
+    # 自定义的上游 DNS 域名 (防启动死循环)
+    - '+.alidns.com'
+    - '+.doh.pub'
+    - '+.dot.pub'
+    - '+.onedns.net'
+    - 'doh.360.cn'
+    - 'dot.360.cn'
+
+    # 🔧 全量远程工具 (P2P 直连打洞)
+    - '+.oray.com'             # 向日葵/花生壳
+    - '+.sunlogin.net'
+    - '+.todesk.com'           # ToDesk
+    - '+.cybertunnel.run'
+    - '+.teamviewer.com'       # TeamViewer
+    - '+.anyviewer.com'        # AnyViewer
+    - '+.anyviewer.cn'
+    - '+.rustdesk.com'         # RustDesk
+    - '+.parsec.app'           # Parsec
+    - '+.logmein.com'
+    - '+.blip.net'             # 🚀 Blip 跨平台 P2P 直传核心
+
+# 🌐 公共 STUN 打洞服务 (穷举所有层级，防 P2P 寻址失败降级)
+    - 'stun.*.*'
+    - 'stun.*.*.*'
+    - '+.stun.*.*'
+    - '+.stun.*.*.*'
+    - '+.stun.*.*.*.*'
+    - '+.stun.*.*.*.*.*'
+
+# 🎮 主机游戏底层网络 (防 NAT 类型降级)
+    - '+.srv.nintendo.net'
+    - '+.stun.playstation.net'
+    - 'xbox.*.microsoft.com'
+    - '*.*.xboxlive.com'
+
+# QUIC 阻断 (放在 DNS 块外面或最后)
+# block-quic: true
+
+# ====================
+# 入站  
+
+tun:
+  enable: true
+  # system/gvisor/mixed
+  # 1. 协议栈：Linux 软路由必须选 system 性能最好
+  stack: system
+  # 2. 设备名：Linux 下通常叫 tun0 或 mihomo，utun 是 macOS 的叫法(虽不报错但建议改)
+  device: mihomo-tun
+  # 3. 自动检测接口：强烈建议开启！解决之前的 EOF 和连接超时问题
+  auto-detect-interface: true
+  # 4. DNS 劫持：保持原样
+  dns-hijack: ["any:53", "tcp://any:53"]
+  # 5. NAT 类型：保持 true，对 P2P 和游戏至关重要
+  endpoint-independent-nat: true
+
+  # 6. 路由设置：如果是 OpenClash 插件接管，这俩通常会被插件覆盖；如果是手搓配置，建议开启
+  auto-route: true
+  auto-redirect: true  # 主要是处理一些连不上代理的流量
+  strict-route: true   # 建议开启 strict，防止流量泄漏 (虽然 false 兼容性好，但 true 更规范)
+  # 7. MTU：TUN 模式下建议设为 9000 (Jumbo Frame) 以利用 GSO/GRO 减少 CPU 中断
+  mtu: 9000
+  # 8. ⭐ 核心性能优化：开启 GSO (Generic Segmentation Offload)
+  gso: true             # 极大地降低 CPU 占用，提升吞吐量
+  gso-max-size: 65536   # GSO 数据包最大值，默认即可
+  # 9. 开启 IPSec/Udp 转发 (可选，看你有无需求)
+  # ipsec: true
+
+# ====================
+# 嗅探
+
+sniffer:
+  enable: true
+  parse-pure-ip: true
+  override-destination: true
+  sniff:
+    HTTP:
+      ports: [80, 8080-8880] # (注意)这里不再需要 "override-destination: true"，因为它会自动继承上面全局的 "true"
+    TLS:
+      ports: [443, 8443]
+  skip-domain:
+  # 本地和 mDNS (必须)
+  # - 'localhost'
+  # - '*.local'               # Apple mDNS / Bonjour
+  # 基础排除
+  - 'rule-set:private_domain' # 已经包含上面
+  - 'rule-set:pt_domain'      # 排除 PT 站 (防封号)
+  - 'rule-set:p2p_domain'     # 排除公共 Tracker
+
+  # 🍎 苹果全家桶 (大流量精准直连)
+  # App Store / iTunes 下载核心 (流量最大，必跳过)
+  - '+.mzstatic.com'
+  - '+.iosapps.itunes.apple.com'
+  - '+.osxapps.itunes.apple.com'
+  # 系统更新与固件
+  - 'mesu.apple.com'
+  - '+.swcdn.apple.com'
+  - '+.updates-http.cdn-apple.com'
+
+  # 🪟 微软全家桶 (仅限巨型系统更新与 P2P 流量)
+  - '+.windowsupdate.com'          # 核心系统更新包下载
+  - '+.delivery.mp.microsoft.com'  # 传递优化大数据块 (必须跳过，否则 CPU 暴涨)
+
+  # 迅雷
+  - '+.xunlei.com'       # 迅雷主站与核心调度
+  - '+.sandai.net'       # 迅雷三代 P2P 加速网络 (最核心)
+  - '+.xycdn.com'        # 星域 CDN (迅雷自家的 P2P 边缘计算网络)
+  - '+.thundercdn.com'   # 迅雷专属分布式下载节点
+
+  # 游戏平台下载
+  - '+.steamcontent.com'
+  - '+.assets.xboxlive.com'
+  - '+.epicgames.com'
+
+  # 🔧 全量远程工具
+  - '+.oray.com'
+  - '+.sunlogin.net'
+  - '+.todesk.com'
+  - '+.teamviewer.com'
+  - '+.anyviewer.com'
+  - '+.rustdesk.com'
+  - '+.parsec.app'
+  - '+.logmein.com'
+  - '+.blip.net'             # 🚀 跳过 Blip 的海量文件传输嗅探
+
+  # skip-src-address:        # 对于来源ip跳过嗅探
+  # - 192.168.0.3/32
+
+  # ==========================================
+  # 🚫 IP 跳过规则
+  # ==========================================
+  skip-dst-address:          # 对于目标ip跳过嗅探
+  # 1. 基础局域网
+  - '192.168.0.0/16'  # 直接跳过整个局域网网段的嗅探
+  - '10.0.0.0/8'
+  - '127.0.0.1/32'
+  - 'rule-set:private_ip🔰'
+  - 'rule-set:pt_ip🔰'         # 排除 PT 站 IP
+
+# ====================
+# 测速锚点（节点数量大，策略组极多，测速太勤快会导致乘法效应，以下已对interval时间进行上调）
+
+# ✨ 🇨🇳 国内测速模板：小米/华为 (反应快，绿)
+cn-check: &cn-check
+  url: 'https://connect.rom.miui.com/generate_204'
+  interval: 300      # 🟢 5分钟：标准设置
+  timeout: 2000      # 2秒：国内如果超2秒就是断网了
+  lazy: true         # 开启懒加载
+
+# 🌍业务层/爷爷层 (User-Facing Groups)
+# 作用：GEO国外、Apple、兜底 等手动选择组
+# 策略：必须最有耐心！因为它们要等底下的自动组跑完。
+# 建议：保持 1小时。这些组测速只是为了看颜色，手动点击节点时会触发即时测速，所以自动测速不需要快。
+global-check: &global-check
+  url: 'https://cp.cloudflare.com/generate_204'
+  interval: 3600     # ⚡️ 修改重点：改为 3600 或更久 # 🟢 1小时：安全红线，极低频，保护机场
+  timeout: 9000      # 5秒：宽容度高，甚至 6000 都可以
+  lazy: true         # 必须开，不然几十个业务组一起测速会卡死
+
+# 🚑故障转移层 (Fallback) - 只要通就行，不需要快
+# 作用：香港-故障 等
+# 策略：需要较长耐心，容忍子节点抖动。
+fault-check: &fault-check
+  url: 'https://cp.cloudflare.com/generate_204' # 必须加 URL，否则 fallback 机制可能不生效
+  # 建议：20分钟。只要当前节点没挂，就不需要高频骚扰备用节点。
+  interval: 1200     # 建议改短一点 (5分钟)，因为只测几个子项，不费流量 # 🟡 20分钟：适中
+  timeout: 4000      # ⚡️ 4秒。要比 global-check 小，比 auto-check 大/宽容
+  lazy: true         # 故障转移父组可以勤快点，如果策略组数量太多，出于防骚扰/资源平衡决定还是保持懒加载
+
+# 🚀自动切换层 (Url-Test / Smart) - 核心 这是真正需要测速的
+# 作用：所有-自动、香港-自动 等
+# 策略：必须相对灵敏！断了就要赶紧切。
+auto-check: &auto-check
+  url: 'https://cp.cloudflare.com/generate_204'
+  # 建议：10分钟。删除了“所有-自动”组后，压力减轻，可以比故障组快一点。
+  # 如果你觉得 10分钟太久，最低最低不要低于 300，建议 600。
+  # 自动选择组需要一定的灵敏度，但10分钟切一次其实也够了
+  interval: 600      # 🟠 10分钟：平衡点，既保证切换灵敏度，又保护机场账号
+  timeout: 3000      # ⚡️ 3秒。超过3秒的节点太卡，不选
+  lazy: true         # 建议开启，只有当你用这个组的时候才测速
+  tolerance: 50      # (可选) 容差。如果新节点只快了 50ms 以内，就不切换，防止乱跳 适用类型：url-test / smart / load-balance
+
+# 手动层 (底层) - 这是最没必要测速的！
+manual-check: &manual-check
+  url: 'https://cp.cloudflare.com/generate_204' # 👇 建议加上，为了仪表盘好看，也为了父组能检测它
+  # ⚡️ 修改重点：改为 3600 (1小时) 甚至 7200
+  # 你自己选的节点，你知道它是通的，不需要系统一直测。
+  # 频繁测速手动组纯属浪费机场资源，只会为了仪表盘那个绿灯好看。
+  interval: 3600     # 手动组不需要太勤快，保活即可 # 🟢 1小时：极低频
+  timeout: 5000      # 手动选择时，容忍度可以高一点
+  lazy: true         # 必须开启，不然它会把所有节点都测一遍，太吵了
+
+
+# ====================
+# 策略组定义
+
+# 🏠 国内结构：
+cn-structure: &cn-structure
+  type: select
+  proxies:
+    - ⭕️ 直连
+    - ❌ 拒绝
+  <<: *cn-check
+
+# 🌍 国外结构：
+global-structure: &global-structure
+  type: select
+  proxies:
+    # - ⚪️⚪️⚪️所有-自动
+    # - ⚪️⚪️⚪️所有-手动
+    - 🔴🔴🔴香港-故障
+    - 香港-手动
+    - 香港-☁️-自动
+    - 香港-🌀-自动
+    - 香港-💸-自动
+    - 香港-🧩-自动
+    - 🟠🟠🟠台湾-故障
+    - 台湾-手动
+    - 台湾-☁️-自动
+    - 台湾-🌀-自动
+    - 台湾-💸-自动
+    - 台湾-🧩-自动
+    - 🟡🟡🟡日本-故障
+    - 日本-手动
+    - 日本-☁️-自动
+    - 日本-🌀-自动
+    - 日本-💸-自动
+    - 日本-🧩-自动
+    - 🟢🟢🟢新加坡-故障
+    - 新加坡-手动
+    - 新加坡-☁️-自动
+    - 新加坡-🌀-自动
+    - 新加坡-💸-自动
+    - 新加坡-🧩-自动
+    - 🔵🔵🔵韩国-故障
+    - 韩国-手动
+    - 韩国-☁️-自动
+    - 韩国-💸-自动
+    - 韩国-🧩-自动
+    - 🟣🟣🟣美国-故障
+    - 美国-手动
+    - 美国-☁️-自动
+    - 美国-🌀-自动
+    - 美国-💸-自动
+    - 美国-🧩-自动
+    - ⚫️⚫️⚫️英国-故障
+    - 英国-手动
+    - 英国-☁️-自动
+    - 英国-🧩-自动
+    - 🔘🔘🔘低倍率-故障
+    - 低倍率-手动
+    - 低倍率-美国0.01-自动
+    - 低倍率-美国0.1-自动
+    - 低倍率-日本0.1-自动
+    # - 低倍率-英国0.1-自动
+    - 低倍率-☁️-手动
+    - ⭕️ 直连
+    - ❌ 拒绝
+  <<: *global-check
+
+# 🌍 CDN结构：
+cdn-structure: &cdn-structure
+  type: select
+  proxies:
+    - ⭕️ 直连
+    # - ⚪️⚪️⚪️所有-自动
+    # - ⚪️⚪️⚪️所有-手动
+    - 🔴🔴🔴香港-故障
+    - 香港-手动
+    - 香港-☁️-自动
+    - 香港-🌀-自动
+    - 香港-💸-自动
+    - 香港-🧩-自动
+    - 🟠🟠🟠台湾-故障
+    - 台湾-手动
+    - 台湾-☁️-自动
+    - 台湾-🌀-自动
+    - 台湾-💸-自动
+    - 台湾-🧩-自动
+    - 🟡🟡🟡日本-故障
+    - 日本-手动
+    - 日本-☁️-自动
+    - 日本-🌀-自动
+    - 日本-💸-自动
+    - 日本-🧩-自动
+    - 🟢🟢🟢新加坡-故障
+    - 新加坡-手动
+    - 新加坡-☁️-自动
+    - 新加坡-🌀-自动
+    - 新加坡-💸-自动
+    - 新加坡-🧩-自动
+    - 🔵🔵🔵韩国-故障
+    - 韩国-手动
+    - 韩国-☁️-自动
+    - 韩国-💸-自动
+    - 韩国-🧩-自动
+    - 🟣🟣🟣美国-故障
+    - 美国-手动
+    - 美国-☁️-自动
+    - 美国-🌀-自动
+    - 美国-💸-自动
+    - 美国-🧩-自动
+    - ⚫️⚫️⚫️英国-故障
+    - 英国-手动
+    - 英国-☁️-自动
+    - 英国-🧩-自动
+    - 🔘🔘🔘低倍率-故障
+    - 低倍率-手动
+    - 低倍率-美国0.01-自动
+    - 低倍率-美国0.1-自动
+    - 低倍率-日本0.1-自动
+    # - 低倍率-英国0.1-自动
+    - 低倍率-☁️-手动
+    - ❌ 拒绝
+  <<: *global-check
+
+
+# ====================
+proxy-groups:
+
+  # 业务分流组
+  # ==============================
+  # 1. 基础阻断与网络服务
+  # ==============================
+  - {name: 🎠 私有地址, type: select, proxies: [⭕️ 直连], <<: *cn-check}
+  - {name: 🕰️ NTP, type: select, proxies: [⭕️ 直连], <<: *cn-check}
+  - {name: 🔺 国内DNS, type: select, proxies: [⭕️ 直连], <<: *cn-check}
+  - {name: 🔸™️国外DNS, type: select, proxies: [🔴🔴🔴香港-故障], <<: *global-check}
+  - {name: ⛔️ 境外UDP阻断, type: select, proxies: [❌ 拒绝, ⭕️ 直连], <<: *cn-check}
+  - {name: ⛔️ 广告|阻断, type: select, proxies: [❌ 拒绝, ⭕️ 直连], <<: *cn-check}
+  # ==============================
+  # 2. 下载与P2P
+  # ==============================
+  - {name: 📦 PT, <<: *cn-structure}
+  - {name: 🍻 BT/P2P, <<: *cdn-structure}
+  - {name: ☀️ 自定-内, <<: *cn-structure}
+  - {name: ☄️™️自定-外, <<: *cdn-structure}
+  - {name: 🎰 Speedtest, <<: *cdn-structure}
+  - {name: 🦌 迅雷, <<: *cn-structure}
+  - {name: 🕹️ 游戏下载, <<: *cdn-structure}
+  - {name: 🎮 游戏国内, <<: *cn-structure}
+  - {name: 🎮 国际游戏中区CDN, <<: *cdn-structure}
+  # ==============================
+  # 3. 🇨🇳 国产互联网大厂 (Specific Apps)
+  # 逻辑：具体 APP 规则，必须排在下面的泛分类之前
+  # ==============================
+  - {name: 🐨™️Bilibili 海外, <<: *global-structure}
+  - {name: 🐨 Bilibili, <<: *cn-structure}
+  - {name: 📺 CCTV, <<: *cn-structure}
+  - {name: 🥭 芒果TV, <<: *cn-structure}
+  - {name: 🥝 爱奇艺, <<: *cn-structure}
+  - {name: 🦈 斗鱼, <<: *cn-structure}
+  - {name: 🎵 字节海外, <<: *global-structure}
+  - {name: 🫟 字节跳动, <<: *cn-structure}
+  - {name: 📸 快手, <<: *cn-structure}
+  - {name: 🐧™️腾讯国际, <<: *global-structure}
+  - {name: 🐧 腾讯, <<: *cn-structure}
+  - {name: 🐹 阿里巴巴, <<: *cn-structure}
+  - {name: 🐶 京东, <<: *cn-structure}
+  - {name: 🦊 拼多多, <<: *cn-structure}
+  - {name: 🦁 苏宁, <<: *cn-structure}
+  - {name: 🍟 美团, <<: *cn-structure}
+  - {name: 🐻‍❄️ 百度, <<: *cn-structure}
+  - {name: 🦀 网易, <<: *cn-structure}
+  - {name: 👁️ 新浪, <<: *cn-structure}
+  - {name: 🍥 小米, <<: *cn-structure}
+  - {name: 🦚 华为, <<: *cn-structure}
+  - {name: 🚕 滴滴, <<: *cn-structure}
+  - {name: 🐯 奇虎360, <<: *cn-structure}
+  - {name: 🏖️ 金山软件, <<: *cn-structure}
+  - {name: 📡 运营商, <<: *cn-structure}
+  - {name: 🏦 银行, <<: *cn-structure}
+  # ==============================
+  # 4. 📂 泛规则分类 (Categories)
+  # 逻辑：兜底国内未单独列出的 APP
+  # ==============================
+  - {name: 🍞 中文传媒, <<: *cn-structure}
+  - {name: 🍉 中文社媒, <<: *cn-structure}
+  - {name: 🍋 国内娱乐, <<: *cn-structure}
+  # ==============================
+  # 5. 🌍 国际规则与工具
+  # ==============================
+  - {name: 🔆™️国外AI, <<: *global-structure}
+  - {name: 🍎™️Apple智能, <<: *global-structure}
+  - {name: 🔅 国内AI, <<: *cn-structure}
+  # 游戏国际与开发
+  - {name: 🎮™️游戏国际, <<: *global-structure}
+  - {name: 🥥 中区开发者, <<: *cdn-structure}
+  - {name: 🥥 全球开发者中国CDN, <<: *cdn-structure}
+  - {name: 🥥™️Github1s, <<: *global-structure}
+  - {name: 🥥™️全球开发者, <<: *global-structure}
+  # Apple / MS / Google
+  - {name: 🍏 Apple中国CDN, <<: *cdn-structure}
+  - {name: 🍏 Apple中国, <<: *cdn-structure}
+  - {name: 🍎™️Apple, <<: *cdn-structure}
+  - {name: ☁️™️OneDrive, <<: *cdn-structure}
+  - {name: 🍍™️Bing, <<: *global-structure}
+  - {name: Ⓜ️ 微软中国, <<: *cdn-structure}
+  - {name: Ⓜ️™️微软, <<: *global-structure}
+  - {name: 🧀™️Google, <<: *global-structure}
+  # 国际社媒
+  - {name: 📮™️Telegram, <<: *global-structure}
+  - {name: 🍀™️Dcard, <<: *global-structure}
+  - {name: 🍉™️外文社媒, <<: *global-structure}
+  # 金融
+  - {name: 💶™️加密货币, <<: *global-structure}
+  - {name: 💳 贝宝, <<: *cdn-structure}
+  - {name: 💳™️PayPal, <<: *global-structure}
+  # 工具
+  - {name: 🧰™️Password, <<: *global-structure}
+  - {name: 💊™️Adguard, <<: *global-structure}
+  - {name: 🖍️™️Adobe激活, <<: *global-structure}
+  - {name: 🖍️™️Adobe, <<: *global-structure}
+  - {name: 💡™️Nvidia, <<: *cdn-structure}
+  # 最后的兜底
+  - {name: 🍞™️外文传媒, <<: *global-structure}
+  - {name: 🍋™️国外娱乐, <<: *global-structure}
+  - {name: 🔞™️NSFW, <<: *global-structure}
+  - {name: 🗼 GEO国内, <<: *cn-structure}
+  - {name: 🏰 中国1️⃣, <<: *cn-structure}
+  - {name: 🛫™️GEO国外, <<: *global-structure}
+  - {name: 🏰 中国2️⃣, <<: *cn-structure}
+  - {name: 🛟™️兜底, <<: *global-structure}
+
+
+# ====================
+  # 所有组
+
+  # - name: ⚪️⚪️⚪️所有-自动
+  #   type: smart  # 注意：如果Mihomo报错，请改为 url-test
+  #   include-all: true
+  #   policy-priority: "家宽:0.8;直连:0.5;下载:0.6;hy2:0.7"
+  #   uselightgbm: true
+  #   collectdata: true
+  #   filter: "^(?i)(?:(?!⭕️ 直连|❌ 拒绝).)*$"
+  #   <<: *auto-check
+
+  # - name: ⚪️⚪️⚪️所有-手动
+  #   type: select
+  #   include-all: true
+  #   filter: "^(?i)(?:(?!⭕️ 直连|❌ 拒绝).)*$"
+  #   <<: *manual-check
+
+
+  # 香港组
+
+  - name: 🔴🔴🔴香港-故障
+    type: fallback
+    proxies:
+      - 香港-手动
+      - 香港-☁️-自动
+      - 香港-🌀-自动
+      - 香港-💸-自动
+    <<: *fault-check
+  
+  - name: 香港-手动
+    type: select
+    include-all: true
+    filter: "^(?i)(?=.*?(?:🇭🇰|香港|(?<![a-zA-Z])(?:HK|Hong\\s*Kong)(?![a-zA-Z])))(?!.*?(?:0(?:\\.(?>\\d+))?|1\\.(?>\\d*)[1-9](?>\\d*)|(?:[2-9]|[1-9](?>[0-9]+))(?:\\.(?>\\d+))?)\\s*(?:x|倍)).*$"
+    <<: *manual-check
+
+  - name: 香港-☁️-自动
+    type: url-test
+    use:
+      - ➊-ahQ
+    filter: "^(?i)(?=.*?(?:🇭🇰|香港|(?<![a-zA-Z])(?:HK|Hong\\s*Kong)(?![a-zA-Z])))(?!.*?(?:0(?:\\.(?>\\d+))?|1\\.(?>\\d*)[1-9](?>\\d*)|(?:[2-9]|[1-9](?>[0-9]+))(?:\\.(?>\\d+))?)\\s*(?:x|倍)).*$"
+    <<: *auto-check
+
+  - name: 香港-🌀-自动
+    type: url-test
+    use:
+      - ➋-alpha
+    filter: "^(?i)(?=.*?(?:🇭🇰|香港|(?<![a-zA-Z])(?:HK|Hong\\s*Kong)(?![a-zA-Z])))(?!.*?(?:0(?:\\.(?>\\d+))?|1\\.(?>\\d*)[1-9](?>\\d*)|(?:[2-9]|[1-9](?>[0-9]+))(?:\\.(?>\\d+))?)\\s*(?:x|倍)).*$"
+    <<: *auto-check
+
+  - name: 香港-💸-自动
+    type: url-test
+    use:
+      - ➌-peiqian
+    filter: "^(?i)(?=.*?(?:🇭🇰|香港|(?<![a-zA-Z])(?:HK|Hong\\s*Kong)(?![a-zA-Z])))(?!.*?(?:0(?:\\.(?>\\d+))?|1\\.(?>\\d*)[1-9](?>\\d*)|(?:[2-9]|[1-9](?>[0-9]+))(?:\\.(?>\\d+))?)\\s*(?:x|倍)).*$"
+    <<: *auto-check
+
+  - name: 香港-🧩-自动
+    type: url-test
+    use:
+      - ➍-GG
+    filter: "^(?i)(?=.*?(?:🇭🇰|香港|(?<![a-zA-Z])(?:HK|Hong\\s*Kong)(?![a-zA-Z])))(?!.*?(?:0(?:\\.(?>\\d+))?|1\\.(?>\\d*)[1-9](?>\\d*)|(?:[2-9]|[1-9](?>[0-9]+))(?:\\.(?>\\d+))?)\\s*(?:x|倍)).*$"
+    <<: *auto-check
+
+  # 台湾组
+
+  - name: 🟠🟠🟠台湾-故障
+    type: fallback
+    proxies:
+      - 台湾-手动
+      - 台湾-☁️-自动
+      - 台湾-🌀-自动
+      - 台湾-💸-自动
+    <<: *fault-check
+  
+  - name: 台湾-手动
+    type: select
+    include-all: true
+    filter: "^(?i)(?=.*?(?:🇹🇼|🇨🇳|台[湾灣]|(?<![a-zA-Z])(?:TW|Taiwan|Taipei)(?![a-zA-Z])))(?!.*?(?:0(?:\\.(?>\\d+))?|1\\.(?>\\d*)[1-9](?>\\d*)|(?:[2-9]|[1-9](?>[0-9]+))(?:\\.(?>\\d+))?)\\s*(?:x|倍)).*$"
+    <<: *manual-check
+
+  - name: 台湾-☁️-自动
+    type: url-test
+    use:
+      - ➊-ahQ
+    filter: "^(?i)(?=.*?(?:🇹🇼|🇨🇳|台[湾灣]|(?<![a-zA-Z])(?:TW|Taiwan|Taipei)(?![a-zA-Z])))(?!.*?(?:0(?:\\.(?>\\d+))?|1\\.(?>\\d*)[1-9](?>\\d*)|(?:[2-9]|[1-9](?>[0-9]+))(?:\\.(?>\\d+))?)\\s*(?:x|倍)).*$"
+    <<: *auto-check
+
+  - name: 台湾-🌀-自动
+    type: url-test
+    use:
+      - ➋-alpha
+    filter: "^(?i)(?=.*?(?:🇹🇼|🇨🇳|台[湾灣]|(?<![a-zA-Z])(?:TW|Taiwan|Taipei)(?![a-zA-Z])))(?!.*?(?:0(?:\\.(?>\\d+))?|1\\.(?>\\d*)[1-9](?>\\d*)|(?:[2-9]|[1-9](?>[0-9]+))(?:\\.(?>\\d+))?)\\s*(?:x|倍)).*$"
+    <<: *auto-check
+
+  - name: 台湾-💸-自动
+    type: url-test
+    use:
+      - ➌-peiqian
+    filter: "^(?i)(?=.*?(?:🇹🇼|🇨🇳|台[湾灣]|(?<![a-zA-Z])(?:TW|Taiwan|Taipei)(?![a-zA-Z])))(?!.*?(?:0(?:\\.(?>\\d+))?|1\\.(?>\\d*)[1-9](?>\\d*)|(?:[2-9]|[1-9](?>[0-9]+))(?:\\.(?>\\d+))?)\\s*(?:x|倍)).*$"
+    <<: *auto-check
+
+  - name: 台湾-🧩-自动
+    type: url-test
+    use:
+      - ➍-GG
+    filter: "^(?i)(?=.*?(?:🇹🇼|🇨🇳|台[湾灣]|(?<![a-zA-Z])(?:TW|Taiwan|Taipei)(?![a-zA-Z])))(?!.*?(?:0(?:\\.(?>\\d+))?|1\\.(?>\\d*)[1-9](?>\\d*)|(?:[2-9]|[1-9](?>[0-9]+))(?:\\.(?>\\d+))?)\\s*(?:x|倍)).*$"
+    <<: *auto-check
+
+
+  # 日本组
+
+  - name: 🟡🟡🟡日本-故障
+    type: fallback
+    proxies:
+      - 日本-手动
+      - 日本-☁️-自动
+      - 日本-🌀-自动
+      - 日本-💸-自动
+      - 低倍率-日本0.1-自动
+    <<: *fault-check
+  
+  - name: 日本-手动
+    type: select
+    include-all: true
+    filter: "^(?i)(?=.*?(?:🇯🇵|日本|东京|广日|川日|大阪|泉日|埼玉|沪日|深日|(?<![a-zA-Z])(?:JP|Japan|Tokyo)(?![a-zA-Z])))(?!.*?(?:0(?:\\.(?>\\d+))?|1\\.(?>\\d*)[1-9](?>\\d*)|(?:[2-9]|[1-9](?>[0-9]+))(?:\\.(?>\\d+))?)\\s*(?:x|倍)).*$"
+    <<: *manual-check
+
+  - name: 日本-☁️-自动
+    type: url-test
+    use:
+      - ➊-ahQ
+    filter: "^(?i)(?=.*?(?:🇯🇵|日本|东京|广日|川日|大阪|泉日|埼玉|沪日|深日|(?<![a-zA-Z])(?:JP|Japan|Tokyo)(?![a-zA-Z])))(?!.*?(?:0(?:\\.(?>\\d+))?|1\\.(?>\\d*)[1-9](?>\\d*)|(?:[2-9]|[1-9](?>[0-9]+))(?:\\.(?>\\d+))?)\\s*(?:x|倍)).*$"
+    <<: *auto-check
+
+  - name: 日本-🌀-自动
+    type: url-test
+    use:
+      - ➋-alpha
+    filter: "^(?i)(?=.*?(?:🇯🇵|日本|东京|广日|川日|大阪|泉日|埼玉|沪日|深日|(?<![a-zA-Z])(?:JP|Japan|Tokyo)(?![a-zA-Z])))(?!.*?(?:0(?:\\.(?>\\d+))?|1\\.(?>\\d*)[1-9](?>\\d*)|(?:[2-9]|[1-9](?>[0-9]+))(?:\\.(?>\\d+))?)\\s*(?:x|倍)).*$"
+    <<: *auto-check
+
+  - name: 日本-💸-自动
+    type: url-test
+    use:
+      - ➌-peiqian
+    filter: "^(?i)(?=.*?(?:🇯🇵|日本|东京|广日|川日|大阪|泉日|埼玉|沪日|深日|(?<![a-zA-Z])(?:JP|Japan|Tokyo)(?![a-zA-Z])))(?!.*?(?:0(?:\\.(?>\\d+))?|1\\.(?>\\d*)[1-9](?>\\d*)|(?:[2-9]|[1-9](?>[0-9]+))(?:\\.(?>\\d+))?)\\s*(?:x|倍)).*$"
+    <<: *auto-check
+
+  - name: 日本-🧩-自动
+    type: url-test
+    use:
+      - ➍-GG
+    filter: "^(?i)(?=.*?(?:🇯🇵|日本|东京|广日|川日|大阪|泉日|埼玉|沪日|深日|(?<![a-zA-Z])(?:JP|Japan|Tokyo)(?![a-zA-Z])))(?!.*?(?:0(?:\\.(?>\\d+))?|1\\.(?>\\d*)[1-9](?>\\d*)|(?:[2-9]|[1-9](?>[0-9]+))(?:\\.(?>\\d+))?)\\s*(?:x|倍)).*$"
+    <<: *auto-check
+
+  # 新加坡组
+
+  - name: 🟢🟢🟢新加坡-故障
+    type: fallback
+    proxies:
+      - 新加坡-手动
+      - 新加坡-☁️-自动
+      - 新加坡-🌀-自动
+      - 新加坡-💸-自动
+    <<: *fault-check
+  
+  - name: 新加坡-手动
+    type: select
+    include-all: true
+    filter: "^(?i)(?=.*?(?:🇸🇬|新加坡|[狮獅]城|(?<![a-zA-Z])(?:SG|Singapore)(?![a-zA-Z])))(?!.*?(?:0(?:\\.(?>\\d+))?|1\\.(?>\\d*)[1-9](?>\\d*)|(?:[2-9]|[1-9](?>[0-9]+))(?:\\.(?>\\d+))?)\\s*(?:x|倍)).*$"
+    <<: *manual-check
+
+  - name: 新加坡-☁️-自动
+    type: url-test
+    use:
+      - ➊-ahQ
+    filter: "^(?i)(?=.*?(?:🇸🇬|新加坡|[狮獅]城|(?<![a-zA-Z])(?:SG|Singapore)(?![a-zA-Z])))(?!.*?(?:0(?:\\.(?>\\d+))?|1\\.(?>\\d*)[1-9](?>\\d*)|(?:[2-9]|[1-9](?>[0-9]+))(?:\\.(?>\\d+))?)\\s*(?:x|倍)).*$"
+    <<: *auto-check
+
+  - name: 新加坡-🌀-自动
+    type: url-test
+    use:
+      - ➋-alpha
+    filter: "^(?i)(?=.*?(?:🇸🇬|新加坡|[狮獅]城|(?<![a-zA-Z])(?:SG|Singapore)(?![a-zA-Z])))(?!.*?(?:0(?:\\.(?>\\d+))?|1\\.(?>\\d*)[1-9](?>\\d*)|(?:[2-9]|[1-9](?>[0-9]+))(?:\\.(?>\\d+))?)\\s*(?:x|倍)).*$"
+    <<: *auto-check
+
+  - name: 新加坡-💸-自动
+    type: url-test
+    use:
+      - ➌-peiqian
+    filter: "^(?i)(?=.*?(?:🇸🇬|新加坡|[狮獅]城|(?<![a-zA-Z])(?:SG|Singapore)(?![a-zA-Z])))(?!.*?(?:0(?:\\.(?>\\d+))?|1\\.(?>\\d*)[1-9](?>\\d*)|(?:[2-9]|[1-9](?>[0-9]+))(?:\\.(?>\\d+))?)\\s*(?:x|倍)).*$"
+    <<: *auto-check
+
+  - name: 新加坡-🧩-自动
+    type: url-test
+    use:
+      - ➍-GG
+    filter: "^(?i)(?=.*?(?:🇸🇬|新加坡|[狮獅]城|(?<![a-zA-Z])(?:SG|Singapore)(?![a-zA-Z])))(?!.*?(?:0(?:\\.(?>\\d+))?|1\\.(?>\\d*)[1-9](?>\\d*)|(?:[2-9]|[1-9](?>[0-9]+))(?:\\.(?>\\d+))?)\\s*(?:x|倍)).*$"
+    <<: *auto-check
+
+  # 韩国组
+
+  - name: 🔵🔵🔵韩国-故障
+    type: fallback
+    proxies:
+      - 韩国-手动
+      - 韩国-☁️-自动
+      - 韩国-💸-自动
+    <<: *fault-check
+  
+  - name: 韩国-手动
+    type: select
+    include-all: true
+    filter: "^(?i)(?=.*?(?:🇰🇷|[韩韓]国|首尔|春川|广韩|(?<![a-zA-Z])(?:KR|Korea|South\\s*Korea)(?![a-zA-Z])))(?!.*?(?:0(?:\\.(?>\\d+))?|1\\.(?>\\d*)[1-9](?>\\d*)|(?:[2-9]|[1-9](?>[0-9]+))(?:\\.(?>\\d+))?)\\s*(?:x|倍)).*$"
+    <<: *manual-check
+
+  - name: 韩国-☁️-自动
+    type: url-test
+    use:
+      - ➊-ahQ
+    filter: "^(?i)(?=.*?(?:🇰🇷|[韩韓]国|首尔|春川|广韩|(?<![a-zA-Z])(?:KR|Korea|South\\s*Korea)(?![a-zA-Z])))(?!.*?(?:0(?:\\.(?>\\d+))?|1\\.(?>\\d*)[1-9](?>\\d*)|(?:[2-9]|[1-9](?>[0-9]+))(?:\\.(?>\\d+))?)\\s*(?:x|倍)).*$"
+    <<: *auto-check
+
+  - name: 韩国-💸-自动
+    type: url-test
+    use:
+      - ➌-peiqian
+    filter: "^(?i)(?=.*?(?:🇰🇷|[韩韓]国|首尔|春川|广韩|(?<![a-zA-Z])(?:KR|Korea|South\\s*Korea)(?![a-zA-Z])))(?!.*?(?:0(?:\\.(?>\\d+))?|1\\.(?>\\d*)[1-9](?>\\d*)|(?:[2-9]|[1-9](?>[0-9]+))(?:\\.(?>\\d+))?)\\s*(?:x|倍)).*$"
+    <<: *auto-check
+
+  - name: 韩国-🧩-自动
+    type: url-test
+    use:
+      - ➍-GG
+    filter: "^(?i)(?=.*?(?:🇰🇷|[韩韓]国|首尔|春川|广韩|(?<![a-zA-Z])(?:KR|Korea|South\\s*Korea)(?![a-zA-Z])))(?!.*?(?:0(?:\\.(?>\\d+))?|1\\.(?>\\d*)[1-9](?>\\d*)|(?:[2-9]|[1-9](?>[0-9]+))(?:\\.(?>\\d+))?)\\s*(?:x|倍)).*$"
+    <<: *auto-check
+
+  # 美国组
+
+  - name: 🟣🟣🟣美国-故障
+    type: fallback
+    proxies:
+      - 美国-手动
+      - 美国-☁️-自动
+      - 美国-🌀-自动
+      - 美国-💸-自动
+      - 低倍率-美国0.1-自动
+      - 低倍率-美国0.01-自动
+    <<: *fault-check
+
+  - name: 美国-手动
+    type: select
+    include-all: true
+    filter: "^(?i)(?=.*?(?:🇺🇸|美国|广美|纽约|波特兰|达拉斯|俄勒|凤凰城|费利蒙|洛杉|圣何塞|圣克拉|西雅|芝加|(?<![a-zA-Z])(?:US|USA|States|America|United\\s*States|Dallas|Houston)(?![a-zA-Z])))(?!.*?(?:0(?:\\.(?>\\d+))?|1\\.(?>\\d*)[1-9](?>\\d*)|(?:[2-9]|[1-9](?>[0-9]+))(?:\\.(?>\\d+))?)\\s*(?:x|倍)).*$"
+    <<: *manual-check
+
+  - name: 美国-☁️-自动
+    type: url-test
+    use:
+      - ➊-ahQ
+    filter: "^(?i)(?=.*?(?:🇺🇸|美国|广美|纽约|波特兰|达拉斯|俄勒|凤凰城|费利蒙|洛杉|圣何塞|圣克拉|西雅|芝加|(?<![a-zA-Z])(?:US|USA|States|America|United\\s*States|Dallas|Houston)(?![a-zA-Z])))(?!.*?(?:0(?:\\.(?>\\d+))?|1\\.(?>\\d*)[1-9](?>\\d*)|(?:[2-9]|[1-9](?>[0-9]+))(?:\\.(?>\\d+))?)\\s*(?:x|倍)).*$"
+    <<: *auto-check
+
+  - name: 美国-🌀-自动
+    type: url-test
+    use:
+      - ➋-alpha
+    filter: "^(?i)(?=.*?(?:🇺🇸|美国|广美|纽约|波特兰|达拉斯|俄勒|凤凰城|费利蒙|洛杉|圣何塞|圣克拉|西雅|芝加|(?<![a-zA-Z])(?:US|USA|States|America|United\\s*States|Dallas|Houston)(?![a-zA-Z])))(?!.*?(?:0(?:\\.(?>\\d+))?|1\\.(?>\\d*)[1-9](?>\\d*)|(?:[2-9]|[1-9](?>[0-9]+))(?:\\.(?>\\d+))?)\\s*(?:x|倍)).*$"
+    <<: *auto-check
+
+  - name: 美国-💸-自动
+    type: url-test
+    use:
+      - ➌-peiqian
+    filter: "^(?i)(?=.*?(?:🇺🇸|美国|广美|纽约|波特兰|达拉斯|俄勒|凤凰城|费利蒙|洛杉|圣何塞|圣克拉|西雅|芝加|(?<![a-zA-Z])(?:US|USA|States|America|United\\s*States|Dallas|Houston)(?![a-zA-Z])))(?!.*?(?:0(?:\\.(?>\\d+))?|1\\.(?>\\d*)[1-9](?>\\d*)|(?:[2-9]|[1-9](?>[0-9]+))(?:\\.(?>\\d+))?)\\s*(?:x|倍)).*$"
+    <<: *auto-check
+
+  - name: 美国-🧩-自动
+    type: url-test
+    use:
+      - ➍-GG
+    filter: "^(?i)(?=.*?(?:🇺🇸|美国|广美|纽约|波特兰|达拉斯|俄勒|凤凰城|费利蒙|洛杉|圣何塞|圣克拉|西雅|芝加|(?<![a-zA-Z])(?:US|USA|States|America|United\\s*States|Dallas|Houston)(?![a-zA-Z])))(?!.*?(?:0(?:\\.(?>\\d+))?|1\\.(?>\\d*)[1-9](?>\\d*)|(?:[2-9]|[1-9](?>[0-9]+))(?:\\.(?>\\d+))?)\\s*(?:x|倍)).*$"
+    <<: *auto-check
+
+  # 英国组
+
+  - name: ⚫️⚫️⚫️英国-故障
+    type: fallback
+    proxies:
+      - 英国-手动
+      - 英国-☁️-自动
+#      - 英国-💸-自动
+      # - 低倍率-英国0.1-自动
+    <<: *fault-check
+  
+  - name: 英国-手动
+    type: select
+    include-all: true
+    filter: "^(?i)(?=.*?(?:🇬🇧|英国|伦敦|(?<![a-zA-Z])(?:UK|United\\s*Kingdom|London)(?![a-zA-Z])))(?!.*?(?:0(?:\\.(?>\\d+))?|1\\.(?>\\d*)[1-9](?>\\d*)|(?:[2-9]|[1-9](?>[0-9]+))(?:\\.(?>\\d+))?)\\s*(?:x|倍)).*$"
+    <<: *manual-check
+
+  - name: 英国-☁️-自动
+    type: url-test
+    use:
+      - ➊-ahQ
+    filter: "^(?i)(?=.*?(?:🇬🇧|英国|伦敦|(?<![a-zA-Z])(?:UK|United\\s*Kingdom|London)(?![a-zA-Z])))(?!.*?(?:0(?:\\.(?>\\d+))?|1\\.(?>\\d*)[1-9](?>\\d*)|(?:[2-9]|[1-9](?>[0-9]+))(?:\\.(?>\\d+))?)\\s*(?:x|倍)).*$"
+    <<: *auto-check
+
+  - name: 英国-🧩-自动
+    type: url-test
+    use:
+      - ➍-GG
+    filter: "^(?i)(?=.*?(?:🇬🇧|英国|伦敦|(?<![a-zA-Z])(?:UK|United\\s*Kingdom|London)(?![a-zA-Z])))(?!.*?(?:0(?:\\.(?>\\d+))?|1\\.(?>\\d*)[1-9](?>\\d*)|(?:[2-9]|[1-9](?>[0-9]+))(?:\\.(?>\\d+))?)\\s*(?:x|倍)).*$"
+    <<: *auto-check
+
+#  - name: 英国-💸-自动
+#    type: url-test
+#    use:
+#      - ➌-peiqian
+#    policy-priority: "hy2:0.8"
+#    uselightgbm: true
+#    collectdata: true
+#    filter: "^(?i)(?=.*?(?:🇬🇧|英国|伦敦|(?<![a-zA-Z])(?:UK|United\\s*Kingdom|London)(?![a-zA-Z])))(?!.*?(?:0(?:\\.(?>\\d+))?|1\\.(?>\\d*)[1-9](?>\\d*)|(?:[2-9]|[1-9](?>[0-9]+))(?:\\.(?>\\d+))?)\\s*(?:x|倍)).*$"
+#    <<: *auto-check
+
+
+  # 其他组
+  
+  - name: 🔘🔘🔘低倍率-故障
+    type: fallback
+    proxies:
+      - 低倍率-手动
+      - 低倍率-美国0.01-自动
+      - 低倍率-美国0.1-自动
+      - 低倍率-日本0.1-自动
+      # - 低倍率-英国0.1-自动
+      - 低倍率-☁️-手动
+    <<: *fault-check
+
+  - name: 低倍率-手动
+    type: select
+    include-all: true
+    filter: "^(?i)(?=.*?(?:0(?:\\.(?>\\d+))?)\\s*(?:x|倍)).*$"
+    <<: *manual-check
+
+  - name: 低倍率-美国0.01-自动
+    type: url-test
+    use:
+      - ➌-peiqian
+    filter: "^(?i)(?=.*?(?:🇺🇸|美国|广美|纽约|波特兰|达拉斯|俄勒|凤凰城|费利蒙|洛杉|圣何塞|圣克拉|西雅|芝加|(?<![a-zA-Z])(?:US|USA|States|America|United\\s*States|Dallas|Houston)(?![a-zA-Z])))(?=.*?(?:(?<![\\d\\.])0\\.01(?>0*))\\s*(?:x|倍)).*$"
+    <<: *auto-check
+
+  - name: 低倍率-美国0.1-自动
+    type: url-test
+    use:
+      - ➌-peiqian
+    filter: "^(?i)(?=.*?(?:🇺🇸|美国|广美|纽约|波特兰|达拉斯|俄勒|凤凰城|费利蒙|洛杉|圣何塞|圣克拉|西雅|芝加|(?<![a-zA-Z])(?:US|USA|States|America|United\\s*States|Dallas|Houston)(?![a-zA-Z])))(?=.*?(?:(?<![\\d\\.])0\\.1(?>0*))\\s*(?:x|倍)).*$"
+    <<: *auto-check
+
+  - name: 低倍率-日本0.1-自动
+    type: url-test
+    use:
+      - ➌-peiqian
+    filter: "^(?i)(?=.*?(?:🇯🇵|日本|东京|广日|川日|大阪|泉日|埼玉|沪日|深日|(?<![a-zA-Z])(?:JP|Japan|Tokyo)(?![a-zA-Z])))(?=.*?(?:(?<![\\d\\.])0\\.1(?>0*))\\s*(?:x|倍)).*$"
+    <<: *auto-check
+
+  # - name: 低倍率-英国0.1-自动
+  #   type: url-test
+  #   use:
+  #     - ➌-peiqian
+  #   policy-priority: "hy2:0.8"
+  #   uselightgbm: true
+  #   collectdata: true
+  #   filter: "^(?i)(?=.*?(?:🇬🇧|英国|伦敦|(?<![a-zA-Z])(?:UK|United\\s*Kingdom|London)(?![a-zA-Z])))(?=.*?(?:(?<![\\d\\.])0\\.1(?>0*))\\s*(?:x|倍)).*$"
+  #   <<: *auto-check
+
+  - name: 低倍率-☁️-手动
+    type: select
+    use:
+      - ➊-ahQ
+    filter: "^(?i)(?=.*?(?:0(?:\\.(?>\\d+))?)\\s*(?:x|倍)).*$"
+    <<: *manual-check
+
+# ====================
+# 规则匹配
+
+rules:
+  # ==============================
+  # 1. 基础阻断与网络服务
+  # ==============================
+  - RULE-SET,private_domain,🎠 私有地址
+  - RULE-SET,private_ip🔰,🎠 私有地址,no-resolve
+  - RULE-SET,ntp_domain,🕰️ NTP
+  - DST-PORT,123,🕰️ NTP  # 简单粗暴，所有时间同步全部直连
+  # ==============================
+  # 1.5. DNS 分流 (防止握手失败/绕路)
+  # ==============================
+  # 国内 DNS -> 必须直连 (防止 CDN 跑偏)
+  - RULE-SET,cn_dns_domain,🔺 国内DNS
+  - RULE-SET,cn_dns_ip🔰,🔺 国内DNS,no-resolve
+  # 国外 DNS -> 必须代理 (防止被墙/DNS污染)
+  - RULE-SET,global_dns_domain,🔸™️国外DNS
+  - RULE-SET,global_dns_ip🔰,🔸™️国外DNS,no-resolve
+  # 协议执法：强制降级
+  # 理由：先封死 UDP 443，逼浏览器退回到 TCP，后续的域名嗅探和拦截才 100% 有效。
+  # - AND,((NETWORK,UDP),(DST-PORT,443)),⛔️ 广告|阻断
+
+  # 🔴 终极 UDP 装甲 (德·摩根定律版)：拦截非国内、非白名单大厂的海外 QUIC 和 WebRTC 流量
+  # 逻辑：如果是 UDP，且端口是 443/3478，且【不属于 (国内IP 或 国内域名 或 白名单)】，则阻断！
+  # 1. 过滤流氓协议：仅瞄准 UDP 443(QUIC) 和 3478(STUN)。
+  # 2. 短路求值：TCP 流量在一纳秒内直接跳过，0 CPU 损耗。
+  # 3. 德·摩根豁免：只要命中国内 IP、国内域名或特定白名单，瞬间放行。
+  # 4. no-resolve 圣旨：强制纯本地匹配，绝对不触发上游 DNS 解析，防污染且延迟极低。
+  - AND,((NETWORK,UDP),(OR,((DST-PORT,443),(DST-PORT,3478))),(NOT,((OR,((RULE-SET,cn_ip🔰,no-resolve),(RULE-SET,cn_domain),(RULE-SET,quic_whitelist)))))),⛔️ 境外UDP阻断
+  - RULE-SET,block_domain,⛔️ 广告|阻断
+  # ==============================
+  # 2. 下载与P2P
+  # ==============================
+  - DST-PORT,7680,Ⓜ️ 微软中国        # Windows P2P
+  - RULE-SET,pt_domain,📦 PT
+  - RULE-SET,pt_ip🔰,📦 PT,no-resolve
+  - RULE-SET,p2p_domain,🍻 BT/P2P
+  - DST-PORT,6881-6889,🍻 BT/P2P    # 保留这个：BT 默认端口防漏
+  - RULE-SET,inner_custom,☀️ 自定-内
+  - RULE-SET,outer_custom,☄️™️自定-外
+  - RULE-SET,speedtest_domain,🎰 Speedtest
+  - RULE-SET,xunlei_domain,🦌 迅雷
+  - RULE-SET,gamedownload_domain,🕹️ 游戏下载
+  - RULE-SET,games-cn_domain,🎮 游戏国内
+  - RULE-SET,games@cn_domain,🎮 国际游戏中区CDN
+  # ==============================
+  # 3. 🇨🇳 国产互联网大厂 (Specific Apps)
+  # 逻辑：具体 APP 规则，必须排在下面的泛分类之前
+  # ==============================
+  - RULE-SET,bilibiligat_domain,🐨™️Bilibili 海外
+  - RULE-SET,bilibili_domain,🐨 Bilibili
+  # 视频巨头 (直播流媒体，优先级极高)
+  - RULE-SET,cctv_domain,📺 CCTV
+  - RULE-SET,mgtv_domain,🥭 芒果TV
+  - RULE-SET,iqiyi_domain,🥝 爱奇艺
+  #直播高并发
+  - RULE-SET,douyu_domain,🦈 斗鱼
+  # 短视频
+  - RULE-SET,bytedance@!cn_domain,🎵 字节海外
+  - RULE-SET,bytedance_domain,🫟 字节跳动
+  - RULE-SET,kuaishou_domain,📸 快手
+  # 腾讯系
+  - RULE-SET,tencent@!cn_domain,🐧™️腾讯国际
+  - RULE-SET,tencent_domain,🐧 腾讯
+  # 电商系
+  - RULE-SET,alibaba_domain,🐹 阿里巴巴
+  - RULE-SET,jd_domain,🐶 京东
+  - RULE-SET,pinduoduo_domain,🦊 拼多多
+  - RULE-SET,suning_domain,🦁 苏宁
+  # 生活与搜索
+  - RULE-SET,meituan_domain,🍟 美团
+  - RULE-SET,baidu_domain,🐻‍❄️ 百度
+  # 内容与媒体
+  - RULE-SET,netease_domain,🦀 网易
+  - RULE-SET,sina_domain,👁️ 新浪
+  # 硬件与软件厂商
+  - RULE-SET,xiaomi_domain,🍥 小米
+  - RULE-SET,huawei_domain,🦚 华为
+  - RULE-SET,didi_domain,🚕 滴滴
+  - RULE-SET,qihoo360_domain,🐯 奇虎360
+  - RULE-SET,kingsoft_domain,🏖️ 金山软件
+  # 运营商与银行
+  - RULE-SET,chinamobile_domain,📡 运营商
+  - RULE-SET,chinatelecom_domain,📡 运营商
+  - RULE-SET,chinaunicom_domain,📡 运营商
+  - RULE-SET,chinabroadnet_domain,📡 运营商
+  - RULE-SET,icbc_domain,🏦 银行
+  - RULE-SET,boc_domain,🏦 银行
+  - RULE-SET,ccb_domain,🏦 银行
+  - RULE-SET,cmb_domain,🏦 银行
+  - RULE-SET,pingan_domain,🏦 银行
+  - RULE-SET,citic_domain,🏦 银行
+  - RULE-SET,bank-cn_domain,🏦 银行
+
+  # ==============================
+  # 4. 📂 泛规则分类 (Categories)
+  # 逻辑：兜底国内未单独列出的 APP
+  # ==============================
+  - RULE-SET,media-cn_domain,🍞 中文传媒
+  - RULE-SET,socialmedia-cn_domain,🍉 中文社媒
+  - RULE-SET,entertainment-cn_domain,🍋 国内娱乐
+  # ==============================
+  # 5. 🌍 国际规则与工具
+  # ==============================
+  - RULE-SET,ai!cn_domain,🔆™️国外AI
+  - RULE-SET,apple-intelligence_domain,🍎™️Apple智能
+  - RULE-SET,aicn_domain,🔅 国内AI
+  # 游戏国际与开发
+  - RULE-SET,games-!cn_domain,🎮™️游戏国际
+  - RULE-SET,dev-cn_domain,🥥 中区开发者
+  - RULE-SET,dev@cn_domain,🥥 全球开发者中国CDN
+  - RULE-SET,github1s_domain,🥥™️Github1s
+  - RULE-SET,dev_domain,🥥™️全球开发者
+  # Apple / MS / Google
+  - RULE-SET,apple-cn_domain,🍏 Apple中国CDN
+  - RULE-SET,apple@cn_domain,🍏 Apple中国
+  - RULE-SET,apple_domain,🍎™️Apple
+  - RULE-SET,apple_ip🔰,🍎™️Apple,no-resolve
+  - RULE-SET,onedrive_domain,☁️™️OneDrive
+  - RULE-SET,bing_domain,🍍™️Bing
+  - RULE-SET,microsoft@cn_domain,Ⓜ️ 微软中国
+  - RULE-SET,microsoft_domain,Ⓜ️™️微软
+  - RULE-SET,google_domain,🧀™️Google
+  - RULE-SET,google_ip🔰,🧀™️Google,no-resolve
+  # 国际社媒
+  - RULE-SET,telegram_domain,📮™️Telegram
+  - RULE-SET,telegram_ip🔰,📮™️Telegram,no-resolve
+  - RULE-SET,twitter_ip🔰,🍉™️外文社媒,no-resolve
+  - RULE-SET,dcard_domain,🍀™️Dcard
+  - RULE-SET,socialmedia-!cn_domain,🍉™️外文社媒
+  # 金融
+  - RULE-SET,bitget_domain,💶™️加密货币
+  - RULE-SET,crypto_domain,💶™️加密货币
+  - RULE-SET,paypal@cn_domain,💳 贝宝
+  - RULE-SET,paypal_domain,💳™️PayPal
+  # 工具
+  - RULE-SET,password_domain,🧰™️Password
+  - RULE-SET,adguard_domain,💊™️Adguard
+  - RULE-SET,adobe-activation_domain,🖍️™️Adobe激活
+  - RULE-SET,adobe_domain,🖍️™️Adobe
+  - RULE-SET,nvidia_domain,💡™️Nvidia
+  # 最后的兜底
+  - RULE-SET,media_domain,🍞™️外文传媒
+  - RULE-SET,entertainment_domain,🍋™️国外娱乐
+  - RULE-SET,porn_domain,🔞™️NSFW
+  - RULE-SET,geo-cn_domain,🗼 GEO国内
+  - RULE-SET,cn_domain,🏰 中国1️⃣
+  - RULE-SET,geo-!cn_domain,🛫™️GEO国外
+  - RULE-SET,cn_ip🔰,🏰 中国2️⃣,no-resolve
+  - MATCH,🛟™️兜底
+
+# ====================
+# 规则集
+# type：可选http/file/inline  behavior：可选domain/ipcidr/classical format：可选yaml/text/mrs
+
+rule-anchor:
+  mdomain: &mdomain {type: http, interval: 86400, behavior: domain, format: mrs}
+  mip: &mip {type: http, interval: 86400, behavior: ipcidr, format: mrs}
+  ydomain: &ydomain {type: http, interval: 86400, behavior: domain, format: yaml}
+  yip: &yip {type: http, interval: 86400, behavior: ipcidr, format: yaml}
+  tedomain: &tedomain {type: http, interval: 86400, behavior: domain, format: text}
+  teip: &teip {type: http, interval: 86400, behavior: ipcidr, format: text}
+  classicay: &classicay {type: http, interval: 86400, behavior: classical, format: yaml}
+  classicat: &classicat {type: http, interval: 86400, behavior: classical, format: text}
+
+
+rule-providers:
+  # ========================================================
+  # 🔴 1. 基础阻断与网络服务
+  # ========================================================
+  # 局域网与私有地址 (防止断网)
+  private_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/private_domain.list"}
+  private_ip🔰: { <<: *teip, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/IP/private_ip.list"}
+  ntp_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/ntp_domain.list"}
+  # 国内 DNS -> 必须直连 (防止 CDN 跑偏)
+  cn_dns_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/cn_dns_domain.list", pre-resolve: true}
+  cn_dns_ip🔰: { <<: *teip, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/IP/cn_dns_ip.list"}
+  # 国外 DNS -> 必须代理 (防止被墙/DNS污染)
+  global_dns_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/global_dns_domain.list"}
+  global_dns_ip🔰: { <<: *teip, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/IP/global_dns_ip.list"}
+  # 广告拦截 (一票否决)
+  block_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/block_domain.list"}  
+
+  # ========================================================
+  # 🟣 2. 下载与P2P
+  # ========================================================
+  # 私有 Tracker (PT站) 列表,包含了馒头(M-Team)、HDSky、CHDBits、TTG 等所有国内外 PT 站点的官网域名和Tracker 域名
+  # 作用：访问 PT 站网页（刷流、看种子）,向 PT 服务器汇报上传/下载量。
+  # 重要性：极高。PT 站对 IP 极其敏感。如果您一会儿用家中宽带 IP 访问，一会儿不小心走了代理变成香港 IP，您的 PT 账号会被封禁（判定为共享账号）。
+  # 绝对必须直连 (DIRECT)，且建议加入 Fake-IP 白名单
+  pt_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/pt_domain.list"}
+  # PT 站服务器 IP 地址库
+  # category-pt.list 域名解析出来的 真实 IP 地址
+  pt_ip🔰: { <<: *teip, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/IP/pt_ip.list"}
+  # 公共 Tracker 分类列表，包含了互联网上各种常见的 BitTorrent Tracker 域名
+  # 作用：BT 下载（迅雷、比特彗星等）依靠这些域名来寻找“谁在做种”
+  # 必须直连。如果走代理，会被机场判定为 BT 滥用并封号
+  p2p_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/p2p_domain.list"}
+
+  # 1. 自定义直连 (Inner)
+  inner_custom: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/inner_custom.list"}
+  # 2. 自定义代理 (Outer)
+  outer_custom: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/outer_custom.list"}
+
+
+  # 测速与下载 (跑满带宽，越前越好)
+  speedtest_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/speedtest_domain.list"}
+  xunlei_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/xunlei_domain.list"}
+  # 包含了全球的游戏下载域名
+  gamedownload_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/gamedownload_domain.list"}
+  # 游戏专区 (直连优先)(低延迟要求)
+  # 国内本土游戏厂商 & 平台 (Mihoyo/Tencent/NetEase/TapTap)涵盖：王者荣耀、原神国服、网易/腾讯游戏
+  games-cn_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/games-cn_domain.list"}
+  # 国际游戏厂商中国区服务 & CDN (Steam/Xbox/Switch/Nintendo/Ubisoft)
+  games@cn_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/games@cn_domain.list"}
+
+  # ========================================================
+  # 🔵 3. 🇨🇳 国产互联网大厂 (Specific Apps) # 逻辑：具体 APP 规则，必须排在下面的泛分类之前
+  # ========================================================
+  # 1. 国内视频与媒体
+  bilibiligat_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/bilibiligat_domain.list"}
+  bilibili_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/bilibili_domain.list"}
+  cctv_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/cctv_domain.list"}
+  mgtv_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/mgtv_domain.list"}
+  iqiyi_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/iqiyi_domain.list"}
+  douyu_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/douyu_domain.list"}
+  bytedance@!cn_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/bytedance@!cn_domain.list"}
+  bytedance_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/bytedance_domain.list"}
+  kuaishou_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/kuaishou_domain.list"}
+
+  # 2. 腾讯与电商系
+  tencent@!cn_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/tencent@!cn_domain.list"}
+  tencent_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/tencent_domain.list"}
+  alibaba_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/alibaba_domain.list"}
+  jd_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/jd_domain.list"}
+  pinduoduo_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/pinduoduo_domain.list"}
+  suning_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/suning_domain.list"}
+  meituan_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/meituan_domain.list"}
+
+  # 3. 其他国内大厂
+  baidu_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/baidu_domain.list"}
+  netease_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/netease_domain.list"}
+  sina_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/sina_domain.list"}
+  xiaomi_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/xiaomi_domain.list"}
+  huawei_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/huawei_domain.list"}
+  didi_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/didi_domain.list"}
+  qihoo360_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/qihoo360_domain.list"}
+  kingsoft_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/kingsoft_domain.list"}
+
+  # 4. 运营商|银行
+  chinamobile_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/chinamobile_domain.list"}
+  chinatelecom_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/chinatelecom_domain.list"}
+  chinaunicom_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/chinaunicom_domain.list"}
+  chinabroadnet_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/chinabroadnet_domain.list"}
+  icbc_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/icbc_domain.list"}
+  boc_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/boc_domain.list"}
+  ccb_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/ccb_domain.list"}
+  cmb_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/cmb_domain.list"}
+  pingan_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/pingan_domain.list"}
+  citic_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/citic_domain.list"}
+  bank-cn_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/bank-cn_domain.list"}
+
+  # ========================================================
+  # 🟡 4. 📂 泛规则分类 (Categories) # 逻辑：兜底国内未单独列出的 APP
+  # ========================================================
+  # 中文传媒
+  media-cn_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/media-cn_domain.list"}
+  # 国内社交(微博/知乎等)
+  socialmedia-cn_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/socialmedia-cn_domain.list"}
+  # 国内娱乐
+  entertainment-cn_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/entertainment-cn_domain.list"}
+
+  # ========================================================
+  # 🟢 5. 🌍 国际规则与工具
+  # ========================================================
+  # 1. AI 服务(必须在 Google/MS 之前)
+  ai!cn_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/ai!cn_domain.list"}
+  apple-intelligence_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/apple-intelligence_domain.list"}
+  aicn_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/aicn_domain.list"}
+
+  # 2. 游戏外服 (必须在通用规则之前)
+  # 国际服游戏/平台服务 -> 必须代理 (联机/社区/登录) 涵盖：Steam 社区、好友列表、国际服对战、EA App 登录
+  games-!cn_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/games-!cn_domain.list"}
+
+  # 3. 开发者服务 (GitHub 在 MS 之前)
+  # 中国开发者资源
+  dev-cn_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/dev-cn_domain.list"}
+  # 全球开发者资源的中国特供/CDN
+  dev@cn_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/dev@cn_domain.list"}
+  github1s_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/github1s_domain.list"}
+  dev_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/dev_domain.list"}
+
+
+  # 1. 苹果 (Apple)
+  # Apple 中国 CDN (内容分发网络) 和 公共服务
+  apple-cn_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/apple-cn_domain.list"}
+
+  # Apple 中国区的服务
+  apple@cn_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/apple@cn_domain.list"}
+  apple_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/apple_domain.list"}
+  apple_ip🔰: { <<: *teip, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/IP/apple_ip.list"}
+
+  # 2. 微软 (Microsoft)
+  onedrive_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/onedrive_domain.list"}
+  bing_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/bing_domain.list"}
+  # 微软中国特供/CDN
+  microsoft@cn_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/microsoft@cn_domain.list"}
+  microsoft_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/microsoft_domain.list"}
+
+  # 3. 谷歌 (Google)
+  google_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/google_domain.list"}
+  google_ip🔰: { <<: *teip, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/IP/google_ip.list"}
+
+  # ========================================================
+  # 🟠 6. 社交、金融与长尾
+  # ========================================================
+  # 1. 国际社交
+  telegram_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/telegram_domain.list"}
+  telegram_ip🔰: { <<: *teip, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/IP/telegram_ip.list"}
+
+  twitter_ip🔰: { <<: *teip, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/IP/twitter_ip.list"}
+  dcard_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/dcard_domain.list"}
+  # 国外社交媒体
+  socialmedia-!cn_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/socialmedia-!cn_domain.list"}
+
+  # 2. 金融与加密
+  bitget_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/bitget_domain.list"}
+  crypto_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/crypto_domain.list"}
+  paypal@cn_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/paypal@cn_domain.list"}
+  paypal_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/paypal_domain.list"}
+
+  # 3. 杂项
+  password_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/password_domain.list"}
+  adguard_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/adguard_domain.list"}
+  adobe-activation_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/adobe-activation_domain.list"}
+  adobe_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/adobe_domain.list"}
+  nvidia_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/nvidia_domain.list"}
+
+  # ========================================================
+  # ⚪ 7. 兜底防御
+  # ========================================================
+  # 外文传媒资讯
+  media_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/media_domain.list"}
+  # 国外娱乐
+  entertainment_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/entertainment_domain.list"}
+  porn_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/porn_domain.list"}
+
+  # 1. 快速匹配热门 CN
+  # 绝大多数日常访问（淘宝、京东、百度）会在这里命中并结束，不占用CPU去查大表
+  geo-cn_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/geo-cn_domain.list"}
+
+  # 2. 慢速匹配全量 CN
+  # 只有上面的没命中（冷门网站），才会查这张大表
+  cn_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/cn_domain.list"}
+  
+  # 3. 显式代理非 CN
+  # 明确标识为“非中国”的域名，走代理
+  geo-!cn_domain: { <<: *tedomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/Domain/geo-!cn_domain.list"}
+
+  # 4. IP 兜底
+  # 如果域名也没查到，最后查 IP 归属地。
+  # 既然您不想用 GEOIP 数据库，这个 Rule-Set 形式的 IP 表是最好的替代
+
+  cn_ip🔰: { <<: *teip, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/Mihomo/IP/cn_ip.list"}
+
+  # 🚀 自定义：海外大厂 QUIC/WebRTC 放行白名单
+  quic_whitelist:
+    type: inline               # 核心魔法：直接加载进内核内存
+    behavior: domain           # 纯域名匹配，拒绝 DNS 解析，保持 O(1) 极速
+    payload:
+      # 🍎 苹果生态 (防 iCloud 彻底断流与照片同步卡死)
+      - '+.apple.com'
+      - '+.icloud.com'
+      - '+.apple'
+      - '+.mzstatic.com'
+      - '+.cdn-apple.com'      # 苹果最庞大的全球分发 CDN
+      - '+.icloud-content.com' # iCloud 数据同步底层核心
+      - '+.me.com'
+      - '+.aaplimg.com'        # 苹果图片与动效资产节点
+
+      # 🔍 谷歌外科手术级放行 (仅限实时通讯，绝不放行视频和 STUN 探针)
+      # 1. 绝对不加 +.google.com 和 stun.*.google.com (防止真实IP泄露)
+      # 2. 绝对不加 +.googlevideo.com (逼迫 YouTube 老老实实走 TCP 代理通道，保证 4K 不卡)
+      # 3. 仅放行以下实时语音/视频会议核心域名，保障跨国开会不断连：
+      - '+.meet.google.com'     # Google Meet 会议通道
+      - '+.voice.google.com'    # Google Voice 语音电话
+      - '+.telephony.goog'      # 谷歌底层语音通信协议
+      - '+.messages.google.com' # RCS 实时消息推送
+      - '+.duo.google.com'      # 高清视频通话
+
+      # 🪟 微软与生产力 (防 Teams 会议机械音与更新失败)
+      - '+.microsoft.com'
+      - '+.live.com'
+      - '+.windows.com'
+      - '+.microsoftonline.com'
+      - '+.office.com'
+      - '+.office365.com'
+      - '+.skype.com'           # Teams 与 Skype 语音底层极度依赖 QUIC
+      - '+.teams.microsoft.com' # Teams 视频会议核心
+      - '+.windowsupdate.com'   # Windows 补丁更新分发网络
+
+      # 📞 全球主流即时通讯与会议 (防跨国语音/视频通话断流)
+      - '+.whatsapp.net'       # WhatsApp 语音通话依赖 UDP 穿透
+      - '+.zoom.us'            # Zoom 视频会议核心
+      - '+.webex.com'          # 思科 Webex 会议
+      - '+.discord.com'        # Discord 语音频道 (极其依赖 UDP)
+      - '+.discord.gg'
+      - '+.discordapp.net'
+      - '+.telegram.org'       # TG 语音通话防降级
+
+      # 🎮 主机与 PC 游戏网络 (三大主机和 Steam 联机必须全放行 UDP)
+      - '+.xboxlive.com'       # Xbox 网络
+      - '+.srv.nintendo.net'   # 任天堂联机底层
+      - '+.playstation.net'    # PSN 联机网络
+      - '+.steampowered.com'   # Steam 远程畅玩与语音
+      - '+.epicgames.com'      # Epic 游戏联机对战
