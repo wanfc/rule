@@ -311,11 +311,53 @@ dns:
     - 'rule-set:pt_domain'       # PT 站 (防封号，必须 Real-IP)
     - 'rule-set:p2p_domain'      # 公共 BT Tracker
 
-    # 🏠 智能家居 (小米/米家 - 纯为了保物理设备不掉线)
-    - '+.io.mi.com'            # 物理设备心跳维持与控制
-    - '+.home.mi.com'          # 核心云端交互
-    - '+.mina.mi.com'          # 小爱同学语音通道
+    # 🏠 小米 / 米家核心通讯
+    - 'mina.mi.com'          # 小爱同学语音核心大脑
+    - '+.io.mi.com'          # 米家 IoT 设备底层控制流 (含 api.io.mi.com | ot.io.mi.com 设备固件 OTA 更新)
+    - 'home.mi.com'          # 米家 APP 数据接口
+  
+    # 🏠 华为 HiLink / 鸿蒙智联
+    - 'iot.hicloud.com'      # 华为 IoT 核心网关
 
+    # 🏠 涂鸦智能 (极客常买的第三方通版设备)
+    - 'a1.tuyacn.com'        # 涂鸦国内 MQTT 长连接
+    - 'm1.tuyaip.com'        # 涂鸦国内 API
+
+    # 🏠 阿里天猫精灵
+    - '+.aligenie.com'       # 天猫精灵 MQTT 长连接与语音大脑
+
+    # 🏠 京东小京鱼 (Joylink)
+    - '+.joylink.jd.com'     # 京东智能底层通讯
+    - '+.smartcloud.jd.com'  # 京东智能云端接口
+
+    # 🏠 萤石云 / 海康威视 (安防摄像头、智能门铃)
+    - '+.ezviz.com'
+    - '+.ys7.com'
+
+    # 🏠 博联 BroadLink (智能红外遥控器)
+    - '+.broadlink.com.cn'
+
+    # VIVO 推送
+    - '+.vivoxspace.com'
+    - '+.vivo.com.cn'
+
+    # OPPO / 一加 (ColorOS / 欢太推送)
+    - '+.push.heytapmobi.com'
+    - '+.push.oppomobile.com'
+
+    # 华为 (HMS Core 推送)
+    - '+.push.hicloud.com'
+
+    # 荣耀 (独立后的 MagicOS 推送)
+    - '+.push.hihonor.com'
+
+    # 小米 (MiPush 核心消息分发)
+    - '+.push.xiaomi.com'
+    - '+.chat.xiaomi.net'
+
+    # 魅族 (Flyme 推送，虽然小众但极其封闭)
+    - '+.push.meizu.com'
+  
     # 🍎 苹果 (极致精简 - 仅限证书与推送)
     - 'ocsp.apple.com'         # 证书撤销检查 (极其重要，走 Fake-IP 易导致 App 闪退或加载卡死)
     - 'ocsp2.apple.com'
@@ -327,12 +369,13 @@ dns:
     - '+.osxapps.itunes.apple.com'     # Mac App 核心下载包
     - '+.swcdn.apple.com'              # iOS/Mac 系统固件更新包
     # 刷机与固件签名验证 (防变砖核心)
-    - 'mesu.apple.com'         # 资产目录配置 (检查更新的核心)
+    - 'mesu.apple.com'         # 资产目录配置 (OTA 系统更新检测)
     - 'gs.apple.com'           # 全球签名验证服务器 (最容易导致报错变砖的元凶)
     - 'ig.apple.com'           # 设备激活与基础带验证
     - 'tbsc.apple.com'         # 授权与时间戳校验
     - 'gdmf.apple.com'         # 设备管理与固件放行验证
     - 'tss.apple.com'          # 备用签名服务器
+    - 'appldnld.apple.com'     # 固件下载
 
     # 🪟 微软 (极致精简 - 仅限网络探针与更新调度)
     # 网络状态探测 (防止电脑右下角出现“无网络”地球仪)
@@ -393,7 +436,7 @@ dns:
     - '+.logmein.com'
     - '+.blip.net'             # 🚀 Blip 跨平台 P2P 直传核心
 
-# 🌐 公共 STUN 打洞服务 (穷举所有层级，防 P2P 寻址失败降级)
+    # 🌐 公共 STUN 打洞服务 (穷举所有层级，防 P2P 寻址失败降级)
     - 'stun.*.*'
     - 'stun.*.*.*'
     - '+.stun.*.*'
@@ -401,11 +444,14 @@ dns:
     - '+.stun.*.*.*.*'
     - '+.stun.*.*.*.*.*'
 
-# 🎮 主机游戏底层网络 (防 NAT 类型降级)
-    - '+.srv.nintendo.net'
-    - '+.stun.playstation.net'
-    - 'xbox.*.microsoft.com'
-    - '*.*.xboxlive.com'
+    # 🎮 游戏主机与 PC 平台 (保 NAT 类型、防反作弊误封)
+    - '+.playstation.net'    # PSN 纯底层联机、派对语音与登录
+    - '+.nintendo.net'       # 核心联机匹配与 STUN 穿透
+    - '+.xboxlive.com'       # Xbox 核心联机与 Teredo 隧道
+    - '+.cm.steampowered.com' # Steam Connection Manager (核心长连接)
+    - '+.steamserver.net'    # V社官方对战服务器集群 (CSGO/Dota2)
+    - 'stun.epicgames.com'   # Epic 语音与 P2P 穿透
+    - 'turn.epicgames.com'
 
 # QUIC 阻断 (放在 DNS 块外面或最后)
 # block-quic: true
@@ -469,8 +515,10 @@ sniffer:
   - 'mesu.apple.com'
   - '+.swcdn.apple.com'
   - '+.updates-http.cdn-apple.com'
+  - 'gs.apple.com'            # TSS 刷机与固件签名验证
   - 'captive.apple.com'       # Apple 网络连通性探测
   - '+.push.apple.com'        # Apple APNs 推送
+  - '+.push.apple.com.cn'
 
   # 🪟 微软全家桶 (仅限巨型系统更新与 P2P 流量)
   - '+.windowsupdate.com'          # 核心系统更新包下载
@@ -479,16 +527,68 @@ sniffer:
   - '+.msftconnecttest.com'   # Windows NCSI 网络探测
   - '+.msftncsi.com'
 
+  # 小米 / 米家核心通讯
+  - '+.io.mi.com'          # 小米米家 IoT 设备底层通讯
+  - '+.home.mi.com'        # 米家 APP 控制端
+  - 'mina.mi.com'
+
+  - '+.vivoxspace.com'     # VIVO 推送
+  # 华为 HiLink / 鸿蒙智联
+  - 'iot.hicloud.com'      # 华为 IoT 核心网关
+  
+  # 阿里天猫精灵
+  - '+.aligenie.com'       # 天猫精灵 MQTT 长连接与语音大脑
+  
+  # 京东小京鱼 (Joylink)
+  - '+.joylink.jd.com'     # 京东智能底层通讯
+  - '+.smartcloud.jd.com'  # 京东智能云端接口
+
+  # 涂鸦智能 (极客常买的第三方通版设备)
+  - 'a1.tuyacn.com'        # 涂鸦国内 MQTT 长连接
+  - 'm1.tuyaip.com'        # 涂鸦国内 API
+
+  # 萤石云 / 海康威视 (安防摄像头、智能门铃)
+  - '+.ezviz.com'
+  - '+.ys7.com'
+
+  # 博联 BroadLink (智能红外遥控器)
+  - '+.broadlink.com.cn'
+
+  # VIVO 推送
+  - '+.vivoxspace.com'
+  - '+.vivo.com.cn'
+
+  # OPPO / 一加 (ColorOS / 欢太推送)
+  - '+.push.heytapmobi.com'
+  - '+.push.oppomobile.com'
+
+  # 华为 (HMS Core 推送)
+  - '+.push.hicloud.com'
+
+  # 荣耀 (独立后的 MagicOS 推送)
+  - '+.push.hihonor.com'
+
+  # 小米 (MiPush 核心消息分发)
+  - '+.push.xiaomi.com'
+  - '+.chat.xiaomi.net'
+
+  # 魅族 (Flyme 推送，虽然小众但极其封闭)
+  - '+.push.meizu.com'
+
   # 迅雷
   - '+.xunlei.com'       # 迅雷主站与核心调度
   - '+.sandai.net'       # 迅雷三代 P2P 加速网络 (最核心)
   - '+.xycdn.com'        # 星域 CDN (迅雷自家的 P2P 边缘计算网络)
   - '+.thundercdn.com'   # 迅雷专属分布式下载节点
 
-  # 游戏平台下载
-  - '+.steamcontent.com'
-  - '+.assets.xboxlive.com'
-  - '+.epicgames.com'
+  # 🎮 游戏主机与 PC 平台 (保 NAT 类型、防反作弊误封)
+  - '+.playstation.net'    # PSN 纯底层联机、派对语音与登录
+  - '+.nintendo.net'       # 核心联机匹配与 STUN 穿透
+  - '+.xboxlive.com'       # Xbox 核心联机与 Teredo 隧道
+  - '+.cm.steampowered.com' # Steam Connection Manager (核心长连接)
+  - '+.steamserver.net'    # V社官方对战服务器集群 (CSGO/Dota2)
+  - 'stun.epicgames.com'   # Epic 语音与 P2P 穿透
+  - 'turn.epicgames.com'
 
   # 🔧 全量远程工具
   - '+.oray.com'
@@ -1629,4 +1729,5 @@ rule-providers:
       - '+.parsec.app'           # Parsec (强实时串流，绝不可降级 TCP)
       - '+.logmein.com'
       - '+.blip.net'             # 🚀 Blip (底层重度依赖 QUIC 协议直传)
+
       - 'rule-set:speedtest_domain'
