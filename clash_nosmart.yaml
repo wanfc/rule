@@ -453,7 +453,6 @@ dns:
     - '+.steamserver.net'    # V社官方对战服务器集群 (CSGO/Dota2)
     - 'stun.epicgames.com'   # Epic 语音与 P2P 穿透
     - 'turn.epicgames.com'
-    - '+.umeng.com'
 
 # QUIC 阻断 (放在 DNS 块外面或最后)
 # block-quic: true
@@ -1741,5 +1740,6 @@ rule-providers:
       - '+.blip.net'             # 🚀 Blip (底层重度依赖 QUIC 协议直传)
 
       - 'rule-set:speedtest_domain'
+
 
 
