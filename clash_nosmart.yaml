@@ -298,16 +298,90 @@ dns:
   fake-ip-filter-mode: blacklist
   fake-ip-filter:
     # ... (逻辑顺序：私有 -> 运营商 -> 银行 -> 大厂兼容 -> 游戏) ...
-    # 注意: 不要在这里加入 'geosite:cn'。我们希望国内域名也走 Fake-IP,这样我们才能在`rules:`中对它们应用广告拦截等规则
-    # 不要只依赖 rule-set，手动加上这几个通配符做双重保险
-    - '+.lan'
+    # 路由器后台与物理网络管理面板
+    - 'instant.arubanetworks.com'
+    - 'setmeup.arubanetworks.com'
+    - '+.asusrouter.com'
+    - 'router.asus.com'
+    - 'oasisauth.h3c.com'
+    - '+.routerlogin.com'
+    - 'tplogin.cn'
+    - '+.miwifi.com'
+    - '+.peiluyou.com'
+    - '+.zte.home'
+    - '+.tplinkwifi.net'
+    - '+.tendawifi.com'
+    - '+.hiwifi.com'
+    - '+.leike.cc'
+    - '+.router.ctc'
+    - '+.phicomm.me'
+    - '+.my.router'
+
+    # 局域网开发测试与本地服务 (mDNS / Tailscale / Plex)
+    - '+.internal'
+    - '+.localdomain'
+    - '+.example'
+    - '+.invalid'
+    - '+.localhost'
+    - '+.test'
     - '+.local'
-    - 'openwrt'
-    - 'localhost'    
+    - '+.lan'
+    - '+.home.arpa'
+    - '+.plex.direct'
+    - '+.ts.net'
+    - '+.test.steampowered.com'
+    - '+.localhost.ptlogin2.qq.com'
+    - '+.localhost.sec.qq.com'
+
+    # 反向 DNS 解析 (PTR) 防治 Fake-IP 污染
+    - '+.in-addr.arpa'
+    - '+.ip6.arpa'
+
+    # NTP 时间同步核心池
+    # 苹果全家桶默认 (iPhone/Mac/Apple Watch)
+    - 'time.apple.com'
+    - 'time.asia.apple.com'
+
+    # 微软 Windows 系统默认
+    - 'time.windows.com'
+
+    # 谷歌原生安卓默认 (部分外版设备/电视盒子必须)
+    - 'time.google.com'
+
+    # 国外大厂
+    - 'time.aws.com'
+    - 'time.amazonaws.cn'
+    - 'time.cloudflare.com'
+    - 'ntp.ubuntu.com'
+  
+    # 国内双巨头骨干池 (极速、超低延迟，国产手机及软路由最爱)
+    - 'ntp.aliyun.com'
+    - 'ntp1.aliyun.com'
+    - 'ntp2.aliyun.com'
+    - 'ntp3.aliyun.com'
+    - 'ntp4.aliyun.com'
+    - 'ntp5.aliyun.com'
+    - 'ntp6.aliyun.com'
+    - 'ntp7.aliyun.com'
+    - 'ntp.tencent.com'
+    - 'ntp1.tencent.com'
+    - 'ntp2.tencent.com'
+    - 'ntp3.tencent.com'
+    - 'ntp4.tencent.com'
+    - 'ntp5.tencent.com'
+
+    # 智能设备与基带 A-GPS 定位授时
+    - 'time.izatcloud.net'
+    - 'time.xtracloud.net'
+
+    # NTP 国际组织与中国官方总池 (终极兜底方案)
+    - '+.pool.ntp.org'
+    - '+.ntp-servers.net'
+    - '+.ntp.org.cn'
+    - '+.ntp.ntsc.ac.cn' # 中国科学院国家授时中心
+    - '+.ntp.neu.edu.cn' # 东北大学网络授时服务
 
     # 基础设施与局域网 (绝对核心)
-    - 'rule-set:private_domain'  # 已经包含上面
-    - 'rule-set:ntp_domain'
     - 'rule-set:pt_domain'       # PT 站 (防封号，必须 Real-IP)
     - 'rule-set:p2p_domain'      # 公共 BT Tracker
 
@@ -416,7 +490,6 @@ dns:
     - '+.xycdn.com'        # 星域 CDN (迅雷自家的 P2P 边缘计算网络)
     - '+.thundercdn.com'   # 迅雷专属分布式下载节点
 
-
     # 自定义的上游 DNS 域名 (防启动死循环)
     - '+.alidns.com'
     - '+.doh.pub'
@@ -501,11 +574,46 @@ sniffer:
     TLS:
       ports: [443, 8443]
   skip-domain:
-  # 本地和 mDNS (必须)
-  # - 'localhost'
-  # - '*.local'               # Apple mDNS / Bonjour
+  # 路由器后台与物理网络管理面板
+  - 'instant.arubanetworks.com'
+  - 'setmeup.arubanetworks.com'
+  - '+.asusrouter.com'
+  - 'router.asus.com'
+  - 'oasisauth.h3c.com'
+  - '+.routerlogin.com'
+  - 'tplogin.cn'
+  - '+.miwifi.com'
+  - '+.peiluyou.com'
+  - '+.zte.home'
+  - '+.tplinkwifi.net'
+  - '+.tendawifi.com'
+  - '+.hiwifi.com'
+  - '+.leike.cc'
+  - '+.router.ctc'
+  - '+.phicomm.me'
+  - '+.my.router'
+
+  # 局域网开发测试与本地服务 (mDNS / Tailscale / Plex)
+  - '+.internal'
+  - '+.localdomain'
+  - '+.example'
+  - '+.invalid'
+  - '+.localhost'
+  - '+.test'
+  - '+.local'
+  - '+.lan'
+  - '+.home.arpa'
+  - '+.plex.direct'
+  - '+.ts.net'
+  - '+.test.steampowered.com'
+  - '+.localhost.ptlogin2.qq.com'
+  - '+.localhost.sec.qq.com'
+
+  # 反向 DNS 解析 (PTR) 防治 Fake-IP 污染
+  - '+.in-addr.arpa'
+  - '+.ip6.arpa'
+
   # 基础排除
-  - 'rule-set:private_domain' # 已经包含上面
   - 'rule-set:pt_domain'      # 排除 PT 站 (防封号)
   - 'rule-set:p2p_domain'     # 排除公共 Tracker
 
@@ -612,11 +720,19 @@ sniffer:
   # 🚫 IP 跳过规则
   # ==========================================
   skip-dst-address:          # 对于目标ip跳过嗅探
-  # 1. 基础局域网
-  - '192.168.0.0/16'  # 直接跳过整个局域网网段的嗅探
-  - '10.0.0.0/8'
-  - '127.0.0.1/32'
-  - 'rule-set:private_ip🔰'
+  # 基础局域网      # 绝对不要包含 Fake-IP 198.18.0.0/15, 让它保持被嗅探状态
+  - 10.0.0.0/8        # A类局域网
+  - 100.64.0.0/10     # 运营商级 NAT (防拨号冲突)
+  - 127.0.0.0/8       # 本地回环
+  - 169.254.0.0/16    # 链路本地 (DHCP失效时的分配IP)
+  - 172.16.0.0/12     # B类局域网 (Docker/虚拟机常用)
+  - 192.168.0.0/16    # C类局域网 (家用路由器必备)
+  - 192.0.0.0/24      # IETF 协议保留
+  - 192.0.2.0/24      # TEST-NET-1 (文档测试)
+  - 192.88.99.0/24    # 6to4 任何播中继
+  - 198.51.100.0/24   # TEST-NET-2
+  - 203.0.113.0/24    # TEST-NET-3
+  - 224.0.0.0/3       # 组播/多播大段 (防极客协议被拆包)
   - 'rule-set:pt_ip🔰'         # 排除 PT 站 IP
 
 # ====================
