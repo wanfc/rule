@@ -733,7 +733,7 @@ sniffer:
   - 198.51.100.0/24   # TEST-NET-2
   - 203.0.113.0/24    # TEST-NET-3
   - 224.0.0.0/3       # 组播/多播大段 (防极客协议被拆包)
-  - 'rule-set:pt_ip🔰'         # 排除 PT 站 IP
+  - 'rule-set:pt_ip'         # 排除 PT 站 IP
 
 # ====================
 # 测速锚点（节点数量大，策略组极多，测速太勤快会导致乘法效应，以下已对interval时间进行上调）
@@ -1431,7 +1431,7 @@ rules:
   # 1. 基础阻断与网络服务
   # ==============================
   - RULE-SET,private_domain,🎠 私有地址
-  - RULE-SET,private_ip🔰,🎠 私有地址,no-resolve
+  - RULE-SET,private_ip,🎠 私有地址,no-resolve
   - RULE-SET,ntp_domain,🕰️ NTP
   - DST-PORT,123,🕰️ NTP  # 简单粗暴，所有时间同步全部直连
   # ==============================
@@ -1439,10 +1439,10 @@ rules:
   # ==============================
   # 国内 DNS -> 必须直连 (防止 CDN 跑偏)
   - RULE-SET,cn_dns_domain,🔺 国内DNS
-  - RULE-SET,cn_dns_ip🔰,🔺 国内DNS,no-resolve
+  - RULE-SET,cn_dns_ip,🔺 国内DNS,no-resolve
   # 国外 DNS -> 必须代理 (防止被墙/DNS污染)
   - RULE-SET,global_dns_domain,🔸™️国外DNS
-  - RULE-SET,global_dns_ip🔰,🔸™️国外DNS,no-resolve
+  - RULE-SET,global_dns_ip,🔸™️国外DNS,no-resolve
   - RULE-SET,httpdns_domain,❎ HTTPDNS
   # - RULE-SET,httpdns_ip,❎ HTTPDNS,no-resolve
   - RULE-SET,pcdn_domain,❎ PCDN
@@ -1450,14 +1450,14 @@ rules:
   # 理由：先封死 UDP 443，逼浏览器退回到 TCP，后续的域名嗅探和拦截才 100% 有效。
   # - AND,((NETWORK,UDP),(DST-PORT,443)),⛔️ 广告|阻断
   # 🔴 终极 UDP 装甲：仅拦截非国内、非白名单大厂的海外 QUIC (UDP 443)，释放 STUN (3478) 以保障 P2P 打洞
-  - AND,((NETWORK,UDP),(DST-PORT,443),(NOT,((OR,((RULE-SET,cn_ip🔰,no-resolve),(RULE-SET,cn_domain),(RULE-SET,quic_whitelist)))))),⛔️ 境外UDP阻断
+  - AND,((NETWORK,UDP),(DST-PORT,443),(NOT,((OR,((RULE-SET,cn_ip,no-resolve),(RULE-SET,cn_domain),(RULE-SET,quic_whitelist)))))),⛔️ 境外UDP阻断
   - RULE-SET,block_domain,⛔️ 广告|阻断
   # ==============================
   # 2. 下载与P2P
   # ==============================
   - DST-PORT,7680,Ⓜ️ 微软中国        # Windows P2P
   - RULE-SET,pt_domain,📦 PT
-  - RULE-SET,pt_ip🔰,📦 PT,no-resolve
+  - RULE-SET,pt_ip,📦 PT,no-resolve
   - RULE-SET,p2p_domain,🍻 BT/P2P
   - DST-PORT,6881-6889,🍻 BT/P2P    # 保留这个：BT 默认端口防漏
   - RULE-SET,inner_custom,☀️ 自定-内
@@ -1540,17 +1540,17 @@ rules:
   - RULE-SET,apple-cn_domain,🍏 Apple中国CDN
   - RULE-SET,apple@cn_domain,🍏 Apple中国
   - RULE-SET,apple_domain,🍎™️Apple
-  - RULE-SET,apple_ip🔰,🍎™️Apple,no-resolve
+  - RULE-SET,apple_ip,🍎™️Apple,no-resolve
   - RULE-SET,onedrive_domain,☁️™️OneDrive
   - RULE-SET,bing_domain,🍍™️Bing
   - RULE-SET,microsoft@cn_domain,Ⓜ️ 微软中国
   - RULE-SET,microsoft_domain,Ⓜ️™️微软
   - RULE-SET,google_domain,🧀™️Google
-  - RULE-SET,google_ip🔰,🧀™️Google,no-resolve
+  - RULE-SET,google_ip,🧀™️Google,no-resolve
   # 国际社媒
   - RULE-SET,telegram_domain,📮™️Telegram
-  - RULE-SET,telegram_ip🔰,📮™️Telegram,no-resolve
-  - RULE-SET,twitter_ip🔰,🍉™️外文社媒,no-resolve
+  - RULE-SET,telegram_ip,📮™️Telegram,no-resolve
+  - RULE-SET,twitter_ip,🍉™️外文社媒,no-resolve
   - RULE-SET,dcard_domain,🍀™️Dcard
   - RULE-SET,socialmedia-!cn_domain,🍉™️外文社媒
   # 金融
@@ -1571,7 +1571,7 @@ rules:
   - RULE-SET,geo-cn_domain,🗼 GEO国内
   - RULE-SET,cn_domain,🏰 中国1️⃣
   - RULE-SET,geo-!cn_domain,🛫™️GEO国外
-  - RULE-SET,cn_ip🔰,🏰 中国2️⃣,no-resolve
+  - RULE-SET,cn_ip,🏰 中国2️⃣,no-resolve
   - MATCH,🛟™️兜底
 
 # ====================
@@ -1595,14 +1595,14 @@ rule-providers:
   # ========================================================
   # 局域网与私有地址 (防止断网)
   private_domain: { <<: *mdomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/MRS/Domain/private_domain.mrs"}
-  private_ip🔰: { <<: *mip, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/MRS/IP/private_ip.mrs"}
+  private_ip: { <<: *mip, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/MRS/IP/private_ip.mrs"}
   ntp_domain: { <<: *mdomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/MRS/Domain/ntp_domain.mrs"}
   # 国内 DNS -> 必须直连 (防止 CDN 跑偏)
   cn_dns_domain: { <<: *mdomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/MRS/Domain/cn_dns_domain.mrs"}
-  cn_dns_ip🔰: { <<: *mip, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/MRS/IP/cn_dns_ip.mrs"}
+  cn_dns_ip: { <<: *mip, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/MRS/IP/cn_dns_ip.mrs"}
   # 国外 DNS -> 必须代理 (防止被墙/DNS污染)
   global_dns_domain: { <<: *mdomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/MRS/Domain/global_dns_domain.mrs"}
-  global_dns_ip🔰: { <<: *mip, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/MRS/IP/global_dns_ip.mrs"}
+  global_dns_ip: { <<: *mip, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/MRS/IP/global_dns_ip.mrs"}
   httpdns_domain: { <<: *mdomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/MRS/Domain/httpdns_domain.mrs"}  
   # httpdns_ip: { <<: *mip, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/MRS/IP/httpdns_ip.mrs"}  
   pcdn_domain: { <<: *mdomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/MRS/Domain/pcdn_domain.mrs"}  
@@ -1619,7 +1619,7 @@ rule-providers:
   pt_domain: { <<: *mdomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/MRS/Domain/pt_domain.mrs"}
   # PT 站服务器 IP 地址库
   # category-pt.list 域名解析出来的 真实 IP 地址
-  pt_ip🔰: { <<: *mip, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/MRS/IP/pt_ip.mrs"}
+  pt_ip: { <<: *mip, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/MRS/IP/pt_ip.mrs"}
   # 公共 Tracker 分类列表，包含了互联网上各种常见的 BitTorrent Tracker 域名
   # 作用：BT 下载（迅雷、比特彗星等）依靠这些域名来寻找“谁在做种”
   # 必须直连。如果走代理，会被机场判定为 BT 滥用并封号
@@ -1727,7 +1727,7 @@ rule-providers:
   # Apple 中国区的服务
   apple@cn_domain: { <<: *mdomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/MRS/Domain/apple@cn_domain.mrs"}
   apple_domain: { <<: *mdomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/MRS/Domain/apple_domain.mrs"}
-  apple_ip🔰: { <<: *mip, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/MRS/IP/apple_ip.mrs"}
+  apple_ip: { <<: *mip, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/MRS/IP/apple_ip.mrs"}
 
   # 2. 微软 (Microsoft)
   onedrive_domain: { <<: *mdomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/MRS/Domain/onedrive_domain.mrs"}
@@ -1738,16 +1738,16 @@ rule-providers:
 
   # 3. 谷歌 (Google)
   google_domain: { <<: *mdomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/MRS/Domain/google_domain.mrs"}
-  google_ip🔰: { <<: *mip, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/MRS/IP/google_ip.mrs"}
+  google_ip: { <<: *mip, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/MRS/IP/google_ip.mrs"}
 
   # ========================================================
   # 🟠 6. 社交、金融与长尾
   # ========================================================
   # 1. 国际社交
   telegram_domain: { <<: *mdomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/MRS/Domain/telegram_domain.mrs"}
-  telegram_ip🔰: { <<: *mip, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/MRS/IP/telegram_ip.mrs"}
+  telegram_ip: { <<: *mip, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/MRS/IP/telegram_ip.mrs"}
 
-  twitter_ip🔰: { <<: *mip, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/MRS/IP/twitter_ip.mrs"}
+  twitter_ip: { <<: *mip, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/MRS/IP/twitter_ip.mrs"}
   dcard_domain: { <<: *mdomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/MRS/Domain/dcard_domain.mrs"}
   # 国外社交媒体
   socialmedia-!cn_domain: { <<: *mdomain, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/MRS/Domain/socialmedia-!cn_domain.mrs"}
@@ -1790,7 +1790,7 @@ rule-providers:
   # 如果域名也没查到，最后查 IP 归属地。
   # 既然您不想用 GEOIP 数据库，这个 Rule-Set 形式的 IP 表是最好的替代
 
-  cn_ip🔰: { <<: *mip, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/MRS/IP/cn_ip.mrs"}
+  cn_ip: { <<: *mip, url: "https://raw.githubusercontent.com/wanfc/rule-converter/refs/heads/main/MRS/IP/cn_ip.mrs"}
 
   # 🚀 自定义：海外大厂 QUIC/WebRTC 放行白名单
   quic_whitelist:
@@ -1806,6 +1806,9 @@ rule-providers:
       - '+.icloud-content.com' # iCloud 数据同步底层核心
       - '+.me.com'
       - '+.aaplimg.com'        # 苹果图片与动效资产节点
+      - '+.apple.com.cn'       # 苹果中国区核心
+      - '+.icloud.com.cn'      # 云上贵州数据同步绝对命脉
+      - '+.apple-dns.net'      # 苹果全球动态 CDN 调度解析
 
       # 🔍 谷歌外科手术级放行 (仅限实时通讯，绝不放行视频和 STUN 探针)
       # 1. 绝对不加 +.google.com 和 stun.*.google.com (防止真实IP泄露)
@@ -1857,7 +1860,55 @@ rule-providers:
       - '+.logmein.com'
       - '+.blip.net'             # 🚀 Blip (底层重度依赖 QUIC 协议直传)
 
-      - 'rule-set:speedtest_domain'
+      # 🚀 全球核心测速平台 (Ookla / Netflix / Nperf 等)
+      - '+.ooklaserver.net'
+      - '+.speedtest.net'
+      - '+.speedtestcustom.com'
+      - '+.speedtest.co'
+      - '+.speedtest.im'
+      - '+.openspeedtest.com'
+      - '+.fast.com'
+      - '+.nperf.com'
+      - '+.pingtest.net'
+      - '+.testmy.net'
+      - '+.measurementlab.net'
+      - '+.cellmaps.com'
+      - '+.ookla.com'
+      - '+.webtest.net'
 
+      # ☁️ 骨干网与各大 CDN 专属测速节点
+      - 'www.speedtest.net.cdn.cloudflare.net'
+      - '+.speed.cloudflare.com'
+      - '+.cdnst.net'
+      - '+.open.cachefly.net'
+      - '+.ekahau.com'
+      - '+.ekahau.cloud'
 
+      # 🇨🇳 国内与港台 ISP/地区测速专属
+      - '+.cnspeedtest.cn'
+      - '+.speedtest.cn'
+      - '+.speedtest.mfcyun.com'
+      - 'hk-global-bgp.hkg.speedtest.yecaoyun.com'
+      - '+.ookla-speedtest-central.hgconair.hgc.com.hk'
+      - '+.speed.dler.io'
+      - '+.speed2.hinet.net'
+      - '+.speed.hinet.net'
+      - '+.speed5.ntu.edu.tw'
+      - '+.speed.nccu.edu.tw'
+      - '+.speedtest.xfinity.com'
 
+      # 🎓 中国教育网 (CERNET) 高校测速节点群
+      - '+.test.ustc.edu.cn'
+      - '+.test6.ustc.edu.cn'
+      - '+.test.nju.edu.cn'
+      - '+.test6.nju.edu.cn'
+      - '+.speed.nju.edu.cn'
+      - '+.speed.neu6.edu.cn'
+      - '+.speed.nuaa.edu.cn'
+      - '+.speed.qlu.edu.cn'
+      - '+.speed.ujs.edu.cn'
+      - '+.speed6.ujs.edu.cn'
+      - '+.speedtest.shu.edu.cn'
+      - '+.speedtest6.shu.edu.cn'
+      - '+.speedtest.xaut.edu.cn'
+      - '+.xnfz.seu.edu.cn'
