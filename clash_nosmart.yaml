@@ -9,6 +9,9 @@ proxy-providers:
     interval: 3600  # 订阅更新间隔，1小时一次没问题
     # 强制开启该提供者内所有节点的 TFO 和 UDP
 
+    # 控制拉取订阅链接时的证书验证！
+    skip-cert-verify: true
+
     health-check:
       enable: true
       url: 'https://cp.cloudflare.com/generate_204'
